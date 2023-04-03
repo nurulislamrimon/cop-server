@@ -1,13 +1,8 @@
 const express = require("express");
+const homeController = require("../controllers/home.controller");
 
 const router = express.Router();
 
-router.get("/", (req, res, next) => {
-  res.send({
-    status: "Success",
-    data: "Welcome to Combination of Power Family",
-  });
-  console.log("Home route");
-});
+router.get("/", homeController);
 
 module.exports = router;

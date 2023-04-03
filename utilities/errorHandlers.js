@@ -10,12 +10,12 @@ exports.errorHandler = (error, req, res, next) => {
       status: "failed!",
       message: error.message,
     });
-    console.log(error.message);
+    console.log(error.message.red.bold);
   } else {
     res.status(error.code || 400).send({
       status: "failed!",
       message: "Internal server error!",
     });
-    console.log("Internal server error!");
+    console.log("Internal server error!".red.bold);
   }
 };

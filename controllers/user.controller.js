@@ -1,7 +1,13 @@
-exports.signupController = (req, res, next) => {
+const userServices = require("../services/user.services");
+
+exports.signupController = async (req, res, next) => {
   try {
-    res.send({ c, status: "success", data: "data" });
-    console.log(req.body);
+    const result = await userServices.postNewUser(req.body);
+    res.send({
+      status: "success",
+      data: result,
+    });
+    console.log(result);
   } catch (error) {
     next(error);
   }

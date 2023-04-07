@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const validator = require("validator");
-const memberCopIDValidator = require("../utilities/memberCopIDValidator");
+const memberCopIDValidator = require("../utilities/member_cop_id_validator");
 const ObjectId = mongoose.ObjectId;
 
 const memberSchema = mongoose.Schema(
@@ -57,6 +57,23 @@ const memberSchema = mongoose.Schema(
           },
         },
       ],
+    },
+    role: {
+      type: String,
+      required: true,
+      enum: {
+        values: [
+          "general-member",
+          "chairman",
+          "vice-chairman",
+          "committee-member",
+          "managing-director",
+          "manager",
+          "finance-secretary",
+          "collector",
+        ],
+        message: `{VALUE} is not a valid role, it should be 'general-member','chairman','vice-chairman','committee-member','managing-director','manager','finance-secretary','collector'`,
+      },
     },
     fatherName: String,
     motherName: String,

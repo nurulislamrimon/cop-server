@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const memberCopIDValidator = require("../utilities/memberCopIDValidator");
+const memberCopIDValidator = require("../utilities/member_cop_id_validator");
 const validator = require("validator");
 const ObjectId = mongoose.ObjectId;
 
@@ -29,8 +29,8 @@ const investmentSchema = mongoose.Schema(
       type: String,
       required: true,
       enum: {
-        values: ["Invested", "Collected", "Unapproved"],
-        message: `{VALUE} is not a valid status, it should be Invested,Collected or Rejected`,
+        values: ["invested", "collected", "rejected"],
+        message: `{VALUE} is not a valid status, it should be 'invested','collected' or 'rejected'`,
       },
     },
     individualInvest: [

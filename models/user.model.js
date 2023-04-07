@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const memberCopIDValidator = require("../utilities/memberCopIDValidator");
+const memberCopIDValidator = require("../utilities/member_cop_id_validator");
 const ObjectId = mongoose.ObjectId;
 
 const userSchema = mongoose.Schema(

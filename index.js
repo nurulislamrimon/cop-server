@@ -3,7 +3,7 @@ require("colors");
 
 // internal import
 const app = require("./app");
-const errorHandler = require("./utilities/error_handlers");
+const errorHandler = require("./middlewares/error_handlers");
 const homeRouter = require("./routers/home.router");
 const userRouter = require("./routers/user.router");
 const dbconnection = require("./utilities/dbconnection");

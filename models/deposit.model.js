@@ -33,7 +33,7 @@ const depositSchema = mongoose.Schema(
       required: true,
       enum: {
         values: ["pending", "approved", "rejected"],
-        message: `{VALUE} is not a valid status, it should be pending,approved or rejected`,
+        message: `{VALUE} is not a valid status, it should be 'pending','approved' or 'rejected'`,
       },
     },
     collector: {

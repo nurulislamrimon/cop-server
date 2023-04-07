@@ -25,6 +25,7 @@ const userSchema = mongoose.Schema(
     moreAboutMember: {
       type: ObjectId,
       ref: "Member",
+      // required: true,
     },
   },
   { timestamps: true }

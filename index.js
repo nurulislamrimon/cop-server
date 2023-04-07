@@ -1,5 +1,5 @@
 // externel import
-const colors = require("colors");
+require("colors");
 
 // internal import
 const app = require("./app");

@@ -6,7 +6,7 @@ exports.routeDoesntExist = (req, res, next) => {
 
 exports.errorHandler = (error, req, res, next) => {
   if (res.headersSent) {
-    next("Something went wrong");
+    throw new Error("Something went wrong!");
   } else {
     if (error.message) {
       res.status(error.code || 400).send({

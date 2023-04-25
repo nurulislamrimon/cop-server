@@ -18,16 +18,13 @@ const memberSchema = mongoose.Schema(
       type: String,
       required: true,
     },
-    email: {
+    emails: {
       defaultEmail: {
         email: {
           type: String,
           validate: [validator.isEmail, "Email is not valid!"],
         },
-        openingDate: {
-          type: String,
-          validate: [validator.isDate, "Date should be 10/10/2023 format!"],
-        },
+        addedAt: Date,
         authorized: {
           status: {
             type: String,
@@ -41,20 +38,14 @@ const memberSchema = mongoose.Schema(
           },
         },
       },
-      oldEmail: [
+      oldEmails: [
         {
           email: {
             type: String,
             validate: [validator.isEmail, "Email is not valid!"],
           },
-          openingDate: {
-            type: String,
-            validate: [validator.isDate, "Date should be 10/10/2023 format!"],
-          },
-          removingDate: {
-            type: String,
-            validate: [validator.isDate, "Date should be 10/10/2023 format!"],
-          },
+          addedAt: Date,
+          removedAt: Date,
         },
       ],
     },

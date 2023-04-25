@@ -1,17 +1,31 @@
 // external import
 const bcrypt = require("bcrypt");
 // internal import
-const Member = require("../models/member.model");
 const User = require("../models/user.model");
 const generate_token = require("../utilities/generate_token");
+const memberServices = require("./member.services");
 
-exports.postNewUser = async (user) => {
+exports.postNewUserService = async (user) => {
+  const { email, memberCopID } = user;
   // check if user is a member=========
-  const memberCopID = user.memberCopID;
-  if (memberCopID) {
-    const member = await Member.findOne({ memberCopID });
-    user.moreAboutMember = member._id;
-    user.role = member.role;
+  if (user.memberCopID) {
+    const member = await memberServices.getMemberByCopIDService(memberCopID);
+    if (member) {
+      const oldEmail = member?.emails?.defaultEmail;
+      // update default email
+      await memberServices.updateMemberEmailService(
+        memberCopID,
+        email,
+        oldEmail
+      );
+      // member id and role for new user model
+      user.moreAboutMember = member._id;
+      user.role = member.role;
+    } else {
+      throw new Error(
+        "If you are a member, please contact to COP Family to get your valid membership id!"
+      );
+    }
   }
   // encrypting password
   const { password: directPassword, ...rest } = user;

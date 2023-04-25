@@ -8,7 +8,7 @@ const memberServices = require("./member.services");
 exports.getUserByEmail = async (email) => {
   return await User.findOne({ email });
 };
-exports.getUserByEmailPopulate = async (email) => {
+exports.getUserByEmailPopulate = async (email, select) => {
   return await User.findOne({ email }).populate("moreAboutMember");
 };
 
@@ -28,6 +28,11 @@ exports.postNewUserService = async (user) => {
       // member id and role for new user model
       user.moreAboutMember = member._id;
       user.role = member.role;
+      // removing previous active email from the member
+      await User.updateMany(
+        { moreAboutMember: member._id },
+        { $set: { moreAboutMember: null } }
+      );
     } else {
       throw new Error(
         "If you are a member, please contact to COP Family to get your valid membership id!"

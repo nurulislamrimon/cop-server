@@ -23,7 +23,7 @@ exports.loginController = async (req, res, next) => {
   try {
     const { email, password } = req.body;
     if (email && password) {
-      const user = await userServices.getUserByEmailPopulate(email);
+      const user = await userServices.getUserByEmail(email);
       if (user) {
         const isLoginSuccessful = await userServices.comparePassword(
           user,
@@ -31,15 +31,19 @@ exports.loginController = async (req, res, next) => {
         );
         if (isLoginSuccessful) {
           const token = generate_token({
-            role: user.moreAboutMember.role,
-            memberCopID: user.memberCopID,
+            role: user?.moreAboutMember?.role,
+            memberCopID: user?.memberCopID,
             email,
           });
+          const userInfo = await userServices.getUserByEmailPopulate(
+            email,
+            "-password",
+            "name"
+          );
           res.send({
             status: "Success",
-            data: { user, token },
+            data: { user: userInfo, token },
           });
-          // console.log(user);
         } else {
           throw new Error("Incorrect email or password!");
         }

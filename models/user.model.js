@@ -22,6 +22,15 @@ const userSchema = mongoose.Schema(
       required: true,
     },
     photoURL: String,
+    status: {
+      type: String,
+      default: "inactive",
+      enum: {
+        values: ["active", "inactive"],
+        message: "{VALUE} must be 'active' or 'inactive'",
+      },
+      required: true,
+    },
     moreAboutMember: {
       type: ObjectId,
       ref: "Member",

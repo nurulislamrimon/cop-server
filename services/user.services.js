@@ -8,8 +8,10 @@ const memberServices = require("./member.services");
 exports.getUserByEmail = async (email) => {
   return await User.findOne({ email });
 };
-exports.getUserByEmailPopulate = async (email, select) => {
-  return await User.findOne({ email }).populate("moreAboutMember");
+exports.getUserByEmailPopulate = async (email, select, populateSelect) => {
+  return await User.findOne({ email })
+    .select(select)
+    .populate("moreAboutMember", populateSelect);
 };
 
 exports.postNewUserService = async (user) => {
@@ -28,10 +30,11 @@ exports.postNewUserService = async (user) => {
       // member id and role for new user model
       user.moreAboutMember = member._id;
       user.role = member.role;
+      user.status = "active";
       // removing previous active email from the member
       await User.updateMany(
         { moreAboutMember: member._id },
-        { $set: { moreAboutMember: null } }
+        { $set: { status: "inactive" } }
       );
     } else {
       throw new Error(

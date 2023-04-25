@@ -19,6 +19,7 @@ exports.signupController = async (req, res, next) => {
     next(error);
   }
 };
+
 exports.loginController = async (req, res, next) => {
   try {
     const { email, password } = req.body;
@@ -53,6 +54,19 @@ exports.loginController = async (req, res, next) => {
     } else {
       throw new Error("Please provide valid credential!");
     }
+  } catch (error) {
+    next(error);
+  }
+};
+
+exports.aboutMeController = async (req, res, next) => {
+  try {
+    const result = await userServices.getUserByEmailPopulate(req.decoded.email);
+    res.send({
+      status: "success",
+      data: result,
+    });
+    console.log(result);
   } catch (error) {
     next(error);
   }

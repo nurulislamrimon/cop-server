@@ -5,6 +5,13 @@ const User = require("../models/user.model");
 const generate_token = require("../utilities/generate_token");
 const memberServices = require("./member.services");
 
+exports.getUserByEmail = async (email) => {
+  return await User.findOne({ email });
+};
+exports.getUserByEmailPopulate = async (email) => {
+  return await User.findOne({ email }).populate("moreAboutMember");
+};
+
 exports.postNewUserService = async (user) => {
   const { email, memberCopID } = user;
   // check if user is a member=========
@@ -39,6 +46,7 @@ exports.postNewUserService = async (user) => {
   return { user: result, token };
 };
 
-exports.getUserByEmail = async (email) => {
-  return await User.findOne({ email });
+exports.comparePassword = async (user, password) => {
+  const isPasswordCorrect = await bcrypt.compare(password, user.password);
+  return isPasswordCorrect;
 };

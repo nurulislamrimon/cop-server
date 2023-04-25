@@ -12,7 +12,7 @@ const dbconnection = require("./utilities/dbconnection");
 dbconnection();
 // routes
 app.use("/", homeRouter);
-app.use("/api/v1/user", userRouter);
+app.use("/api/v1/users", userRouter);
 // route doesn't exist error handler
 app.use(errorHandler.routeDoesntExist);
 // error handler

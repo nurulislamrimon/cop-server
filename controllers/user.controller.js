@@ -1,3 +1,4 @@
+const User = require("../models/user.model");
 const { updateMemberOldEmailService } = require("../services/member.services");
 const userServices = require("../services/user.services");
 const generate_token = require("../utilities/generate_token");
@@ -24,7 +25,7 @@ exports.loginController = async (req, res, next) => {
   try {
     const { email, password } = req.body;
     if (email && password) {
-      const user = await userServices.getUserByEmail(email);
+      const user = await userServices.getUserByEmailPopulate(email);
       if (user) {
         const isLoginSuccessful = await userServices.comparePassword(
           user,
@@ -45,6 +46,7 @@ exports.loginController = async (req, res, next) => {
             status: "Success",
             data: { user: userInfo, token },
           });
+          console.log("user is logged in!");
         } else {
           throw new Error("Incorrect email or password!");
         }
@@ -61,12 +63,28 @@ exports.loginController = async (req, res, next) => {
 
 exports.aboutMeController = async (req, res, next) => {
   try {
-    const result = await userServices.getUserByEmailPopulate(req.decoded.email);
+    const result = await userServices.getUserByEmailPopulate(
+      req.decoded.email,
+      "-password"
+    );
     res.send({
       status: "success",
       data: result,
     });
     console.log(result);
+  } catch (error) {
+    next(error);
+  }
+};
+
+exports.getAllUsers = async (req, res, next) => {
+  try {
+    const result = await User.find({}).select("-password");
+    res.send({
+      status: "success",
+      data: result,
+    });
+    console.log(`${result.length} users!`);
   } catch (error) {
     next(error);
   }

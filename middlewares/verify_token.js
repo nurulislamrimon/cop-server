@@ -8,6 +8,8 @@ exports.verifyToken = (req, res, next) => {
     req.decoded = data;
     next();
   } else {
-    throw new Error("Unauthorized access!");
+    const err = new Error("Access forbidden!");
+    err.code = 403;
+    throw err;
   }
 };

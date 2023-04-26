@@ -58,3 +58,18 @@ exports.comparePassword = async (user, password) => {
   const isPasswordCorrect = await bcrypt.compare(password, user.password);
   return isPasswordCorrect;
 };
+
+exports.getAllUsersService = async (query) => {
+  let { skip, limit, sort, ...filters } = query;
+
+  let filterString = JSON.stringify(filters);
+  filterString = filterString.replace(/gt|lt|gte|lte/g, (match) => `$${match}`);
+  filters = JSON.parse(filterString);
+
+  const result = await User.find(filters)
+    .skip(skip)
+    .limit(limit)
+    .sort(sort)
+    .select("-password");
+  return result;
+};

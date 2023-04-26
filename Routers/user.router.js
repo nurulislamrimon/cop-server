@@ -7,7 +7,7 @@ router.get(
   "/",
   verifyToken,
   verifyAuthorization("admin", "chairman", "managing-director", "manager"),
-  userController.getAllUsers
+  userController.getAllUsersController
 );
 router.post("/signup", userController.signupController);
 router.post("/login", userController.loginController);

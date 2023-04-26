@@ -36,6 +36,7 @@ exports.loginController = async (req, res, next) => {
             role: user?.moreAboutMember?.role,
             memberCopID: user?.memberCopID,
             email,
+            status: user.status,
           });
           const userInfo = await userServices.getUserByEmailPopulate(
             email,
@@ -77,9 +78,9 @@ exports.aboutMeController = async (req, res, next) => {
   }
 };
 
-exports.getAllUsers = async (req, res, next) => {
+exports.getAllUsersController = async (req, res, next) => {
   try {
-    const result = await User.find({}).select("-password");
+    const result = await userServices.getAllUsersService(req.query);
     res.send({
       status: "success",
       data: result,

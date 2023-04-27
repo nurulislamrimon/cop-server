@@ -8,6 +8,11 @@ const memberServices = require("./member.services");
 exports.getUserByEmail = async (email) => {
   return await User.findOne({ email });
 };
+exports.getUserById = async (id, select, populateSelect) => {
+  return await User.findById(id)
+    .select(select)
+    .populate("moreAboutMember", populateSelect);
+};
 exports.getUserByEmailPopulate = async (email, select, populateSelect) => {
   return await User.findOne({ email })
     .select(select)
@@ -71,5 +76,25 @@ exports.getAllUsersService = async (query) => {
     .limit(limit)
     .sort(sort)
     .select("-password");
+  return result;
+};
+
+exports.activeUserService = async (newUser) => {
+  const result = await User.updateOne(
+    { email: newUser },
+    { $set: { status: "active" } }
+  );
+  return result;
+};
+exports.deactiveUserService = async (previousUser) => {
+  const result = await User.updateOne(
+    { email: previousUser },
+    { $set: { status: "inactive" } }
+  );
+  return result;
+};
+
+exports.deleteAnUserService = async (id) => {
+  const result = await User.findByIdAndDelete(id).then((data) => data);
   return result;
 };

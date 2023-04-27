@@ -3,6 +3,22 @@ const Member = require("../models/member.model");
 const { generate_memberCopID } = require("../utilities/generate_member_cop_id");
 const { ObjectId } = mongoose.Types;
 
+exports.getAllMembersService = async (query, select) => {
+  let { limit, page, sort, ...filters } = query;
+
+  let filterString = JSON.stringify(filters);
+  filterString = filterString.replace(/gt|lt|gte|lte/g, (match) => `$${match}`);
+  filters = JSON.parse(filterString);
+
+  const members = await Member.find(filters)
+    .skip(page * limit)
+    .limit(limit)
+    .sort(sort)
+    .select(select);
+  const membersCount = await Member.count();
+  return { members, membersCount };
+};
+
 exports.getMemberByCopIDService = async (memberCopID) => {
   return await Member.findOne({ memberCopID });
 };
@@ -62,7 +78,12 @@ exports.updateMemberInformationService = async (memberId, newData) => {
   return result;
 };
 
-exports.deleteAMember = async (id) => {
+exports.deleteAMemberService = async (id) => {
   const result = await Member.deleteOne({ _id: new ObjectId(id) });
+  return result;
+};
+
+exports.getInfoOfAMemberService = async (id) => {
+  const result = await Member.findById(id);
   return result;
 };

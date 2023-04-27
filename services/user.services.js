@@ -65,17 +65,18 @@ exports.comparePassword = async (user, password) => {
 };
 
 exports.getAllUsersService = async (query) => {
-  let { skip, limit, sort, ...filters } = query;
+  let { limit, page, sort, ...filters } = query;
 
   let filterString = JSON.stringify(filters);
   filterString = filterString.replace(/gt|lt|gte|lte/g, (match) => `$${match}`);
   filters = JSON.parse(filterString);
 
   const result = await User.find(filters)
-    .skip(skip)
+    .skip(page * limit)
     .limit(limit)
     .sort(sort)
     .select("-password");
+
   return result;
 };
 

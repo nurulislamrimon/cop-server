@@ -5,6 +5,17 @@ const { verifyAuthorization } = require("../middlewares/verify_authorization");
 
 const membersRouter = express.Router();
 /*
+ *@api{get}/members/ get all members
+ *@apiDescription get all members using any query
+ *@apiPermission none
+ *@apiHeader none
+ *@apiParam none
+ *@apiQuery limit,sort,skip,
+ *@apiSuccess {Array of Objects} members info.
+ *@apiError none.
+ */
+membersRouter.get("/", memberController.getAllMembersController);
+/*
  *@api{post}/members/addnew add a new member
  *@apiDescription a new member will be added
  *@apiPermission authorized people only
@@ -42,6 +53,22 @@ membersRouter.patch(
     "general-member"
   ),
   memberController.updateMemberInformationController
+);
+/*
+ *@api{get}/members/:id get information about member
+ *@apiDescription all information about a member
+ *@apiPermission authorized people only
+ *@apiHeader {string} authorization access token
+ *@apiParam none
+ *@apiQuery none
+ *@apiSuccess {Object} members info.
+ *@apiError 401 & 403 unauthorized and forbidden.
+ */
+membersRouter.get(
+  "/:id",
+  verifyToken,
+  verifyAuthorization("admin", "chairman", "managing-director", "manager"),
+  memberController.getInfoOfAMemberController
 );
 /*
  *@api{delete}/members/:id delete a member

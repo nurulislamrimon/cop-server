@@ -1,5 +1,5 @@
 const User = require("../models/user.model");
-const { updateMemberEmailService } = require("../services/member.services");
+const { updateMemberEmailService } = require("../services/members.services");
 const userServices = require("../services/user.services");
 const generate_token = require("../utilities/generate_token");
 
@@ -9,7 +9,7 @@ exports.signupController = async (req, res, next) => {
     if (await userServices.getUserByEmail(req.body.email)) {
       throw new Error("User already exist!");
     } else {
-      const result = await userServices.postNewUserService(req.body);
+      const result = await userServices.addNewUserService(req.body);
       res.send({
         status: "success",
         data: result,

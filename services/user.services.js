@@ -3,7 +3,7 @@ const bcrypt = require("bcrypt");
 // internal import
 const User = require("../models/user.model");
 const generate_token = require("../utilities/generate_token");
-const memberServices = require("./member.services");
+const memberServices = require("./members.services");
 
 exports.getUserByEmail = async (email) => {
   return await User.findOne({ email });
@@ -19,7 +19,7 @@ exports.getUserByEmailPopulate = async (email, select, populateSelect) => {
     .populate("moreAboutMember", populateSelect);
 };
 
-exports.postNewUserService = async (user) => {
+exports.addNewUserService = async (user) => {
   const { email, memberCopID } = user;
   // check if user is a member=========
   if (user.memberCopID) {

@@ -52,6 +52,7 @@ const memberSchema = mongoose.Schema(
     role: {
       type: String,
       required: true,
+      default: "general-member",
       enum: {
         values: [
           "general-member",
@@ -64,6 +65,15 @@ const memberSchema = mongoose.Schema(
           "collector",
         ],
         message: `{VALUE} is not a valid role, it should be 'general-member','chairman','vice-chairman','committee-member','managing-director','manager','finance-secretary','collector'`,
+      },
+    },
+    status: {
+      type: String,
+      default: "active",
+      required: true,
+      enum: {
+        values: ["active", "inactive", "removed"],
+        message: `{VALUE} is not valid status, must be "active", "inactive", "removed"`,
       },
     },
     fatherName: String,

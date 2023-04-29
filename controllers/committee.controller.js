@@ -10,7 +10,7 @@ exports.addNewCommitteeController = async (req, res, next) => {
         status: "success",
         data: result,
       });
-      console.log(result);
+      console.log("New committee added!");
     }
   } catch (error) {
     next(error);

@@ -3,6 +3,7 @@ const Member = require("../models/member.model");
 const { getMemberByIdService } = require("./members.services");
 
 exports.addNewCommitteeService = async (committee) => {
+  await this.makeExpiredPreviousCommitteeService();
   const members = committee.members;
   for (let i = 0; i < members.length; i++) {
     const member = await getMemberByIdService(members[i].moreAboutMember);
@@ -10,9 +11,7 @@ exports.addNewCommitteeService = async (committee) => {
     members[i].memberCopID = member.memberCopID;
     await this.updateMemberRoleToCommittee(members[i]);
   }
-
-  await this.makeExpiredPreviousCommitteeService();
-  const result = await Committee.insertMany(committee);
+  const result = await Committee.create(committee);
   return result;
 };
 
@@ -23,6 +22,15 @@ exports.updateMemberRoleToCommittee = async (member) => {
 };
 
 exports.makeExpiredPreviousCommitteeService = async () => {
+  const committees = await Committee.find({});
+  for (const committee of committees) {
+    for (const member of committee.members) {
+      await Member.findByIdAndUpdate(member.moreAboutMember, {
+        $set: { role: "general-member" },
+      });
+    }
+  }
+
   const result = await Committee.updateMany(
     {},
     { $set: { status: "expired", expiredOn: Date.now() } }

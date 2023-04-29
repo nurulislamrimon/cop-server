@@ -55,7 +55,7 @@ membersRouter.patch(
   memberController.updateMemberInformationController
 );
 /*
- *@api{get}/members/:id get information about member
+ *@api{get}/members/:id get information of a member
  *@apiDescription all information about a member
  *@apiPermission authorized people only
  *@apiHeader {string} authorization access token

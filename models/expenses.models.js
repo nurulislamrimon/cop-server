@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
-const memberCopIDValidator = require("../utilities/memberCopIDValidator");
 const validator = require("validator");
+const memberCopIDValidator = require("../utilities/member_cop_id_validator");
 const ObjectId = mongoose.ObjectId;
 
 const expenseSchema = mongoose.Schema(
@@ -10,8 +10,8 @@ const expenseSchema = mongoose.Schema(
       type: String,
       required: true,
       enum: {
-        values: ["Pending", "Approved", "Rejected"],
-        message: `{VALUE} is not a valid status, it should be Invested,Collected or Rejected`,
+        values: ["pending", "approved", "rejected"],
+        message: `{VALUE} is not a valid status, it should be 'pending','approved' or 'rejected'`,
       },
     },
     dataEntry: {

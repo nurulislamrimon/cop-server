@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const validator = require("validator");
-const memberCopIDValidator = require("../utilities/memberCopIDValidator");
+const memberCopIDValidator = require("../utilities/member_cop_id_validator");
 const ObjectId = mongoose.ObjectId;
 
 const memberSchema = mongoose.Schema(
@@ -18,16 +18,13 @@ const memberSchema = mongoose.Schema(
       type: String,
       required: true,
     },
-    email: {
+    emails: {
       defaultEmail: {
         email: {
           type: String,
           validate: [validator.isEmail, "Email is not valid!"],
         },
-        openingDate: {
-          type: String,
-          validate: [validator.isDate, "Date should be 10/10/2023 format!"],
-        },
+        addedAt: Date,
         authorized: {
           status: {
             type: String,
@@ -41,22 +38,43 @@ const memberSchema = mongoose.Schema(
           },
         },
       },
-      oldEmail: [
+      oldEmails: [
         {
           email: {
             type: String,
             validate: [validator.isEmail, "Email is not valid!"],
           },
-          openingDate: {
-            type: String,
-            validate: [validator.isDate, "Date should be 10/10/2023 format!"],
-          },
-          removingDate: {
-            type: String,
-            validate: [validator.isDate, "Date should be 10/10/2023 format!"],
-          },
+          addedAt: Date,
+          removedAt: Date,
         },
       ],
+    },
+    role: {
+      type: String,
+      required: true,
+      default: "general-member",
+      enum: {
+        values: [
+          "general-member",
+          "chairman",
+          "vice-chairman",
+          "committee-member",
+          "managing-director",
+          "manager",
+          "finance-secretary",
+          "collector",
+        ],
+        message: `{VALUE} is not a valid role, it should be 'general-member','chairman','vice-chairman','committee-member','managing-director','manager','finance-secretary','collector'`,
+      },
+    },
+    status: {
+      type: String,
+      default: "active",
+      required: true,
+      enum: {
+        values: ["active", "inactive", "removed"],
+        message: `{VALUE} is not valid status, must be "active", "inactive", "removed"`,
+      },
     },
     fatherName: String,
     motherName: String,

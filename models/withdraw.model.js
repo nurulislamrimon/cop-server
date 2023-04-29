@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const memberCopIDValidator = require("../utilities/memberCopIDValidator");
+const memberCopIDValidator = require("../utilities/member_cop_id_validator");
 const ObjectId = mongoose.ObjectId;
 
 const withdrawSchema = mongoose.Schema(
@@ -30,8 +30,8 @@ const withdrawSchema = mongoose.Schema(
       type: String,
       required: true,
       enum: {
-        values: ["Pending", "Approved", "Rejected"],
-        message: `{VALUE} is not a valid status, it should be Pending,Approved or Rejected`,
+        values: ["pending", "approved", "rejected"],
+        message: `{VALUE} is not a valid status, it should be pending,approved or rejected`,
       },
     },
     witness: {

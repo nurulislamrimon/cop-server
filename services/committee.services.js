@@ -1,5 +1,6 @@
 const Committee = require("../models/committee.model");
 const Member = require("../models/member.model");
+const ObjectId=require("mongoose").ObjectId;
 const { getMemberByIdService } = require("./members.services");
 
 exports.getActiveCommittee=async()=>{
@@ -9,6 +10,7 @@ exports.getActiveCommittee=async()=>{
 
 exports.addNewCommitteeService = async (committee) => {
   const members=committee.members;
+  // check if member exist 
   for (const member of members) {
     const isMemberExist = await getMemberByIdService(member.id);
     if (!isMemberExist) {
@@ -16,6 +18,7 @@ exports.addNewCommitteeService = async (committee) => {
     }
   }
     await this.makeExpiredPreviousCommitteeService();
+    // change member role on member model and get info
   for (let i = 0; i < members.length; i++) {
     const member = await getMemberByIdService(members[i].id);
     members[i].name = member.name;
@@ -55,4 +58,9 @@ exports.updateCommitteeAddMemberService=async(member,newRole)=>{
   await this.updateMemberRoleToCommittee({id,role:newRole})
 const result = await Committee.findOneAndUpdate({status:"active"},{$push:{"members":{name,memberCopID,role:newRole,moreAboutMember:id}}})
 return result;
+}
+
+exports.deleteACommitteeService=async(id)=>{
+  const result=await Committee.deleteOne({_id:id});
+  return result
 }

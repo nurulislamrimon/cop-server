@@ -51,7 +51,7 @@ router.get("/me", verifyToken, userController.aboutMeController);
 router.get(
   "/",
   verifyToken,
-  verifyAuthorization("admin", "chairman", "managing-director", "manager"),
+  verifyAuthorization("admin", "chairman","vice-chairman","director", "managing-director", "manager"),
   userController.getAllUsersController
 );
 /*
@@ -67,7 +67,7 @@ router.get(
 router.get(
   "/:id",
   verifyToken,
-  verifyAuthorization("admin", "chairman", "managing-director", "manager"),
+  verifyAuthorization("admin", "chairman","vice-chairman","director", "managing-director", "manager"),
   userController.getAnUserController
 );
 /*
@@ -84,7 +84,7 @@ router.get(
 router.put(
   "/active/:id",
   verifyToken,
-  verifyAuthorization("admin", "chairman", "managing-director", "manager"),
+  verifyAuthorization("admin", "chairman","vice-chairman","director", "managing-director", "manager"),
   userController.activeAnUserController
 );
 /*
@@ -101,7 +101,7 @@ router.put(
 router.delete(
   "/:id",
   verifyToken,
-  verifyAuthorization("admin", "chairman", "managing-director", "manager"),
+  verifyAuthorization("admin", "chairman","vice-chairman","director", "managing-director", "manager"),
   userController.deleteAnUserController
 );
 module.exports = router;

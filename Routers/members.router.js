@@ -29,7 +29,7 @@ membersRouter.get("/", memberController.getAllMembersController);
 membersRouter.post(
   "/addnew",
   verifyToken,
-  verifyAuthorization("admin", "chairman", "managing-director", "manager"),
+  verifyAuthorization("admin", "chairman","vice-chairman","director", "managing-director", "manager"),
   memberController.addNewMemberController
 );
 /*
@@ -47,7 +47,7 @@ membersRouter.patch(
   verifyToken,
   verifyAuthorization(
     "admin",
-    "chairman",
+    "chairman","vice-chairman","director",
     "managing-director",
     "manager",
     "general-member"
@@ -67,7 +67,7 @@ membersRouter.patch(
 membersRouter.get(
   "/:id",
   verifyToken,
-  verifyAuthorization("admin", "chairman", "managing-director", "manager"),
+  verifyAuthorization("admin", "chairman","vice-chairman","director", "managing-director", "manager"),
   memberController.getInfoOfAMemberController
 );
 /*
@@ -83,7 +83,7 @@ membersRouter.get(
 membersRouter.delete(
   "/:id",
   verifyToken,
-  verifyAuthorization("admin", "chairman", "managing-director"),
+  verifyAuthorization("admin", "chairman","vice-chairman","director", "managing-director"),
   memberController.deleteAMemberController
 );
 

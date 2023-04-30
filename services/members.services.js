@@ -22,6 +22,7 @@ exports.getAllMembersService = async (query, select) => {
 exports.getMemberByCopIDService = async (memberCopID) => {
   return await Member.findOne({ memberCopID });
 };
+
 exports.getMemberByIdService = async (id) => {
   return await Member.findById(id);
 };

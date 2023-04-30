@@ -1,4 +1,3 @@
-const User = require("../models/user.model");
 const { updateMemberEmailService } = require("../services/members.services");
 const userServices = require("../services/user.services");
 const generate_token = require("../utilities/generate_token");

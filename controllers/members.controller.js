@@ -23,7 +23,7 @@ exports.addNewMemberController = async (req, res, next) => {
       status: "success",
       data: result,
     });
-    console.log(result);
+    console.log(`${result._id} is added as new member!`);
   } catch (error) {
     next(error);
   }

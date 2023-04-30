@@ -26,11 +26,12 @@ exports.addNewUserService = async (user) => {
     const member = await memberServices.getMemberByCopIDService(memberCopID);
     if (member) {
       const oldEmail = member?.emails?.defaultEmail;
+      const oldEmails = [{...oldEmail, removedAt: Date.now()},...member?.emails?.oldEmails];
       // update default email
       await memberServices.updateMemberEmailService(
         memberCopID,
         email,
-        oldEmail
+        oldEmails
       );
       // member id and role for new user model
       user.moreAboutMember = member._id;

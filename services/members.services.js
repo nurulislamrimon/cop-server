@@ -26,18 +26,19 @@ exports.getMemberByIdService = async (id) => {
   return await Member.findById(id);
 };
 
-exports.updateMemberEmailService = async (memberCopID, email, oldEmail) => {
+exports.updateMemberEmailService = async (memberCopID, email, oldEmails) => {
   await Member.updateOne(
     { memberCopID },
     {
       $set: {
         emails: {
           defaultEmail: { email, addedAt: Date.now() },
+          oldEmails
         },
       },
     }
-  );
-  await this.updateMemberOldEmailService(memberCopID, oldEmail);
+    );
+    // await this.updateMemberOldEmailService(memberCopID, oldEmail);
 };
 
 exports.updateMemberOldEmailService = async (memberCopID, oldEmail) => {

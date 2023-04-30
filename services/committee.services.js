@@ -2,13 +2,25 @@ const Committee = require("../models/committee.model");
 const Member = require("../models/member.model");
 const { getMemberByIdService } = require("./members.services");
 
+exports.getActiveCommittee=async()=>{
+  const result = await Committee.findOne({status:"active"})
+  return result
+}
+
 exports.addNewCommitteeService = async (committee) => {
-  await this.makeExpiredPreviousCommitteeService();
-  const members = committee.members;
+  const members=committee.members;
+  for (const member of members) {
+    const isMemberExist = await getMemberByIdService(member.id);
+    if (!isMemberExist) {
+      throw new Error(`Member ${member.id} is not found!`)
+    }
+  }
+    await this.makeExpiredPreviousCommitteeService();
   for (let i = 0; i < members.length; i++) {
-    const member = await getMemberByIdService(members[i].moreAboutMember);
+    const member = await getMemberByIdService(members[i].id);
     members[i].name = member.name;
     members[i].memberCopID = member.memberCopID;
+    members[i].moreAboutMember = member._id;
     await this.updateMemberRoleToCommittee(members[i]);
   }
   const result = await Committee.create(committee);
@@ -16,7 +28,7 @@ exports.addNewCommitteeService = async (committee) => {
 };
 
 exports.updateMemberRoleToCommittee = async (member) => {
-  await Member.findByIdAndUpdate(member.moreAboutMember, {
+  await Member.findByIdAndUpdate(member.id, {
     $set: { role: member.role },
   });
 };
@@ -37,3 +49,10 @@ exports.makeExpiredPreviousCommitteeService = async () => {
   );
   return result;
 };
+
+exports.updateCommitteeAddMemberService=async(member,newRole)=>{
+  const {name,memberCopID,id}=member;
+  await this.updateMemberRoleToCommittee({id,role:newRole})
+const result = await Committee.findOneAndUpdate({status:"active"},{$push:{"members":{name,memberCopID,role:newRole,moreAboutMember:id}}})
+return result;
+}

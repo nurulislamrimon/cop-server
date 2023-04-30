@@ -26,6 +26,9 @@ exports.addNewUserService = async (user) => {
     const member = await memberServices.getMemberByCopIDService(memberCopID);
     if (member) {
       const oldEmail = member?.emails?.defaultEmail;
+      if (!oldEmail.email) {
+        oldEmail.email="...@gmail.com"
+      }
       const oldEmails = [{...oldEmail, removedAt: Date.now()},...member?.emails?.oldEmails];
       // update default email
       await memberServices.updateMemberEmailService(

@@ -1,6 +1,7 @@
 **Here will be two types of users:
 1.	User
 2.	Member
+
 —----------------------credentials—------------------------
 ●	[POST/users/signup] A new user can signup and should return a token with email and role property and memberCopID.
 ●	If a new user has a memberCopID, make the user member by adding this email to the existing member.(based on memberCopID).

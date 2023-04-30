@@ -45,3 +45,17 @@ console.log(`${result}`);}}
     next(error)
   }
 }
+
+exports.deleteACommitteeController=async(req,res,next)=>{
+  try {
+    const committeeId = req.params.committeeId
+    const result = await committeeServices.deleteACommitteeService(committeeId)
+    res.send({
+      status:"success",
+      data:result
+    })
+    console.log(result);
+  } catch (error) {
+    next(error)
+  }
+}

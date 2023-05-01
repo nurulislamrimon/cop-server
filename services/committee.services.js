@@ -8,6 +8,20 @@ exports.getActiveCommittee=async()=>{
   return result
 }
 
+exports.getAllCommitteeService=async(query)=>{
+  let { limit, page, sort, ...filters } = query;
+
+  let filterString = JSON.stringify(filters);
+  filterString = filterString.replace(/gt|lt|gte|lte/g, (match) => `$${match}`);
+  filters = JSON.parse(filterString);
+
+  const result = await Committee.find(filters)
+  .skip(page * limit)
+    .limit(limit)
+    .sort(sort)
+    return result
+}
+
 exports.addNewCommitteeService = async (committee) => {
   const members=committee.members;
   // check if member exist 

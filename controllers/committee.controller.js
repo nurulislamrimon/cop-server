@@ -1,3 +1,4 @@
+const Committee = require("../models/committee.model");
 const committeeServices = require("../services/committee.services");
 const { getMemberByIdService } = require("../services/members.services");
 
@@ -55,6 +56,33 @@ exports.deleteACommitteeController=async(req,res,next)=>{
       data:result
     })
     console.log(result);
+  } catch (error) {
+    next(error)
+  }
+}
+
+exports.getActiveCommitteeController=async(req,res,next)=>{
+  try {
+    const result = await committeeServices.getActiveCommittee();
+    res.send({
+      status:"success",
+      data:result
+    })
+    console.log(`Active committee ${result._id} is responsed!`);
+    return result
+  } catch (error) {
+    next(error)
+  }
+}
+
+exports.getAllCommitteeController=async(req,res,next)=>{
+  try {
+    const result = await committeeServices.getAllCommitteeService(req.query)
+    res.send({
+      status:"success",
+      data:result
+    })
+    console.log(`Committee ${result.length} is responsed!`);
   } catch (error) {
     next(error)
   }

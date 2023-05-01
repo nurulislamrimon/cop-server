@@ -2,8 +2,33 @@ const express = require("express");
 const committeeControllers = require("../controllers/committee.controller");
 const { verifyToken } = require("../middlewares/verify_token");
 const { verifyAuthorization } = require("../middlewares/verify_authorization");
+const { adminToManager } = require("../utilities/roles");
 
 const router = express.Router();
+/*
+ *@api{get}/committee get active committee
+ *@apiDescription get active committee information
+ *@apiPermission none
+ *@apiHeader none
+ *@apiBody none
+ *@apiParam none
+ *@apiQuery none
+ *@apiSuccess {Objects} committee info.
+ *@apiError none
+ */
+ router.get("/",committeeControllers.getActiveCommitteeController);
+/*
+ *@api{get}/committee/all get all committee
+ *@apiDescription get all committee information
+ *@apiPermission authorized roles only
+ *@apiHeader authorization access token verification
+ *@apiBody none
+ *@apiParam none
+ *@apiQuery sort,limit,skip,filters
+ *@apiSuccess {Array of Objects} committee info.
+ *@apiError none
+ */
+ router.get("/all",verifyToken,verifyAuthorization(adminToManager), committeeControllers.getAllCommitteeController);
 /*
  *@api{post}/committee/ post new committee
  *@apiDescription add new committee with election date
@@ -24,7 +49,7 @@ const router = express.Router();
  *@apiSuccess {Array of Objects} committee info.
  *@apiError invalid data, missing data and member not found.
  */
-router.post("/",verifyToken,verifyAuthorization("admin","chairman","director"), committeeControllers.addNewCommitteeController);
+router.post("/",verifyToken,verifyAuthorization(adminToManager), committeeControllers.addNewCommitteeController);
 /*
  *@api{patch}/committee/addmember update committee
  *@apiDescription add new committee member in active committee
@@ -40,7 +65,8 @@ router.post("/",verifyToken,verifyAuthorization("admin","chairman","director"), 
  *@apiSuccess {Objects} committee info.
  *@apiError invalid data, missing data and member not found.
  */
-router.patch("/addmember",verifyToken,verifyAuthorization("admin","chairman","director","managing-director","manager"), committeeControllers.updateCommitteeAddMemberController);
+router.patch("/addmember",verifyToken,verifyAuthorization(adminToManager), committeeControllers.updateCommitteeAddMemberController);
+
 /*
  *@api{delete}/committee/:id delete a committee
  *@apiDescription delete a committee using committee id
@@ -52,6 +78,6 @@ router.patch("/addmember",verifyToken,verifyAuthorization("admin","chairman","di
  *@apiSuccess {Objects} committee info.
  *@apiError none
  */
-router.delete("/:committeeId",verifyToken,verifyAuthorization("admin","chairman","director","managing-director","manager"), committeeControllers.deleteACommitteeController);
+router.delete("/:committeeId",verifyToken,verifyAuthorization(adminToManager), committeeControllers.deleteACommitteeController);
 
 module.exports = router;

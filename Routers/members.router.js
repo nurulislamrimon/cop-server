@@ -2,6 +2,7 @@ const express = require("express");
 const memberController = require("../controllers/members.controller");
 const { verifyToken } = require("../middlewares/verify_token");
 const { verifyAuthorization } = require("../middlewares/verify_authorization");
+const { adminToManager } = require("../utilities/roles");
 
 const membersRouter = express.Router();
 /*
@@ -29,7 +30,7 @@ membersRouter.get("/", memberController.getAllMembersController);
 membersRouter.post(
   "/addnew",
   verifyToken,
-  verifyAuthorization("admin", "chairman","vice-chairman","director", "managing-director", "manager"),
+  verifyAuthorization(adminToManager),
   memberController.addNewMemberController
 );
 /*
@@ -46,10 +47,7 @@ membersRouter.patch(
   "/:id",
   verifyToken,
   verifyAuthorization(
-    "admin",
-    "chairman","vice-chairman","director",
-    "managing-director",
-    "manager",
+    adminToManager,
     "general-member"
   ),
   memberController.updateMemberInformationController
@@ -67,7 +65,7 @@ membersRouter.patch(
 membersRouter.get(
   "/:id",
   verifyToken,
-  verifyAuthorization("admin", "chairman","vice-chairman","director", "managing-director", "manager"),
+  verifyAuthorization(adminToManager),
   memberController.getInfoOfAMemberController
 );
 /*
@@ -83,7 +81,7 @@ membersRouter.get(
 membersRouter.delete(
   "/:id",
   verifyToken,
-  verifyAuthorization("admin", "chairman","vice-chairman","director", "managing-director"),
+  verifyAuthorization(adminToManager),
   memberController.deleteAMemberController
 );
 

@@ -1,14 +1,12 @@
 const mongoose = require("mongoose");
 const Member = require("../models/member.model");
 const { generate_memberCopID } = require("../utilities/generate_member_cop_id");
+const { addSymbleToFiltersOperator: filtersOperator } = require("../utilities/filter.operators");
 const { ObjectId } = mongoose.Types;
 
 exports.getAllMembersService = async (query, select) => {
   let { limit, page, sort, ...filters } = query;
-
-  let filterString = JSON.stringify(filters);
-  filterString = filterString.replace(/gt|lt|gte|lte/g, (match) => `$${match}`);
-  filters = JSON.parse(filterString);
+filters = filtersOperator(filters)
 
   const members = await Member.find(filters)
     .skip(page * limit)

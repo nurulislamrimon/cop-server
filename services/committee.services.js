@@ -1,6 +1,6 @@
 const Committee = require("../models/committee.model");
 const Member = require("../models/member.model");
-const { filtersOperator } = require("../utilities/filter.operators");
+const { addSymbleToFiltersOperator: filtersOperator } = require("../utilities/filter.operators");
 const ObjectId=require("mongoose").ObjectId;
 const { getMemberByIdService } = require("./members.services");
 
@@ -12,7 +12,6 @@ exports.getActiveCommittee=async()=>{
 exports.getAllCommitteeService=async(query)=>{
   let { limit, page, sort, ...filters } = query;
   filters=filtersOperator(filters);
-console.log(filters);
   const result = await Committee.find(filters)
   .skip(page * limit)
     .limit(limit)

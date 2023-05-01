@@ -8,6 +8,7 @@ const homeRouter = require("./routers/home.router");
 const userRouter = require("./routers/user.router");
 const membersRouter = require("./routers/members.router");
 const committeeRouter = require("./routers/committee.router");
+const adminRouter = require("./routers/admin.router");
 const dbconnection = require("./utilities/dbconnection");
 
 // database connection
@@ -17,6 +18,7 @@ app.use("/", homeRouter);
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/members", membersRouter);
 app.use("/api/v1/committee", committeeRouter);
+app.use("/api/v1/admin", adminRouter);
 // route doesn't exist error handler
 app.use(errorHandler.routeDoesntExist);
 // error handler

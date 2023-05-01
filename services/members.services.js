@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Member = require("../models/member.model");
 const { generate_memberCopID } = require("../utilities/generate_member_cop_id");
-const { filtersOperator } = require("../utilities/filter.operators");
+const { addSymbleToFiltersOperator: filtersOperator } = require("../utilities/filter.operators");
 const { ObjectId } = mongoose.Types;
 
 exports.getAllMembersService = async (query, select) => {

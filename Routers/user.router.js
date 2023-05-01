@@ -2,6 +2,7 @@ const express = require("express");
 const userController = require("../controllers/user.controller");
 const { verifyToken } = require("../middlewares/verify_token");
 const { verifyAuthorization } = require("../middlewares/verify_authorization");
+const { adminToManager } = require("../utilities/roles");
 const router = express.Router();
 /*
  *@api{post}/users/signup post a new user
@@ -51,7 +52,7 @@ router.get("/me", verifyToken, userController.aboutMeController);
 router.get(
   "/",
   verifyToken,
-  verifyAuthorization("admin", "chairman","vice-chairman","director", "managing-director", "manager"),
+  verifyAuthorization(adminToManager),
   userController.getAllUsersController
 );
 /*
@@ -67,7 +68,7 @@ router.get(
 router.get(
   "/:id",
   verifyToken,
-  verifyAuthorization("admin", "chairman","vice-chairman","director", "managing-director", "manager"),
+  verifyAuthorization(adminToManager),
   userController.getAnUserController
 );
 /*
@@ -84,7 +85,7 @@ router.get(
 router.put(
   "/active/:id",
   verifyToken,
-  verifyAuthorization("admin", "chairman","vice-chairman","director", "managing-director", "manager"),
+  verifyAuthorization(adminToManager),
   userController.activeAnUserController
 );
 /*
@@ -101,7 +102,7 @@ router.put(
 router.delete(
   "/:id",
   verifyToken,
-  verifyAuthorization("admin", "chairman","vice-chairman","director", "managing-director", "manager"),
+  verifyAuthorization(adminToManager),
   userController.deleteAnUserController
 );
 module.exports = router;

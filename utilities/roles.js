@@ -1,0 +1,1 @@
+exports.adminToManager="admin","chairman","vice-chairman","director","managing-director","manager";

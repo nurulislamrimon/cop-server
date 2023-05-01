@@ -1,12 +1,14 @@
 const mongoose = require("mongoose");
 const Member = require("../models/member.model");
 const { generate_memberCopID } = require("../utilities/generate_member_cop_id");
-const { addSymbleToFiltersOperator: filtersOperator } = require("../utilities/filter.operators");
+const {
+  addSymbleToFiltersOperator: filtersOperator,
+} = require("../utilities/filter.operators");
 const { ObjectId } = mongoose.Types;
 
 exports.getAllMembersService = async (query, select) => {
   let { limit, page, sort, ...filters } = query;
-filters = filtersOperator(filters)
+  filters = filtersOperator(filters);
 
   const members = await Member.find(filters)
     .skip(page * limit)
@@ -32,22 +34,12 @@ exports.updateMemberEmailService = async (memberCopID, email, oldEmails) => {
       $set: {
         emails: {
           defaultEmail: { email, addedAt: Date.now() },
-          oldEmails
+          oldEmails,
         },
       },
-    }
-    );
-    // await this.updateMemberOldEmailService(memberCopID, oldEmail);
-};
-
-exports.updateMemberOldEmailService = async (memberCopID, oldEmail) => {
-  await Member.updateOne(
-    { memberCopID },
-    {
-      $push: {
-        "emails.oldEmails": { ...oldEmail, removedAt: Date.now() },
-      },
-    }
+    },
+    { new: true },
+    { runValidators: true }
   );
 };
 

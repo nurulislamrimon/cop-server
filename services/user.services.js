@@ -26,11 +26,15 @@ exports.addNewUserService = async (user) => {
   if (user.memberCopID) {
     const member = await memberServices.getMemberByCopIDService(memberCopID);
     if (member) {
-      const oldEmail = member?.emails?.defaultEmail;
-      if (!oldEmail.email) {
-        oldEmail.email="...@gmail.com"
+      let oldEmail = member?.emails?.defaultEmail;
+      let oldEmails;
+      if (oldEmail.email) {
+        oldEmails = [
+          { ...oldEmail, removedAt: Date.now() },
+          ...member?.emails?.oldEmails,
+        ];
       }
-      const oldEmails = [{...oldEmail, removedAt: Date.now()},...member?.emails?.oldEmails];
+
       // update default email
       await memberServices.updateMemberEmailService(
         memberCopID,
@@ -71,7 +75,7 @@ exports.comparePassword = async (user, password) => {
 
 exports.getAllUsersService = async (query) => {
   let { limit, page, sort, ...filters } = query;
-filters =filtersOperator(filters)
+  filters = filtersOperator(filters);
 
   const result = await User.find(filters)
     .skip(page * limit)

@@ -1,7 +1,5 @@
 const mongoose = require("mongoose");
-const {
-  memberCopIDValidator,
-} = require("../utilities/member_cop_id_validator");
+const memberCopIDValidator = require("../utilities/member_cop_id_validator");
 const ObjectId = mongoose.ObjectId;
 
 const depositSchema = mongoose.Schema(
@@ -31,6 +29,7 @@ const depositSchema = mongoose.Schema(
     status: {
       type: String,
       required: true,
+      default: "pending",
       enum: {
         values: ["pending", "approved", "rejected"],
         message: `{VALUE} is not a valid status, it should be 'pending','approved' or 'rejected'`,
@@ -53,8 +52,8 @@ const depositSchema = mongoose.Schema(
           message: (props) => `${props.value} is not a valid Member Unique ID!`,
         },
       },
-      time: {
-        type: String,
+      collectionDate: {
+        type: Date,
         required: true,
       },
       moreAboutCollector: {
@@ -80,7 +79,7 @@ const depositSchema = mongoose.Schema(
           message: (props) => `${props.value} is not a valid Member Unique ID!`,
         },
       },
-      time: {
+      dataEntryTime: {
         type: String,
         required: true,
       },
@@ -93,11 +92,9 @@ const depositSchema = mongoose.Schema(
     authorised: {
       name: {
         type: String,
-        required: true,
       },
       memberCopID: {
         type: String,
-        required: true,
         maxLength: [
           memberCopIDValidator.maxLength,
           "Invalid member unique ID!",
@@ -109,11 +106,9 @@ const depositSchema = mongoose.Schema(
       },
       time: {
         type: String,
-        required: true,
       },
       moreAboutAuthorised: {
         type: ObjectId,
-        required: true,
         ref: "Member",
       },
     },

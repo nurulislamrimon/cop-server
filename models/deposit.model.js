@@ -104,10 +104,10 @@ const depositSchema = mongoose.Schema(
           message: (props) => `${props.value} is not a valid Member Unique ID!`,
         },
       },
-      time: {
-        type: String,
+      authorisingTime: {
+        type: Date,
       },
-      moreAboutAuthorised: {
+      moreAboutAuthoriser: {
         type: ObjectId,
         ref: "Member",
       },

@@ -102,6 +102,6 @@ exports.deactiveUserService = async (previousUser) => {
 };
 
 exports.deleteAnUserService = async (id) => {
-  const result = await User.findByIdAndDelete(id).then((data) => data);
+  const result = await User.deleteOne({ _id: id });
   return result;
 };

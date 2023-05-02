@@ -1,4 +1,4 @@
-exports.verifyAuthorization = (...roles) => {
+exports.verifyAuthorization = (roles) => {
   return (req, res, next) => {
     if (roles.includes(req.decoded.role) && req.decoded.status === "active") {
       next();

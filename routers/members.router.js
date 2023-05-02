@@ -2,7 +2,7 @@ const express = require("express");
 const memberController = require("../controllers/members.controller");
 const { verifyToken } = require("../middlewares/verify_token");
 const { verifyAuthorization } = require("../middlewares/verify_authorization");
-const { adminToManager } = require("../utilities/roles");
+const roles = require("../utilities/roles");
 
 const membersRouter = express.Router();
 /*
@@ -30,7 +30,7 @@ membersRouter.get("/", memberController.getAllMembersController);
 membersRouter.post(
   "/addnew",
   verifyToken,
-  verifyAuthorization(adminToManager),
+  verifyAuthorization(roles.adminToManager),
   memberController.addNewMemberController
 );
 /*
@@ -46,7 +46,7 @@ membersRouter.post(
 membersRouter.patch(
   "/:id",
   verifyToken,
-  verifyAuthorization(adminToManager, "general-member"),
+  verifyAuthorization(roles.adminToManagerAndGeneralMember),
   memberController.updateMemberInformationController
 );
 /*
@@ -62,7 +62,7 @@ membersRouter.patch(
 membersRouter.get(
   "/:id",
   verifyToken,
-  verifyAuthorization(adminToManager),
+  verifyAuthorization(roles.adminToManager),
   memberController.getInfoOfAMemberController
 );
 /*
@@ -78,7 +78,7 @@ membersRouter.get(
 membersRouter.delete(
   "/:id",
   verifyToken,
-  verifyAuthorization(adminToManager),
+  verifyAuthorization(roles.adminToManager),
   memberController.deleteAMemberController
 );
 

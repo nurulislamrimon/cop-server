@@ -86,7 +86,7 @@ const memberSchema = mongoose.Schema(
           type: Number,
           required: true,
         },
-        date: String,
+        depositDate: Date,
         moreAboutDeposit: {
           type: ObjectId,
           required: true,

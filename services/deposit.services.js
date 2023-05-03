@@ -1,6 +1,7 @@
 const Deposit = require("../models/deposit.model");
 const Member = require("../models/member.model");
 const { addSymbleToFiltersOperator } = require("../utilities/filter.operators");
+const ObjectId = require("mongoose").Types.ObjectId;
 
 exports.getADepositByIdService = async (id) => {
   const result = await Deposit.findById(id);
@@ -70,5 +71,28 @@ exports.removeADepositFromMemberService = async (memberId, depositId) => {
 
 exports.deleteADepositService = async (id) => {
   const result = await Deposit.deleteOne({ _id: id });
+  return result;
+};
+
+exports.getTotalDepositCalculatedByIdService = async (id) => {
+  const result = await Deposit.aggregate([
+    {
+      $match: { moreAboutMember: new ObjectId(id), status: "approved" },
+    },
+    {
+      $project: {
+        _id: 1,
+        moreAboutMember: 1,
+        name: 1,
+        depositAmount: 1,
+      },
+    },
+    {
+      $group: {
+        _id: "$moreAboutMember",
+        totalDeposit: { $sum: "$depositAmount" },
+      },
+    },
+  ]);
   return result;
 };

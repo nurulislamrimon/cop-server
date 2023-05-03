@@ -29,6 +29,7 @@ const withdrawSchema = mongoose.Schema(
     status: {
       type: String,
       required: true,
+      default: "pending",
       enum: {
         values: ["pending", "approved", "rejected"],
         message: `{VALUE} is not a valid status, it should be pending,approved or rejected`,
@@ -49,8 +50,8 @@ const withdrawSchema = mongoose.Schema(
           message: (props) => `${props.value} is not a valid Member Unique ID!`,
         },
       },
-      time: {
-        type: String,
+      withdrawDate: {
+        type: Date,
       },
       moreAboutWitness: {
         type: ObjectId,
@@ -74,7 +75,7 @@ const withdrawSchema = mongoose.Schema(
           message: (props) => `${props.value} is not a valid Member Unique ID!`,
         },
       },
-      time: {
+      dataEntryTime: {
         type: String,
         required: true,
       },
@@ -87,11 +88,9 @@ const withdrawSchema = mongoose.Schema(
     authorised: {
       name: {
         type: String,
-        required: true,
       },
       memberCopID: {
         type: String,
-        required: true,
         maxLength: [
           memberCopIDValidator.maxLength,
           "Invalid member unique ID!",
@@ -101,13 +100,11 @@ const withdrawSchema = mongoose.Schema(
           message: (props) => `${props.value} is not a valid Member Unique ID!`,
         },
       },
-      time: {
-        type: String,
-        required: true,
+      authorisingTime: {
+        type: Date,
       },
-      moreAboutAuthorised: {
+      moreAboutAuthoriser: {
         type: ObjectId,
-        required: true,
         ref: "Member",
       },
     },

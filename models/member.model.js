@@ -94,13 +94,13 @@ const memberSchema = mongoose.Schema(
         },
       },
     ],
-    withdrawls: [
+    withdraws: [
       {
         withdrawAmount: {
           type: Number,
           required: true,
         },
-        date: String,
+        withdrawDate: String,
         moreAboutWithdraw: {
           type: ObjectId,
           required: true,

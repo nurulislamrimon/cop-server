@@ -66,13 +66,17 @@ exports.addNewDepositController = async (req, res, next) => {
 };
 
 exports.getAllPendingDepositController = async (req, res, next) => {
-  req.query.status = "pending";
-  const result = await depositServices.getAllDepositService(req.query);
-  res.send({
-    status: "success",
-    data: result,
-  });
-  console.log(`${result.length} pending deposits responding`);
+  try {
+    req.query.status = "pending";
+    const result = await depositServices.getAllDepositService(req.query);
+    res.send({
+      status: "success",
+      data: result,
+    });
+    console.log(`${result.length} pending deposits responding`);
+  } catch (error) {
+    next(error);
+  }
 };
 
 exports.approveADepositRequestController = async (req, res, next) => {
@@ -160,9 +164,9 @@ exports.deleteADepositControllter = async (req, res, next) => {
     const depositId = req.params.id;
     const deposit = await depositServices.getADepositByIdService(depositId);
     if (!deposit) {
-      throw new Error("Deposit not found!");
+      throw new Error("Deposit is not found!");
     } else if (deposit.status !== "approved") {
-      throw new Error("Deposit is not in approved status!");
+      throw new Error("Deposit is not in approved state!");
     } else {
       // remove from member model
       await depositServices.removeADepositFromMemberService(

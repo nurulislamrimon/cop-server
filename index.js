@@ -11,6 +11,8 @@ const committeeRouter = require("./routers/committee.router");
 const adminRouter = require("./routers/admin.router");
 const depositRouter = require("./routers/deposit.router");
 const withdrawRouter = require("./routers/withdraw.router");
+const investmentRouter = require("./routers/investment.router");
+const businessRouter = require("./routers/business.router");
 const dbconnection = require("./utilities/dbconnection");
 
 // database connection
@@ -19,10 +21,12 @@ dbconnection();
 app.use("/", homeRouter);
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/members", membersRouter);
-app.use("/api/v1/committee", committeeRouter);
 app.use("/api/v1/admin", adminRouter);
+app.use("/api/v1/committee", committeeRouter);
+app.use("/api/v1/business", businessRouter);
 app.use("/api/v1/finance/deposit", depositRouter);
 app.use("/api/v1/finance/withdraw", withdrawRouter);
+app.use("/api/v1/finance/investment", investmentRouter);
 // route doesn't exist error handler
 app.use(errorHandler.routeDoesntExist);
 // error handler

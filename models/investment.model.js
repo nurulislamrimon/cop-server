@@ -5,35 +5,20 @@ const ObjectId = mongoose.ObjectId;
 
 const investmentSchema = mongoose.Schema(
   {
-    investedAmount: {
-      initialInvest: {
-        type: Number,
-        required: true,
-      },
-      additionalInvest: [
-        {
-          amount: {
-            type: Number,
-            required: true,
-          },
-          date: {
-            type: String,
-            required: true,
-            validate: [validator.isDate, "Date must be 12/05/2023 format"],
-          },
-          purpose: { type: String, required: true },
-        },
-      ],
+    investmentAmount: {
+      type: Number,
+      required: true,
     },
     status: {
       type: String,
       required: true,
+      default: "pending",
       enum: {
-        values: ["invested", "collected", "rejected"],
-        message: `{VALUE} is not a valid status, it should be 'invested','collected' or 'rejected'`,
+        values: ["pending", "invested", "collected", "rejected"],
+        message: `{VALUE} is not a valid status, it should be 'pending','invested','collected' or 'rejected'`,
       },
     },
-    individualInvest: [
+    individualInvestment: [
       {
         memberCopID: {
           type: String,
@@ -52,14 +37,8 @@ const investmentSchema = mongoose.Schema(
           type: String,
           required: true,
         },
-        depositOnTime: {
-          type: Number,
-          required: true,
-        },
-        investedAmount: {
-          initialInvest: Number,
-          additionalInvest: Number,
-        },
+        investmentPercentage: { type: Number, required: true },
+        investmentAmount: { type: Number, required: true },
         moreAboutMember: {
           type: ObjectId,
           required: true,
@@ -68,22 +47,20 @@ const investmentSchema = mongoose.Schema(
       },
     ],
     investmentDate: {
-      type: String,
+      type: Date,
+      default: Date.now(),
       required: true,
       validate: validator.isDate,
     },
-    platform: {
-      platformName: {
+    business: {
+      businessName: {
         type: String,
         required: true,
       },
-      managerName: {
-        type: String,
+      moreAboutBusiness: {
+        type: ObjectId,
         required: true,
-      },
-      mobile: {
-        type: String,
-        required: true,
+        ref: "Business",
       },
     },
     dataEntry: {
@@ -103,8 +80,8 @@ const investmentSchema = mongoose.Schema(
           message: (props) => `${props.value} is not a valid Member Unique ID!`,
         },
       },
-      time: {
-        type: String,
+      dataEntryTime: {
+        type: Date,
         required: true,
       },
       moreAboutDataEntrier: {
@@ -116,11 +93,9 @@ const investmentSchema = mongoose.Schema(
     authorised: {
       name: {
         type: String,
-        required: true,
       },
       memberCopID: {
         type: String,
-        required: true,
         maxLength: [
           memberCopIDValidator.maxLength,
           "Invalid member unique ID!",
@@ -130,19 +105,17 @@ const investmentSchema = mongoose.Schema(
           message: (props) => `${props.value} is not a valid Member Unique ID!`,
         },
       },
-      time: {
-        type: String,
-        required: true,
+      authorisingTime: {
+        type: Date,
       },
-      moreAboutAuthorised: {
+      moreAboutAuthoriser: {
         type: ObjectId,
-        required: true,
         ref: "Member",
       },
     },
     profits: {
       amount: Number,
-      date: String,
+      profitCollectionTime: Date,
       moreAboutProfit: {
         type: ObjectId,
         ref: "Profit",
@@ -152,7 +125,7 @@ const investmentSchema = mongoose.Schema(
       {
         amount: Number,
         reason: String,
-        date: String,
+        expensingTime: Date,
         moreAboutExpense: {
           type: ObjectId,
           ref: "Expense",

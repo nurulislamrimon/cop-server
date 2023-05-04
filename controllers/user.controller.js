@@ -146,7 +146,7 @@ exports.deleteAnUserController = async (req, res, next) => {
         status: "success",
         data: result,
       });
-      console.log(`User ${result._id} is deleted!`);
+      console.log(`User has been is deleted!`);
     } else {
       throw new Error("User not found!");
     }

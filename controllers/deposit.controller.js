@@ -34,32 +34,39 @@ exports.addNewDepositController = async (req, res, next) => {
       throw new Error(
         "Please provide valid 'depositorId','depositAmount' and 'collectorId'"
       );
+    } else if (
+      collector.role !== "collector" ||
+      collector.status !== "active"
+    ) {
+      throw new Error(`${collector.name} is not a valid collector!`);
+    } else if (member.status !== "active") {
+      throw new Error(`${member.name} is not a active member!`);
+    } else {
+      const deposit = {
+        depositAmount,
+        memberCopID: member.memberCopID,
+        name: member.name,
+        moreAboutMember: member._id,
+        collector: {
+          name: collector.name,
+          memberCopID: collector.memberCopID,
+          moreAboutCollector: collector._id,
+          collectionDate: collectionDate || Date.now(),
+        },
+        dataEntry: {
+          name: dataEntry.name,
+          memberCopID: dataEntry.memberCopID,
+          moreAboutDataEntrier: dataEntry._id,
+          dataEntryTime: Date.now(),
+        },
+      };
+      const result = await depositServices.addNewDepositService(deposit);
+      res.send({
+        status: "success",
+        data: result,
+      });
+      console.log(`New deposit ${result._id} added!`);
     }
-
-    const deposit = {
-      depositAmount,
-      memberCopID: member.memberCopID,
-      name: member.name,
-      moreAboutMember: member._id,
-      collector: {
-        name: collector.name,
-        memberCopID: collector.memberCopID,
-        moreAboutCollector: collector._id,
-        collectionDate: collectionDate || Date.now(),
-      },
-      dataEntry: {
-        name: dataEntry.name,
-        memberCopID: dataEntry.memberCopID,
-        moreAboutDataEntrier: dataEntry._id,
-        dataEntryTime: Date.now(),
-      },
-    };
-    const result = await depositServices.addNewDepositService(deposit);
-    res.send({
-      status: "success",
-      data: result,
-    });
-    console.log(`New deposit ${result._id} added!`);
   } catch (error) {
     next(error);
   }
@@ -113,7 +120,8 @@ exports.approveADepositRequestController = async (req, res, next) => {
 
 exports.rejectADepositRequestController = async (req, res, next) => {
   try {
-    const deposit = await depositServices.getADepositByIdService(req.params.id);
+    const depositId = req.params.id;
+    const deposit = await depositServices.getADepositByIdService(depositId);
     if (!deposit) {
       throw new Error("Deposit request not found!");
     } else if (deposit.status !== "pending") {
@@ -126,7 +134,7 @@ exports.rejectADepositRequestController = async (req, res, next) => {
         status: "success",
         data: result,
       });
-      console.log(`Deposit ${result._id} is rejected!`);
+      console.log(`Deposit ${depositId} is rejected!`);
     }
   } catch (error) {
     next(error);

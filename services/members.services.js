@@ -61,10 +61,9 @@ exports.addNewMemberService = async (member) => {
 };
 
 exports.updateMemberInformationService = async (memberId, newData) => {
-  const result = await Member.findByIdAndUpdate(
-    memberId,
+  const result = await Member.updateOne(
+    { _id: memberId },
     { $set: newData },
-    { new: true },
     { runValidators: true }
   );
   return result;

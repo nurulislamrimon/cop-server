@@ -17,7 +17,11 @@ exports.addNewWithdrawController = async (req, res, next) => {
 
     if (!member || !witness || !dataEntry) {
       throw new Error(
-        "Please provide valid 'withdrawerId','withdrawnAmount' and 'witnessId'"
+        "Please provide valid 'withdrawerId','withdrawAmount' and 'witnessId'"
+      );
+    } else if (member.status !== "active" || witness.status !== "active") {
+      throw new Error(
+        `${member.name} or ${witness.name} is not a active member!`
       );
     } else {
       const deposits = await getTotalDepositCalculatedByIdService(withdrawerId);
@@ -25,12 +29,13 @@ exports.addNewWithdrawController = async (req, res, next) => {
         await withdrawServices.getTotalWithdrawCalculatedByIdService(
           withdrawerId
         );
-      const totalWithdraw = !withdraws.length ? 0 : withdraws[0].totalWithdraw;
+      const totalWithdraw = !withdraws ? 0 : withdraws.totalWithdraw;
+      console.log(deposits, withdraws);
 
-      if (!deposits.length) {
+      if (!deposits) {
         throw new Error("This member has no deposit to withdraw!");
       } else if (
-        deposits[0].totalDeposit - (totalWithdraw + withdrawAmount) <=
+        deposits.totalDeposit - (totalWithdraw + withdrawAmount) <=
         0
       ) {
         throw new Error("Insufficient balance!");
@@ -115,9 +120,8 @@ exports.approveAWithdrawRequestController = async (req, res, next) => {
 
 exports.rejectAWithdrawRequestController = async (req, res, next) => {
   try {
-    const withdraw = await withdrawServices.getAWithdrawByIdService(
-      req.params.id
-    );
+    const withdrawId = req.params.id;
+    const withdraw = await withdrawServices.getAWithdrawByIdService(withdrawId);
     if (!withdraw) {
       throw new Error("withdraw request not found!");
     } else if (withdraw.status !== "pending") {
@@ -130,7 +134,7 @@ exports.rejectAWithdrawRequestController = async (req, res, next) => {
         status: "success",
         data: result,
       });
-      console.log(`withdraw ${result._id} is rejected!`);
+      console.log(`withdraw ${withdrawId} is rejected!`);
     }
   } catch (error) {
     next(error);

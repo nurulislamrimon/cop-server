@@ -94,5 +94,27 @@ exports.getTotalWithdrawCalculatedByIdService = async (id) => {
       },
     },
   ]);
-  return result;
+  return result[0];
+};
+exports.getGrandTotalWithdrawCalculatedService = async () => {
+  const result = await Withdraw.aggregate([
+    {
+      $match: { status: "approved" },
+    },
+    {
+      $project: {
+        _id: 1,
+        status: 1,
+        name: 1,
+        withdrawAmount: 1,
+      },
+    },
+    {
+      $group: {
+        _id: "$status",
+        totalWithdraw: { $sum: "$withdrawAmount" },
+      },
+    },
+  ]);
+  return result[0];
 };

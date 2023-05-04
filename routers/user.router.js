@@ -82,7 +82,7 @@ router.get(
  *@apiError 401 & 403 unauthorized and forbidden
  *@apiError user is not a member && already activate
  */
-router.put(
+router.post(
   "/active/:id",
   verifyToken,
   verifyAuthorization(adminToManager),

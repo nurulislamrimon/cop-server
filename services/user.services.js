@@ -4,7 +4,7 @@ const bcrypt = require("bcrypt");
 const User = require("../models/user.model");
 const generate_token = require("../utilities/generate_token");
 const memberServices = require("./members.services");
-const { filtersOperator } = require("../utilities/filter.operators");
+const filtersOperator = require("../utilities/filter.operators");
 
 exports.getUserByEmail = async (email) => {
   return await User.findOne({ email });
@@ -75,7 +75,7 @@ exports.comparePassword = async (user, password) => {
 
 exports.getAllUsersService = async (query) => {
   let { limit, page, sort, ...filters } = query;
-  filters = filtersOperator(filters);
+  filters = filtersOperator.addSymbleToFiltersOperator(filters);
 
   const result = await User.find(filters)
     .skip(page * limit)

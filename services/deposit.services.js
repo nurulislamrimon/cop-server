@@ -77,7 +77,10 @@ exports.deleteADepositService = async (id) => {
 exports.getTotalDepositCalculatedByIdService = async (id) => {
   const result = await Deposit.aggregate([
     {
-      $match: { moreAboutMember: new ObjectId(id), status: "approved" },
+      $match: {
+        moreAboutMember: new ObjectId(id),
+        status: "approved",
+      },
     },
     {
       $project: {
@@ -94,5 +97,31 @@ exports.getTotalDepositCalculatedByIdService = async (id) => {
       },
     },
   ]);
-  return result;
+  return result[0];
+};
+
+exports.getGrandTotalDepositCalculatedService = async () => {
+  const result = await Deposit.aggregate([
+    {
+      $match: {
+        status: "approved",
+      },
+    },
+    {
+      $project: {
+        _id: 1,
+        moreAboutMember: 1,
+        status: 1,
+        name: 1,
+        depositAmount: 1,
+      },
+    },
+    {
+      $group: {
+        _id: "$status",
+        grandTotalDeposit: { $sum: "$depositAmount" },
+      },
+    },
+  ]);
+  return result[0].grandTotalDeposit;
 };

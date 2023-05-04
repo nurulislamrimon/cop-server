@@ -58,13 +58,14 @@ const memberSchema = mongoose.Schema(
           "general-member",
           "chairman",
           "vice-chairman",
+          "director",
           "committee-member",
           "managing-director",
           "manager",
           "finance-secretary",
           "collector",
         ],
-        message: `{VALUE} is not a valid role, it should be 'general-member','chairman','vice-chairman','committee-member','managing-director','manager','finance-secretary','collector'`,
+        message: `{VALUE} is not a valid role, it should be 'general-member','chairman','vice-chairman','director','committee-member','managing-director','manager','finance-secretary','collector'`,
       },
     },
     status: {
@@ -110,29 +111,13 @@ const memberSchema = mongoose.Schema(
     ],
     investments: [
       {
-        investedAmount: {
-          type: Number,
-          required: true,
-        },
-        date: String,
-        moreAboutInvest: {
+        investmentPercentage: { type: Number, required: true },
+        investmentAmount: { type: Number, required: true },
+        investmentDate: { type: Date, default: Date.now(), required: true },
+        moreAboutInvestment: {
           type: ObjectId,
           required: true,
-          ref: "Invest",
-        },
-      },
-    ],
-    profits: [
-      {
-        profitedAmount: {
-          type: Number,
-          required: true,
-        },
-        date: String,
-        moreAboutProfit: {
-          type: ObjectId,
-          required: true,
-          ref: "Profit",
+          ref: "Investment",
         },
       },
     ],
@@ -142,11 +127,29 @@ const memberSchema = mongoose.Schema(
           type: Number,
           required: true,
         },
-        date: String,
+        expensingTime: { type: Date, default: Date.now(), required: true },
         moreAboutExpense: {
           type: ObjectId,
           required: true,
           ref: "Expense",
+        },
+      },
+    ],
+    profits: [
+      {
+        profitAmount: {
+          type: Number,
+          required: true,
+        },
+        profitCollectionTime: {
+          type: Date,
+          default: Date.now(),
+          required: true,
+        },
+        moreAboutProfit: {
+          type: ObjectId,
+          required: true,
+          ref: "Profit",
         },
       },
     ],

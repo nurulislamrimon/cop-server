@@ -6,19 +6,9 @@ const ObjectId = mongoose.ObjectId;
 const profitSchema = mongoose.Schema(
   {
     collectedAmount: Number,
-    investedAmount: {
-      initialInvest: {
-        type: Number,
-        required: true,
-      },
-      additionalInvest: [
-        {
-          amount: {
-            type: Number,
-            required: true,
-          },
-        },
-      ],
+    investmentAmount: {
+      type: Number,
+      required: true,
     },
     totalExpense: Number,
     totalProfit: Number,

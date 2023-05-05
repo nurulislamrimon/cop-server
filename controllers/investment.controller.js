@@ -1,89 +1,86 @@
 const investmentServices = require("../services/investment.services");
 const memberServices = require("../services/members.services");
-const depositServices = require("../services/deposit.services");
+const { getBusinessByIdService } = require("../services/business.services");
+const {
+  getPresentBalanceOfOrganization,
+  getPresentBalanceOfAMember,
+} = require("../utilities/account.balance");
 
 exports.addNewInvestmentController = async (req, res, next) => {
   try {
-    const {
-      investmentAmount,
-      investmentDate,
-      platformName,
-      managerName,
-      managerContactNumber,
-    } = req.body;
-
-    const dataEntry = await memberServices.getMemberByCopIDService(
-      req.decoded.memberCopID
-    );
-
-    if (
-      !investmentAmount ||
-      !platformName ||
-      !managerName ||
-      !managerContactNumber
-    ) {
-      throw new Error(
-        "Please provide valid 'investmentAmount','platformName', 'managerName', 'managerContactNumber'"
-      );
+    const { businessId, investmentAmount, investmentDate } = req.body;
+    if (!businessId || !investmentAmount) {
+      throw new Error("Please provide valid 'businessId','investmentAmount'");
     } else {
-      const investment = {
-        investmentAmount,
-        investmentDate,
-        individualInvestment: [],
-        platform: {
-          platformName,
-          managerName,
-          managerContactNumber,
-        },
-        dataEntry: {
-          name: dataEntry.name,
-          memberCopID: dataEntry.memberCopID,
-          moreAboutDataEntrier: dataEntry._id,
-          dataEntryTime: Date.now(),
-        },
-      };
+      const business = await getBusinessByIdService(businessId);
+      if (!business) {
+        throw new Error("Business not found!");
+      } else {
+        const dataEntry = await memberServices.getMemberByCopIDService(
+          req.decoded.memberCopID
+        );
+        const investment = {
+          investmentAmount,
+          individualInvestment: [],
+          investmentDate,
+          business: {
+            businessName: business.businessName,
+            moreAboutBusiness: business._id,
+          },
+          dataEntry: {
+            name: dataEntry.name,
+            memberCopID: dataEntry.memberCopID,
+            moreAboutDataEntrier: dataEntry._id,
+          },
+        };
+        const presentBalanceOfOrganization =
+          await getPresentBalanceOfOrganization();
 
-      const members = (
-        await memberServices.getAllMembersService({ status: "active" })
-      ).members;
-      const grandTotalDeposit =
-        await depositServices.getGrandTotalDepositCalculatedService();
-      const percentageOfDepositInvested =
-        (investmentAmount / grandTotalDeposit) * 100;
-      // individualDeposit and calculate percentage then push on array
-      for (const member of members) {
-        const memberDeposit =
-          await depositServices.getTotalDepositCalculatedByIdService(
-            member._id
+        if (presentBalanceOfOrganization < investmentAmount) {
+          throw new Error("Insufficiant Balance!");
+        } else {
+          // calculation of how many percent invested compare to total deposit
+          const investedPercentage =
+            (investmentAmount / presentBalanceOfOrganization) * 100;
+
+          // ===individualDeposit and calculate percentage then push on array===
+          const members = (
+            await memberServices.getAllMembersService({ status: "active" })
+          ).members;
+          for (const member of members) {
+            const memberTotalDeposit = await getPresentBalanceOfAMember(
+              member._id
+            );
+            if (memberTotalDeposit) {
+              const memberInfo = await memberServices.getMemberByIdService(
+                member._id
+              );
+              // individual invested amount and percentage calculation and push to the array
+              const individualInvestedAmount =
+                (memberTotalDeposit * investedPercentage) / 100;
+              const individualInvestmentPercentage =
+                (individualInvestedAmount / investmentAmount) * 100;
+
+              const individualInvestment = {
+                name: memberInfo.name,
+                memberCopID: memberInfo.memberCopID,
+                investmentPercentage: individualInvestmentPercentage,
+                investmentAmount: individualInvestedAmount,
+                moreAboutMember: memberInfo._id,
+              };
+              investment.individualInvestment.push(individualInvestment);
+            }
+          }
+          const result = await investmentServices.addNewinvestmentService(
+            investment
           );
-        if (memberDeposit) {
-          const memberInfo = await memberServices.getMemberByIdService(
-            member._id
-          );
-          const totalDeposit = memberDeposit.totalDeposit;
-          const investedAmount =
-            (totalDeposit * percentageOfDepositInvested) / 100;
-          const investmentPercentage =
-            (investedAmount / investmentAmount) * 100;
-          const individualInvestment = {
-            name: memberInfo.name,
-            memberCopID: memberInfo.memberCopID,
-            investmentPercentage: [investmentPercentage],
-            investmentAmount: [investedAmount],
-            moreAboutMember: memberInfo._id,
-          };
-          investment.individualInvestment.push(individualInvestment);
+          res.send({
+            status: "success",
+            data: result,
+          });
+          console.log(`New investment ${result._id} added!`);
         }
       }
-
-      const result = await investmentServices.addNewinvestmentService(
-        investment
-      );
-      res.send({
-        status: "success",
-        data: result,
-      });
-      console.log(`New investment ${result._id} added!`);
     }
   } catch (error) {
     next(error);

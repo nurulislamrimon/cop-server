@@ -20,6 +20,10 @@ const investmentSchema = mongoose.Schema(
     },
     individualInvestment: [
       {
+        name: {
+          type: String,
+          required: true,
+        },
         memberCopID: {
           type: String,
           required: true,
@@ -32,10 +36,6 @@ const investmentSchema = mongoose.Schema(
             message: (props) =>
               `${props.value} is not a valid Member Unique ID!`,
           },
-        },
-        name: {
-          type: String,
-          required: true,
         },
         investmentPercentage: { type: Number, required: true },
         investmentAmount: { type: Number, required: true },
@@ -82,6 +82,7 @@ const investmentSchema = mongoose.Schema(
       },
       dataEntryTime: {
         type: Date,
+        default: Date.now(),
         required: true,
       },
       moreAboutDataEntrier: {

@@ -3,9 +3,7 @@ const {
   getMemberByCopIDService,
   getMemberByIdService,
 } = require("../services/members.services");
-const {
-  getTotalDepositCalculatedByIdService,
-} = require("../services/deposit.services");
+const { getPresentBalanceOfAMember } = require("../utilities/account.balance");
 
 exports.addNewWithdrawController = async (req, res, next) => {
   try {
@@ -24,20 +22,8 @@ exports.addNewWithdrawController = async (req, res, next) => {
         `${member.name} or ${witness.name} is not a active member!`
       );
     } else {
-      const deposits = await getTotalDepositCalculatedByIdService(withdrawerId);
-      const withdraws =
-        await withdrawServices.getTotalWithdrawCalculatedByIdService(
-          withdrawerId
-        );
-      const totalWithdraw = !withdraws ? 0 : withdraws.totalWithdraw;
-      console.log(deposits, withdraws);
-
-      if (!deposits) {
-        throw new Error("This member has no deposit to withdraw!");
-      } else if (
-        deposits.totalDeposit - (totalWithdraw + withdrawAmount) <=
-        0
-      ) {
+      const individualBalance = await getPresentBalanceOfAMember(withdrawerId);
+      if (individualBalance - withdrawAmount < 0) {
         throw new Error("Insufficient balance!");
       } else {
         const withdraw = {
@@ -49,13 +35,12 @@ exports.addNewWithdrawController = async (req, res, next) => {
             name: witness.name,
             memberCopID: witness.memberCopID,
             moreAboutWitness: witness._id,
-            withdrawDate: withdrawDate || Date.now(),
+            withdrawDate: withdrawDate,
           },
           dataEntry: {
             name: dataEntry.name,
             memberCopID: dataEntry.memberCopID,
             moreAboutDataEntrier: dataEntry._id,
-            dataEntryTime: Date.now(),
           },
         };
 

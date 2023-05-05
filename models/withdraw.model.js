@@ -52,6 +52,7 @@ const withdrawSchema = mongoose.Schema(
       },
       withdrawDate: {
         type: Date,
+        default: Date.now(),
       },
       moreAboutWitness: {
         type: ObjectId,
@@ -76,8 +77,8 @@ const withdrawSchema = mongoose.Schema(
         },
       },
       dataEntryTime: {
-        type: String,
-        required: true,
+        type: Date,
+        default: Date.now(),
       },
       moreAboutDataEntrier: {
         type: ObjectId,

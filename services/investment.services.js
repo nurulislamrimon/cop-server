@@ -77,30 +77,8 @@ exports.deleteAInvestmentService = async (id) => {
   return result;
 };
 
-exports.getTotalinvestmentCalculatedByIdService = async (id) => {
+exports.getGrandTotalInvestmentCalculatedService = async () => {
   const result = await Investment.aggregate([
-    {
-      $match: { moreAboutMember: new ObjectId(id), status: "approved" },
-    },
-    {
-      $project: {
-        _id: 1,
-        moreAboutMember: 1,
-        name: 1,
-        investmentAmount: 1,
-      },
-    },
-    {
-      $group: {
-        _id: "$moreAboutMember",
-        totalinvestment: { $sum: "$investmentAmount" },
-      },
-    },
-  ]);
-  return result[0];
-};
-exports.getGrandTotalInvestmentCalculatedService = async (id) => {
-  const investmentAmount = await Investment.aggregate([
     {
       $match: { status: "invested" },
     },
@@ -108,7 +86,6 @@ exports.getGrandTotalInvestmentCalculatedService = async (id) => {
       $project: {
         _id: 1,
         status: 1,
-        name: 1,
         investmentAmount: 1,
       },
     },
@@ -121,5 +98,30 @@ exports.getGrandTotalInvestmentCalculatedService = async (id) => {
       },
     },
   ]);
-  return investmentAmount[0];
+  return result.length ? result[0].totalInvestment : 0;
+};
+
+exports.getTotalinvestmentCalculatedByIdService = async (id) => {
+  const result = await Investment.aggregate([
+    {
+      $match: {
+        status: "invested",
+      },
+    },
+    { $unwind: "$individualInvestment" },
+
+    {
+      $match: {
+        "individualInvestment.moreAboutMember": new ObjectId(id),
+      },
+    },
+    {
+      $group: {
+        _id: "$individualInvestment.moreAboutMember",
+        totalinvestment: { $sum: "$individualInvestment.investmentAmount" },
+      },
+    },
+  ]);
+
+  return result.length ? result[0].totalinvestment : 0;
 };

@@ -97,7 +97,7 @@ exports.getTotalDepositCalculatedByIdService = async (id) => {
       },
     },
   ]);
-  return result[0];
+  return result.length ? result[0].totalDeposit : 0;
 };
 
 exports.getGrandTotalDepositCalculatedService = async () => {
@@ -123,5 +123,5 @@ exports.getGrandTotalDepositCalculatedService = async () => {
       },
     },
   ]);
-  return result[0].grandTotalDeposit;
+  return result.length ? result[0].grandTotalDeposit : 0;
 };

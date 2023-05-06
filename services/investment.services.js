@@ -1,3 +1,4 @@
+const Business = require("../models/business.model");
 const Investment = require("../models/investment.model");
 const Member = require("../models/member.model");
 const { addSymbleToFiltersOperator } = require("../utilities/filter.operators");
@@ -8,12 +9,12 @@ exports.addNewinvestmentService = async (investment) => {
   return result;
 };
 
-exports.getAInvestmentByIdService = async (id) => {
+exports.getAnInvestmentByIdService = async (id) => {
   const result = await Investment.findById(id);
   return result;
 };
 
-exports.approveAInvestmentRequestService = async (id, authorised) => {
+exports.approveAnInvestmentRequestService = async (id, authorised) => {
   const result = await Investment.updateOne(
     { _id: id },
     { $set: { status: "invested", authorised } },
@@ -43,7 +44,20 @@ exports.addNewInvestmentOnMemberModelService = async (investment) => {
   }
 };
 
-exports.rejectAInvestmentRequestService = async (id) => {
+exports.addNewInvestmentOnBusinessModelService = async (investment) => {
+  const { investmentAmount, investmentDate, _id } = investment;
+  const newInvestment = {
+    investmentAmount,
+    investmentDate,
+    moreAboutInvestment: _id,
+  };
+  await Business.updateOne({
+    _id: investment.business.moreAboutBusiness,
+    $push: { investments: newInvestment },
+  });
+};
+
+exports.rejectAnInvestmentRequestService = async (id) => {
   const result = await Investment.updateOne(
     { _id: id },
     { $set: { status: "rejected" } },
@@ -63,21 +77,35 @@ exports.getAllInvestmentService = async (query) => {
   return result;
 };
 
-exports.removeAInvestmentFromMemberService = async (memberId, investmentId) => {
-  await Member.updateOne(
-    { _id: memberId },
-    {
-      $pull: { investments: { moreAboutInvestment: investmentId } },
-    }
-  );
+exports.removeAnInvestmentFromMemberModelService = async (investment) => {
+  const individualInvestments = investment.individualInvestment;
+  for (const individualInvestment of individualInvestments) {
+    // remove from member model
+    await Member.updateOne(
+      { _id: individualInvestment.moreAboutMember },
+      {
+        $pull: { investments: { moreAboutInvestment: investment._id } },
+      }
+    );
+  }
 };
 
-exports.deleteAInvestmentService = async (id) => {
+exports.removeAnInvestmentFromBusinessModelService = async (investment) => {
+  await Business.updateOne({
+    _id: investment.business.moreAboutBusiness,
+    $pull: {
+      investments: { moreAboutInvestment: investment._id },
+    },
+  });
+};
+
+exports.deleteAnInvestmentService = async (id) => {
   const result = await Investment.deleteOne({ _id: id });
   return result;
 };
 
-exports.getGrandTotalInvestmentCalculatedService = async () => {
+// account services
+exports.getTotalInvestmentOfTheOrganisationService = async () => {
   const result = await Investment.aggregate([
     {
       $match: { status: "invested" },
@@ -101,7 +129,7 @@ exports.getGrandTotalInvestmentCalculatedService = async () => {
   return result.length ? result[0].totalInvestment : 0;
 };
 
-exports.getTotalinvestmentCalculatedByIdService = async (id) => {
+exports.getTotalInvestmentOfAMemberByIdService = async (id) => {
   const result = await Investment.aggregate([
     {
       $match: {

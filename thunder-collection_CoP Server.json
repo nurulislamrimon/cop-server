@@ -1050,7 +1050,7 @@
             "_id": "7a20e1d3-64fb-42b7-a01d-a0fc64205238",
             "colId": "d4cc0172-8a2c-40a7-842d-df27aaec6ee5",
             "containerId": "cbaf57b3-7f34-4703-b5f2-2c5eb88e28ec",
-            "name": "balance of organization- cop",
+            "name": "balance of organisation- cop",
             "url": "{{cop}}/api/v1/finance/account/balance",
             "method": "GET",
             "sortNum": 60000,

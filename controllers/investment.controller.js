@@ -2,9 +2,9 @@ const investmentServices = require("../services/investment.services");
 const memberServices = require("../services/members.services");
 const { getBusinessByIdService } = require("../services/business.services");
 const {
-  getPresentBalanceOfOrganization,
-  getPresentBalanceOfAMember,
-} = require("../utilities/account.balance");
+  getAccountBalanceOfTheOrganisationService,
+  getAccountBalanceOfAMemberService,
+} = require("../services/account.balance.services.js");
 
 exports.addNewInvestmentController = async (req, res, next) => {
   try {
@@ -15,6 +15,8 @@ exports.addNewInvestmentController = async (req, res, next) => {
       const business = await getBusinessByIdService(businessId);
       if (!business) {
         throw new Error("Business not found!");
+      } else if (business?.status !== "active") {
+        throw new Error("Business is not in active state!");
       } else {
         const dataEntry = await memberServices.getMemberByCopIDService(
           req.decoded.memberCopID
@@ -33,39 +35,39 @@ exports.addNewInvestmentController = async (req, res, next) => {
             moreAboutDataEntrier: dataEntry._id,
           },
         };
-        const presentBalanceOfOrganization =
-          await getPresentBalanceOfOrganization();
+        const presentBalanceOfOrganisation =
+          await getAccountBalanceOfTheOrganisationService();
 
-        if (presentBalanceOfOrganization < investmentAmount) {
-          throw new Error("Insufficiant Balance!");
+        if (presentBalanceOfOrganisation < investmentAmount) {
+          throw new Error("Insufficient Balance!");
         } else {
           // calculation of how many percent invested compare to total deposit
           const investedPercentage =
-            (investmentAmount / presentBalanceOfOrganization) * 100;
+            (investmentAmount / presentBalanceOfOrganisation) * 100;
 
           // ===individualDeposit and calculate percentage then push on array===
           const members = (
             await memberServices.getAllMembersService({ status: "active" })
           ).members;
           for (const member of members) {
-            const memberTotalDeposit = await getPresentBalanceOfAMember(
+            const balanceOfTheMember = await getAccountBalanceOfAMemberService(
               member._id
             );
-            if (memberTotalDeposit) {
+            if (balanceOfTheMember) {
               const memberInfo = await memberServices.getMemberByIdService(
                 member._id
               );
               // individual invested amount and percentage calculation and push to the array
-              const individualInvestedAmount =
-                (memberTotalDeposit * investedPercentage) / 100;
-              const individualInvestmentPercentage =
-                (individualInvestedAmount / investmentAmount) * 100;
+              const investmentAmountOfTheMember =
+                (balanceOfTheMember * investedPercentage) / 100;
+              const investmentPercentageOfTheMember =
+                (investmentAmountOfTheMember / investmentAmount) * 100;
 
               const individualInvestment = {
                 name: memberInfo.name,
                 memberCopID: memberInfo.memberCopID,
-                investmentPercentage: individualInvestmentPercentage,
-                investmentAmount: individualInvestedAmount,
+                investmentPercentage: investmentPercentageOfTheMember,
+                investmentAmount: investmentAmountOfTheMember,
                 moreAboutMember: memberInfo._id,
               };
               investment.individualInvestment.push(individualInvestment);
@@ -101,7 +103,7 @@ exports.getAllPendingInvestmentController = async (req, res, next) => {
   }
 };
 
-exports.approveAInvestmentRequestController = async (req, res, next) => {
+exports.approveAnInvestmentRequestController = async (req, res, next) => {
   try {
     const investmentId = req.params.id;
     const authoriser = await memberServices.getMemberByCopIDService(
@@ -113,7 +115,7 @@ exports.approveAInvestmentRequestController = async (req, res, next) => {
       authorisingTime: Date.now(),
       moreAboutAuthoriser: authoriser._id,
     };
-    const investment = await investmentServices.getAInvestmentByIdService(
+    const investment = await investmentServices.getAnInvestmentByIdService(
       investmentId
     );
     if (!investment) {
@@ -121,26 +123,39 @@ exports.approveAInvestmentRequestController = async (req, res, next) => {
     } else if (investment.status !== "pending") {
       throw new Error("This investment is not in pending state!");
     } else {
-      await investmentServices.addNewInvestmentOnMemberModelService(investment);
-      const result = await investmentServices.approveAInvestmentRequestService(
-        investmentId,
-        authorised
-      );
+      // check is balance sufficiant
+      const balanceOfTheOrganisation =
+        await getAccountBalanceOfTheOrganisationService();
+      if (balanceOfTheOrganisation < investment.investmentAmount) {
+        throw new Error("Someone made a withdraw, insufficient balance!");
+      } else {
+        await investmentServices.addNewInvestmentOnMemberModelService(
+          investment
+        );
+        await investmentServices.addNewInvestmentOnBusinessModelService(
+          investment
+        );
+        const result =
+          await investmentServices.approveAnInvestmentRequestService(
+            investmentId,
+            authorised
+          );
 
-      res.send({
-        status: "success",
-        data: result,
-      });
-      console.log(`investment approved!`);
+        res.send({
+          status: "success",
+          data: result,
+        });
+        console.log(`investment approved!`);
+      }
     }
   } catch (error) {
     next(error);
   }
 };
 
-exports.rejectAInvestmentRequestController = async (req, res, next) => {
+exports.rejectAnInvestmentRequestController = async (req, res, next) => {
   try {
-    const investment = await investmentServices.getAInvestmentByIdService(
+    const investment = await investmentServices.getAnInvestmentByIdService(
       req.params.id
     );
     if (!investment) {
@@ -148,7 +163,7 @@ exports.rejectAInvestmentRequestController = async (req, res, next) => {
     } else if (investment.status !== "pending") {
       throw new Error("This investment request is not in pending state!");
     } else {
-      const result = await investmentServices.rejectAInvestmentRequestService(
+      const result = await investmentServices.rejectAnInvestmentRequestService(
         req.params.id
       );
       res.send({
@@ -162,11 +177,11 @@ exports.rejectAInvestmentRequestController = async (req, res, next) => {
   }
 };
 
-exports.getAInvestmentController = async (req, res, next) => {
+exports.getAnInvestmentController = async (req, res, next) => {
   try {
     const investmentId = req.params.id;
 
-    const result = await investmentServices.getAInvestmentByIdService(
+    const result = await investmentServices.getAnInvestmentByIdService(
       investmentId
     );
     if (!result) {
@@ -196,10 +211,10 @@ exports.getlAllInvestmentController = async (req, res, next) => {
   }
 };
 
-exports.deleteAInvestmentControllter = async (req, res, next) => {
+exports.deleteAnInvestmentControllter = async (req, res, next) => {
   try {
     const investmentId = req.params.id;
-    const investment = await investmentServices.getAInvestmentByIdService(
+    const investment = await investmentServices.getAnInvestmentByIdService(
       investmentId
     );
     if (!investment) {
@@ -207,16 +222,16 @@ exports.deleteAInvestmentControllter = async (req, res, next) => {
     } else if (investment.status !== "invested") {
       throw new Error("investment is not in approved state!");
     } else {
-      const individualInvestments = investment.individualInvestment;
-      for (const individualInvestment of individualInvestments) {
-        // remove from member model
-        await investmentServices.removeAInvestmentFromMemberService(
-          individualInvestment.moreAboutMember,
-          investmentId
-        );
-      }
+      // remove the investment from member model
+      await investmentServices.removeAnInvestmentFromMemberModelService(
+        investment
+      );
+      // remove the investment from business model
+      await investmentServices.removeAnInvestmentFromBusinessModelService(
+        investment
+      );
       // delete the investment from investment model
-      const result = await investmentServices.deleteAInvestmentService(
+      const result = await investmentServices.deleteAnInvestmentService(
         investmentId
       );
       res.send({

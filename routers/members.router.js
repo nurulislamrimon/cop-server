@@ -65,6 +65,7 @@ membersRouter.get(
   verifyAuthorization(roles.adminToManager),
   memberController.getInfoOfAMemberController
 );
+
 /*
  *@api{delete}/members/:id delete a member
  *@apiDescription a member will be deleted
@@ -80,6 +81,77 @@ membersRouter.delete(
   verifyToken,
   verifyAuthorization(roles.adminToManager),
   memberController.deleteAMemberController
+);
+// === ==========finance=============== ===
+/*
+ *@api{get}/finance/balance/:id get a balance
+ *@apiDescription get a specific balance by id
+ *@apiPermission authorized admin to manager and member
+ *@apiHeader authorization token for verification
+ *@apiBody none
+ *@apiParam none
+ *@apiQuery none
+ *@apiSuccess {Objects} balance.
+ *@apiError 401 & 404
+ */
+membersRouter.get(
+  "/finance/balance/:id",
+  verifyToken,
+  verifyAuthorization(roles.adminToManager),
+  memberController.getAccountBalanceOfAMemberController
+);
+
+/*
+ *@api{get}/finance/deposit/:id get total deposit amount
+ *@apiDescription get a member's specific deposit by id
+ *@apiPermission authorized admin to manager and member
+ *@apiHeader authorization token for verification
+ *@apiBody none
+ *@apiParam member object id
+ *@apiQuery none
+ *@apiSuccess {Objects} deposit.
+ *@apiError 401 & 404
+ */
+membersRouter.get(
+  "/finance/deposit/:id",
+  verifyToken,
+  verifyAuthorization(roles.adminToManagerAndGeneralMember),
+  memberController.getAccountTotalDepositOfAMemberController
+);
+
+/*
+ *@api{get}/finance/withdraw/:id get total withdraw amount
+ *@apiDescription get a member's specific withdraw by id
+ *@apiPermission authorized admin to manager and member
+ *@apiHeader authorization token for verification
+ *@apiBody none
+ *@apiParam member object id
+ *@apiQuery none
+ *@apiSuccess {Objects} withdraw.
+ *@apiError 401 & 404
+ */
+membersRouter.get(
+  "/finance/withdraw/:id",
+  verifyToken,
+  verifyAuthorization(roles.adminToManagerAndGeneralMember),
+  memberController.getAccountTotalWithdrawOfAMemberController
+);
+/*
+ *@api{get}/finance/investment/:id get total investment amount
+ *@apiDescription get a member's specific investment by id
+ *@apiPermission authorized admin to manager and member
+ *@apiHeader authorization token for verification
+ *@apiBody none
+ *@apiParam member object id
+ *@apiQuery none
+ *@apiSuccess {Objects} investment.
+ *@apiError 401 & 404
+ */
+membersRouter.get(
+  "/finance/investment/:id",
+  verifyToken,
+  verifyAuthorization(roles.adminToManagerAndGeneralMember),
+  memberController.getAccountTotalInvestmentOfAMemberController
 );
 
 module.exports = membersRouter;

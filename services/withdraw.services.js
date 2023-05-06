@@ -74,7 +74,7 @@ exports.deleteAWithdrawService = async (id) => {
   return result;
 };
 
-exports.getTotalWithdrawCalculatedByIdService = async (id) => {
+exports.getTotalWithdrawOfAMemberByIdService = async (id) => {
   const result = await Withdraw.aggregate([
     {
       $match: { moreAboutMember: new ObjectId(id), status: "approved" },
@@ -97,7 +97,7 @@ exports.getTotalWithdrawCalculatedByIdService = async (id) => {
   return result.length ? result[0].totalWithdraw : 0;
 };
 
-exports.getGrandTotalWithdrawCalculatedService = async () => {
+exports.getTotalWithdrawOfTheOrganisationService = async () => {
   const result = await Withdraw.aggregate([
     {
       $match: { status: "approved" },

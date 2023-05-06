@@ -56,7 +56,7 @@ router.post(
   "/approve/:id",
   verifyToken,
   verifyAuthorization(roles.adminToManager),
-  investmentController.approveAInvestmentRequestController
+  investmentController.approveAnInvestmentRequestController
 );
 /*
  *@api{post}/finance/investment/reject/:id reject a investment
@@ -73,7 +73,7 @@ router.post(
   "/reject/:id",
   verifyToken,
   verifyAuthorization(roles.adminToManager),
-  investmentController.rejectAInvestmentRequestController
+  investmentController.rejectAnInvestmentRequestController
 );
 
 /*
@@ -109,7 +109,7 @@ router.get(
   "/:id",
   verifyToken,
   verifyAuthorization(roles.adminToManager),
-  investmentController.getAInvestmentController
+  investmentController.getAnInvestmentController
 );
 /*
  *@api{delete}/finance/investment/:id delete a investment
@@ -126,7 +126,7 @@ router.delete(
   "/:id",
   verifyToken,
   verifyAuthorization("admin"),
-  investmentController.deleteAInvestmentControllter
+  investmentController.deleteAnInvestmentControllter
 );
 
 module.exports = router;

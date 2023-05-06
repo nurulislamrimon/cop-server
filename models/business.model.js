@@ -36,6 +36,15 @@ const businessSchema = mongoose.Schema(
       {
         investmentAmount: { type: Number, required: true },
         investmentDate: { type: Date, required: true },
+        status: {
+          type: String,
+          required: true,
+          default: "invested",
+          enum: {
+            values: ["invested", "collected"],
+            message: `{VALUE} is not a valid status, it should be 'invested','collected'`,
+          },
+        },
         moreAboutInvestment: {
           type: ObjectId,
           required: true,

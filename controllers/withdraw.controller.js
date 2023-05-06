@@ -3,7 +3,9 @@ const {
   getMemberByCopIDService,
   getMemberByIdService,
 } = require("../services/members.services");
-const { getPresentBalanceOfAMember } = require("../utilities/account.balance");
+const {
+  getAccountBalanceOfAMemberService,
+} = require("../services/account.balance.services.js");
 
 exports.addNewWithdrawController = async (req, res, next) => {
   try {
@@ -22,8 +24,10 @@ exports.addNewWithdrawController = async (req, res, next) => {
         `${member.name} or ${witness.name} is not a active member!`
       );
     } else {
-      const individualBalance = await getPresentBalanceOfAMember(withdrawerId);
-      if (individualBalance - withdrawAmount < 0) {
+      const balanceOfTheMember = await getAccountBalanceOfAMemberService(
+        withdrawerId
+      );
+      if (balanceOfTheMember - withdrawAmount < 0) {
         throw new Error("Insufficient balance!");
       } else {
         const withdraw = {

@@ -1,4 +1,8 @@
+const accountBalanceServices = require("../services/account.balance.services.js");
+const depositServices = require("../services/deposit.services");
+const investmentServices = require("../services/investment.services");
 const memberServices = require("../services/members.services");
+const withdrawServices = require("../services/withdraw.services");
 
 exports.getAllMembersController = async (req, res, next) => {
   try {
@@ -86,6 +90,114 @@ exports.getInfoOfAMemberController = async (req, res, next) => {
       data: result,
     });
     console.log(`Member ${result._id} is responsed!`);
+  } catch (error) {
+    next(error);
+  }
+};
+// === ===========finance=========== ===
+exports.getAccountBalanceOfAMemberController = async (req, res, next) => {
+  try {
+    const memberId = req.params.id;
+    const member = await memberServices.getMemberByIdService(memberId);
+    if (!member) {
+      throw new Error("Member not found!");
+    } else {
+      const result =
+        await accountBalanceServices.getAccountBalanceOfAMemberService(
+          memberId
+        );
+      res.send({
+        status: "success",
+        data: result,
+      });
+      console.log(`Total balance is ${result} taka!`);
+    }
+  } catch (error) {
+    next(error);
+  }
+};
+
+exports.getAccountTotalDepositOfAMemberController = async (req, res, next) => {
+  try {
+    const memberId = req.params.id;
+    const member = await memberServices.getMemberByIdService(memberId);
+    if (!member) {
+      throw new Error("Member not found!");
+    } else if (
+      req.decoded.role === "general-member" &&
+      req.decoded.memberCopID !== memberId
+    ) {
+      const unauthorised = new Error("Unauthorised access!");
+      unauthorised.code = 404;
+      throw unauthorised;
+    } else {
+      const result = await depositServices.getTotalDepositOfAMemberByIdService(
+        memberId
+      );
+      res.send({
+        status: "success",
+        data: result,
+      });
+      console.log(`Total balance is ${result} taka!`);
+    }
+  } catch (error) {
+    next(error);
+  }
+};
+exports.getAccountTotalWithdrawOfAMemberController = async (req, res, next) => {
+  try {
+    const memberId = req.params.id;
+    const member = await memberServices.getMemberByIdService(memberId);
+    if (!member) {
+      throw new Error("Member not found!");
+    } else if (
+      req.decoded.role === "general-member" &&
+      req.decoded.memberCopID !== memberId
+    ) {
+      const unauthorised = new Error("Unauthorised access!");
+      unauthorised.code = 404;
+      throw unauthorised;
+    } else {
+      const result =
+        await withdrawServices.getTotalWithdrawOfAMemberByIdService(memberId);
+      res.send({
+        status: "success",
+        data: result,
+      });
+      console.log(`Total balance is ${result} taka!`);
+    }
+  } catch (error) {
+    next(error);
+  }
+};
+exports.getAccountTotalInvestmentOfAMemberController = async (
+  req,
+  res,
+  next
+) => {
+  try {
+    const memberId = req.params.id;
+    const member = await memberServices.getMemberByIdService(memberId);
+    if (!member) {
+      throw new Error("Member not found!");
+    } else if (
+      req.decoded.role === "general-member" &&
+      req.decoded.memberCopID !== memberId
+    ) {
+      const unauthorised = new Error("Unauthorised access!");
+      unauthorised.code = 404;
+      throw unauthorised;
+    } else {
+      const result =
+        await investmentServices.getTotalInvestmentOfAMemberByIdService(
+          memberId
+        );
+      res.send({
+        status: "success",
+        data: result,
+      });
+      console.log(`Total balance is ${result} taka!`);
+    }
   } catch (error) {
     next(error);
   }

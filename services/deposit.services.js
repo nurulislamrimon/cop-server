@@ -74,7 +74,7 @@ exports.deleteADepositService = async (id) => {
   return result;
 };
 
-exports.getTotalDepositCalculatedByIdService = async (id) => {
+exports.getTotalDepositOfAMemberByIdService = async (id) => {
   const result = await Deposit.aggregate([
     {
       $match: {
@@ -100,7 +100,7 @@ exports.getTotalDepositCalculatedByIdService = async (id) => {
   return result.length ? result[0].totalDeposit : 0;
 };
 
-exports.getGrandTotalDepositCalculatedService = async () => {
+exports.getTotalDepositOfTheOrganisationService = async () => {
   const result = await Deposit.aggregate([
     {
       $match: {

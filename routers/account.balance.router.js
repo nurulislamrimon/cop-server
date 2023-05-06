@@ -21,25 +21,60 @@ router.get(
   "/balance",
   verifyToken,
   verifyAuthorization("admin"),
-  accountBalanceController.getOrganizationAccountBalance
+  accountBalanceController.getAccountBalanceOfTheOrganisationController
 );
 
 /*
- *@api{get}/finance/balance/:id get a balance
- *@apiDescription get a specific balance by id
+ *@api{get}/finance/deposit get total deposit amount of organisation
+ *@apiDescription get total deposit of the organisation
  *@apiPermission authorized admin to manager and member
  *@apiHeader authorization token for verification
  *@apiBody none
- *@apiParam balance object id
+ *@apiParam none
  *@apiQuery none
- *@apiSuccess {Objects} update info.
- *@apiError 401 & 404 && is not pending & not found
+ *@apiSuccess {Objects} deposit.
+ *@apiError 401 & 404
  */
 router.get(
-  "/balance/:id",
+  "/deposit",
   verifyToken,
   verifyAuthorization(roles.adminToManager),
-  accountBalanceController.getMemberAccountBalance
+  accountBalanceController.getTotalDepositOfTheOrganisationController
+);
+
+/*
+ *@api{get}/finance/withdraw/ get total withdraw amount of the organisation
+ *@apiDescription get total withdraw of the organisation
+ *@apiPermission authorized admin to manager and member
+ *@apiHeader authorization token for verification
+ *@apiBody none
+ *@apiParam member object id
+ *@apiQuery none
+ *@apiSuccess {Objects} withdraw.
+ *@apiError 401 & 404
+ */
+router.get(
+  "/withdraw",
+  verifyToken,
+  verifyAuthorization(roles.adminToManager),
+  accountBalanceController.getTotalWithdrawOfTheOrganisationController
+);
+/*
+ *@api{get}/finance/investment/ get total investment amount of the organisation
+ *@apiDescription get total investment of the organisation
+ *@apiPermission authorized admin to manager and member
+ *@apiHeader authorization token for verification
+ *@apiBody none
+ *@apiParam member object id
+ *@apiQuery none
+ *@apiSuccess {Objects} investment.
+ *@apiError 401 & 404
+ */
+router.get(
+  "/investment",
+  verifyToken,
+  verifyAuthorization(roles.adminToManager),
+  accountBalanceController.getTotalInvestmentOfTheOrganisationController
 );
 
 module.exports = router;

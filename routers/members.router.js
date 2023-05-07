@@ -82,7 +82,11 @@ membersRouter.delete(
   verifyAuthorization(roles.adminToManager),
   memberController.deleteAMemberController
 );
-// === ==========finance=============== ===
+/*
+ === === === === === === === === === === === ===
+      === ==========finance=============== ===
+ === === === === === === === === === === === === 
+ */
 /*
  *@api{get}/finance/balance/:id get a balance
  *@apiDescription get a specific balance by id
@@ -136,6 +140,7 @@ membersRouter.get(
   verifyAuthorization(roles.adminToManagerAndGeneralMember),
   memberController.getAccountTotalWithdrawOfAMemberController
 );
+
 /*
  *@api{get}/finance/investment/:id get total investment amount
  *@apiDescription get a member's specific investment by id
@@ -153,5 +158,21 @@ membersRouter.get(
   verifyAuthorization(roles.adminToManagerAndGeneralMember),
   memberController.getAccountTotalInvestmentOfAMemberController
 );
-
+/*
+ *@api{get}/finance/expense/:id get total expense amount
+ *@apiDescription get a member's specific expense by id
+ *@apiPermission authorized admin to manager and member
+ *@apiHeader authorization token for verification
+ *@apiBody none
+ *@apiParam member object id
+ *@apiQuery none
+ *@apiSuccess {Objects} expense.
+ *@apiError 401 & 404
+ */
+membersRouter.get(
+  "/finance/expense/:id",
+  verifyToken,
+  verifyAuthorization(roles.adminToManagerAndGeneralMember),
+  memberController.getAccountTotalExpenseOfAMemberController
+);
 module.exports = membersRouter;

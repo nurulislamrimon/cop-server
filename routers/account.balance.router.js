@@ -76,5 +76,22 @@ router.get(
   verifyAuthorization(roles.adminToManager),
   accountBalanceController.getTotalInvestmentOfTheOrganisationController
 );
+/*
+ *@api{get}/finance/expense/ get total expense amount of the organisation
+ *@apiDescription get total expense of the organisation
+ *@apiPermission authorized admin to manager and member
+ *@apiHeader authorization token for verification
+ *@apiBody none
+ *@apiParam member object id
+ *@apiQuery none
+ *@apiSuccess {Objects} expense.
+ *@apiError 401 & 404
+ */
+router.get(
+  "/expense",
+  verifyToken,
+  verifyAuthorization(roles.adminToManager),
+  accountBalanceController.getTotalExpenseOfTheOrganisationController
+);
 
 module.exports = router;

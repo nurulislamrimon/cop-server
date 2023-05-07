@@ -1,5 +1,6 @@
 const accountBalanceServices = require("../services/account.balance.services.js");
 const depositServices = require("../services/deposit.services");
+const expenseServices = require("../services/expense.services.js");
 const investmentServices = require("../services/investment.services");
 const memberServices = require("../services/members.services");
 const withdrawServices = require("../services/withdraw.services");
@@ -94,7 +95,11 @@ exports.getInfoOfAMemberController = async (req, res, next) => {
     next(error);
   }
 };
-// === ===========finance=========== ===
+/*
+ === === === === === === === === === === === ===
+      === ==========finance=============== ===
+ === === === === === === === === === === === === 
+ */
 exports.getAccountBalanceOfAMemberController = async (req, res, next) => {
   try {
     const memberId = req.params.id;
@@ -192,6 +197,33 @@ exports.getAccountTotalInvestmentOfAMemberController = async (
         await investmentServices.getTotalInvestmentOfAMemberByIdService(
           memberId
         );
+      res.send({
+        status: "success",
+        data: result,
+      });
+      console.log(`Total balance is ${result} taka!`);
+    }
+  } catch (error) {
+    next(error);
+  }
+};
+exports.getAccountTotalExpenseOfAMemberController = async (req, res, next) => {
+  try {
+    const memberId = req.params.id;
+    const member = await memberServices.getMemberByIdService(memberId);
+    if (!member) {
+      throw new Error("Member not found!");
+    } else if (
+      req.decoded.role === "general-member" &&
+      req.decoded.memberCopID !== memberId
+    ) {
+      const unauthorised = new Error("Unauthorised access!");
+      unauthorised.code = 404;
+      throw unauthorised;
+    } else {
+      const result = await expenseServices.getTotalExpenseOfAMemberByIdService(
+        memberId
+      );
       res.send({
         status: "success",
         data: result,

@@ -123,11 +123,11 @@ const memberSchema = mongoose.Schema(
     ],
     expenses: [
       {
-        expensedAmount: {
+        expenseAmount: {
           type: Number,
           required: true,
         },
-        expensingTime: { type: Date, default: Date.now(), required: true },
+        expenseDate: { type: Date, default: Date.now(), required: true },
         moreAboutExpense: {
           type: ObjectId,
           required: true,

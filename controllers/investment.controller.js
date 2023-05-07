@@ -45,7 +45,7 @@ exports.addNewInvestmentController = async (req, res, next) => {
           const investedPercentage =
             (investmentAmount / presentBalanceOfOrganisation) * 100;
 
-          // ===individualDeposit and calculate percentage then push on array===
+          // // ===individualBalance and calculate percentage then push on array===
           const members = (
             await memberServices.getAllMembersService({ status: "active" })
           ).members;
@@ -127,7 +127,7 @@ exports.approveAnInvestmentRequestController = async (req, res, next) => {
       const balanceOfTheOrganisation =
         await getAccountBalanceOfTheOrganisationService();
       if (balanceOfTheOrganisation < investment.investmentAmount) {
-        throw new Error("Someone made a withdraw, insufficient balance!");
+        throw new Error("Insufficient balance!");
       } else {
         await investmentServices.addNewInvestmentOnMemberModelService(
           investment

@@ -4,10 +4,49 @@ const ObjectId = mongoose.ObjectId;
 
 const expenseSchema = mongoose.Schema(
   {
-    expensedAmount: Number,
+    expenseAmount: { type: Number, required: true },
+    purposeOfExpense: { type: String, required: true },
+    expenseDate: { type: Date, default: Date.now(), required: true },
     status: {
       type: String,
       required: true,
+      default: "pending",
+      enum: {
+        values: ["pending", "approved", "rejected"],
+        message: `{VALUE} is not a valid status, it should be 'pending','approved' or 'rejected'`,
+      },
+    },
+    individualExpense: [
+      {
+        name: {
+          type: String,
+          required: true,
+        },
+        memberCopID: {
+          type: String,
+          required: true,
+          maxLength: [
+            memberCopIDValidator.maxLength,
+            "Invalid member unique ID!",
+          ],
+          validate: {
+            validator: memberCopIDValidator.memberCopIDValidator,
+            message: (props) =>
+              `${props.value} is not a valid Member Unique ID!`,
+          },
+        },
+        expenseAmount: { type: Number, required: true },
+        moreAboutMember: {
+          type: ObjectId,
+          required: true,
+          ref: "Member",
+        },
+      },
+    ],
+    status: {
+      type: String,
+      required: true,
+      default: "pending",
       enum: {
         values: ["pending", "approved", "rejected"],
         message: `{VALUE} is not a valid status, it should be 'pending','approved' or 'rejected'`,
@@ -30,9 +69,9 @@ const expenseSchema = mongoose.Schema(
           message: (props) => `${props.value} is not a valid Member Unique ID!`,
         },
       },
-      time: {
-        type: String,
-        required: true,
+      dataEntryTime: {
+        type: Date,
+        default: Date.now(),
       },
       moreAboutDataEntrier: {
         type: ObjectId,
@@ -43,11 +82,9 @@ const expenseSchema = mongoose.Schema(
     authorised: {
       name: {
         type: String,
-        required: true,
       },
       memberCopID: {
         type: String,
-        required: true,
         maxLength: [
           memberCopIDValidator.maxLength,
           "Invalid member unique ID!",
@@ -57,13 +94,11 @@ const expenseSchema = mongoose.Schema(
           message: (props) => `${props.value} is not a valid Member Unique ID!`,
         },
       },
-      time: {
-        type: String,
-        required: true,
+      authorisingTime: {
+        type: Date,
       },
-      moreAboutAuthorised: {
+      moreAboutAuthoriser: {
         type: ObjectId,
-        required: true,
         ref: "Member",
       },
     },

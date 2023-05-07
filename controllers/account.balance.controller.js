@@ -3,6 +3,7 @@ const accountBalanceServices = require("../services/account.balance.services.js"
 const depositServices = require("../services/deposit.services");
 const withdrawServices = require("../services/withdraw.services");
 const investmentServices = require("../services/investment.services");
+const expenseServices = require("../services/expense.services");
 
 exports.getAccountBalanceOfTheOrganisationController = async (
   req,
@@ -35,6 +36,7 @@ exports.getTotalDepositOfTheOrganisationController = async (req, res, next) => {
     next(error);
   }
 };
+
 exports.getTotalWithdrawOfTheOrganisationController = async (
   req,
   res,
@@ -52,6 +54,7 @@ exports.getTotalWithdrawOfTheOrganisationController = async (
     next(error);
   }
 };
+
 exports.getTotalInvestmentOfTheOrganisationController = async (
   req,
   res,
@@ -60,6 +63,20 @@ exports.getTotalInvestmentOfTheOrganisationController = async (
   try {
     const result =
       await investmentServices.getTotalInvestmentOfTheOrganisationService();
+    res.send({
+      status: "success",
+      data: result,
+    });
+    console.log(`Total balance is ${result} taka!`);
+  } catch (error) {
+    next(error);
+  }
+};
+
+exports.getTotalExpenseOfTheOrganisationController = async (req, res, next) => {
+  try {
+    const result =
+      await expenseServices.getTotalExpenseOfTheOrganisationService();
     res.send({
       status: "success",
       data: result,

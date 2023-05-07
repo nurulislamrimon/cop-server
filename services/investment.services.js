@@ -104,7 +104,11 @@ exports.deleteAnInvestmentService = async (id) => {
   return result;
 };
 
-// account services
+/*
+ === === === === === === === === === === === ===
+      === ==========finance=============== ===
+ === === === === === === === === === === === === 
+ */
 exports.getTotalInvestmentOfTheOrganisationService = async () => {
   const result = await Investment.aggregate([
     {

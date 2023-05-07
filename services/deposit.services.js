@@ -74,6 +74,11 @@ exports.deleteADepositService = async (id) => {
   return result;
 };
 
+/*
+ === === === === === === === === === === === ===
+      === ==========finance=============== ===
+ === === === === === === === === === === === === 
+ */
 exports.getTotalDepositOfAMemberByIdService = async (id) => {
   const result = await Deposit.aggregate([
     {

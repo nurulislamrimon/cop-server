@@ -6,49 +6,56 @@ const ObjectId = mongoose.ObjectId;
 const profitSchema = mongoose.Schema(
   {
     collectedAmount: Number,
-    investmentAmount: {
-      type: Number,
-      required: true,
-    },
-    totalExpense: Number,
-    totalProfit: Number,
+    investmentAmount: Number,
+
+    // totalExpense: Number,
+    profitAmount: { type: Number, required: true },
     status: {
       type: String,
       required: true,
+      default: "pending",
       enum: {
         values: ["pending", "approved", "rejected"],
         message: `{VALUE} is not a valid status, it should be pending,approved or rejected`,
       },
     },
-    distributedProfit: [
+    profitOnInvestment: [
       {
-        memberCopID: {
-          type: String,
-          required: true,
-          maxLength: [
-            memberCopIDValidator.maxLength,
-            "Invalid member unique ID!",
-          ],
-          validate: {
-            validator: memberCopIDValidator.memberCopIDValidator,
-            message: (props) =>
-              `${props.value} is not a valid Member Unique ID!`,
-          },
-        },
-        totalInvest: Number,
-        totalExpenseOnInvest: Number,
-        totalProfit: Number,
-
-        moreAboutMember: {
+        moreAboutInvestment: {
           type: ObjectId,
           required: true,
-          ref: "Member",
+          ref: "Investment",
         },
+        profitAmount: { type: Number, required: true },
+        individualProfit: [
+          {
+            name: { type: String, required: true },
+            memberCopID: {
+              type: String,
+              required: true,
+              maxLength: [
+                memberCopIDValidator.maxLength,
+                "Invalid member unique ID!",
+              ],
+              validate: {
+                validator: memberCopIDValidator.memberCopIDValidator,
+                message: (props) =>
+                  `${props.value} is not a valid Member Unique ID!`,
+              },
+            },
+            profitAmount: { type: Number, required: true },
+            moreAboutMember: {
+              type: ObjectId,
+              required: true,
+              ref: "Member",
+            },
+          },
+        ],
       },
     ],
     collectionDate: {
-      type: String,
-      required: true,
+      type: Date,
+      default: Date.now(),
       validate: validator.isDate,
     },
     dataEntry: {
@@ -68,8 +75,9 @@ const profitSchema = mongoose.Schema(
           message: (props) => `${props.value} is not a valid Member Unique ID!`,
         },
       },
-      time: {
-        type: String,
+      dataEntryTime: {
+        type: Date,
+        default: Date.now(),
         required: true,
       },
       moreAboutDataEntrier: {
@@ -81,11 +89,9 @@ const profitSchema = mongoose.Schema(
     authorised: {
       name: {
         type: String,
-        required: true,
       },
       memberCopID: {
         type: String,
-        required: true,
         maxLength: [
           memberCopIDValidator.maxLength,
           "Invalid member unique ID!",
@@ -95,25 +101,30 @@ const profitSchema = mongoose.Schema(
           message: (props) => `${props.value} is not a valid Member Unique ID!`,
         },
       },
-      time: {
-        type: String,
-        required: true,
+      authorisingTime: {
+        type: Date,
+        default: Date.now(),
       },
       moreAboutAuthorised: {
         type: ObjectId,
-        required: true,
         ref: "Member",
       },
     },
-    moreAboutTheInvestment: {
-      type: ObjectId,
-      required: true,
-      ref: "Investment",
+    business: {
+      businessName: {
+        type: String,
+        required: true,
+      },
+      moreAboutBusiness: {
+        type: ObjectId,
+        required: true,
+        ref: "Business",
+      },
     },
   },
   { timestamps: true }
 );
 
-const Investment = mongoose.model("Investment", profitSchema);
+const Profit = mongoose.model("Profit", profitSchema);
 
-module.exports = Investment;
+module.exports = Profit;

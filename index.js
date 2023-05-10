@@ -14,6 +14,7 @@ const depositRouter = require("./routers/deposit.router");
 const withdrawRouter = require("./routers/withdraw.router");
 const investmentRouter = require("./routers/investment.router");
 const expenseRouter = require("./routers/expense.router");
+const profitRouter = require("./routers/profit.router");
 const accountBalanceRouter = require("./routers/account.balance.router");
 const dbconnection = require("./utilities/dbconnection");
 
@@ -30,6 +31,7 @@ app.use("/api/v1/finance/deposit", depositRouter);
 app.use("/api/v1/finance/withdraw", withdrawRouter);
 app.use("/api/v1/finance/investment", investmentRouter);
 app.use("/api/v1/finance/expense", expenseRouter);
+app.use("/api/v1/finance/profit", profitRouter);
 app.use("/api/v1/finance/account", accountBalanceRouter);
 // route doesn't exist error handler
 app.use(errorHandler.routeDoesntExist);

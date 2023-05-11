@@ -66,6 +66,38 @@ businessRouter.get(
   businessController.getInfoOfABusinessController
 );
 /*
+ *@api{get}/business/close/:id close a business
+ *@apiDescription collect investment and profit and close the investment
+ *@apiPermission authorized people only
+ *@apiHeader {string} authorization access token
+ *@apiParam business objectId
+ *@apiQuery none
+ *@apiSuccess {Object} business info.
+ *@apiError 401 & 403 unauthorized and forbidden.
+ */
+businessRouter.post(
+  "/close/:id",
+  verifyToken,
+  verifyAuthorization(roles.adminToManager),
+  businessController.createClosingRequestBusinessController
+);
+/*
+ *@api{get}/business/close/approve/:id approve a closing request of business
+ *@apiDescription change the investments status of the business and approve profit
+ *@apiPermission authorized people only
+ *@apiHeader {string} authorization access token
+ *@apiParam businessclose Id objectId
+ *@apiQuery none
+ *@apiSuccess {Object} business info.
+ *@apiError 401 & 403 unauthorized and forbidden.
+ */
+businessRouter.post(
+  "/close/approve/:id",
+  verifyToken,
+  verifyAuthorization(roles.adminToManager),
+  businessController.approveBusinessClosingRequestController
+);
+/*
  *@api{delete}/business/:id delete a business
  *@apiDescription a business will be deleted
  *@apiPermission authorized people only

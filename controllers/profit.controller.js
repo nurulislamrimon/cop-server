@@ -36,8 +36,9 @@ exports.addNewProfitController = async (req, res, next) => {
         };
 
         // // ===Calculate profit distributed to each investment===
+
         const profitOnInvestment =
-          await profitServices.getEachInvestmentWithIndividualProfit(
+          await profitServices.getProfitOnInvestmentService(
             business,
             profitAmount
           );

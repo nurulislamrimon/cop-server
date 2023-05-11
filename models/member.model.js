@@ -114,6 +114,15 @@ const memberSchema = mongoose.Schema(
         investmentPercentage: { type: Number, required: true },
         investmentAmount: { type: Number, required: true },
         investmentDate: { type: Date, default: Date.now(), required: true },
+        status: {
+          type: String,
+          default: "invested",
+          enum: {
+            values: ["invested", "collected"],
+            message: `{VALUE} is not correct status, it must be 'invested' or 'collected'`,
+          },
+          required: true,
+        },
         moreAboutInvestment: {
           type: ObjectId,
           required: true,

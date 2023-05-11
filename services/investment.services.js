@@ -140,8 +140,14 @@ exports.getTotalInvestmentOfAMemberByIdService = async (id) => {
         _id: new ObjectId(id),
       },
     },
-    { $unwind: "$investments" },
-
+    {
+      $unwind: "$investments",
+    },
+    {
+      $match: {
+        "investments.status": "invested",
+      },
+    },
     {
       $group: {
         _id: "$_id",

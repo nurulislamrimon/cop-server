@@ -53,7 +53,7 @@ exports.addNewInvestmentController = async (req, res, next) => {
             const balanceOfTheMember = await getAccountBalanceOfAMemberService(
               member._id
             );
-            if (balanceOfTheMember) {
+            if (balanceOfTheMember > 0) {
               const memberInfo = await memberServices.getMemberByIdService(
                 member._id
               );

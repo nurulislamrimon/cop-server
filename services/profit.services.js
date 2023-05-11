@@ -11,38 +11,42 @@ exports.addNewprofitService = async (profit) => {
   return result;
 };
 
-exports.getEachInvestmentWithIndividualProfit = async (
-  business,
-  profitAmount
-) => {
+exports.getProfitOnInvestmentService = async (business, profitAmount) => {
   const profitOnInvestment = [];
   const totalInvestmentInTheBusiness =
     await this.calculateTotalInvestmentInABusinessTimeAndMoneyService(
       business._id
     );
-  for (const investment of business.investments) {
-    const totalTimeAndMoneyOfTheInvestment =
-      await this.calculateTotalTimeAndMoneyByInvestmentIdService(
-        investment.moreAboutInvestment
-      );
-    const profitOfTheInvestment =
-      (totalTimeAndMoneyOfTheInvestment / totalInvestmentInTheBusiness) *
-      profitAmount;
-    // each investment object for profitOnInvestment
-    const eachInvestmentWithProfit = {
-      moreAboutInvestment: investment.moreAboutInvestment,
-      profitAmount: profitOfTheInvestment,
-    };
-    // each member profit calculation and push
-    const individual = await this.getIndividualProfit(
-      investment.moreAboutInvestment,
-      profitOfTheInvestment
-    );
+  if (!totalInvestmentInTheBusiness) {
+    throw new Error("Investment is not mature!");
+  } else {
+    for (const investment of business.investments) {
+      if (investment.status === "invested") {
+        const totalTimeAndMoneyOfTheInvestment =
+          await this.calculateTotalTimeAndMoneyByInvestmentIdService(
+            investment.moreAboutInvestment
+          );
+        const profitOfTheInvestment =
+          (totalTimeAndMoneyOfTheInvestment / totalInvestmentInTheBusiness) *
+          profitAmount;
 
-    eachInvestmentWithProfit.individualProfit = individual;
-    profitOnInvestment.push(eachInvestmentWithProfit);
+        // each investment object for profitOnInvestment
+        const eachInvestmentWithProfit = {
+          moreAboutInvestment: investment.moreAboutInvestment,
+          profitAmount: profitOfTheInvestment,
+        };
+        // each member profit calculation and push
+        const individual = await this.getIndividualProfit(
+          investment.moreAboutInvestment,
+          profitOfTheInvestment
+        );
+
+        eachInvestmentWithProfit.individualProfit = individual;
+        profitOnInvestment.push(eachInvestmentWithProfit);
+      }
+    }
+    return profitOnInvestment;
   }
-  return profitOnInvestment;
 };
 
 exports.calculateTotalInvestmentInABusinessTimeAndMoneyService = async (
@@ -85,6 +89,7 @@ exports.calculateTotalInvestmentInABusinessTimeAndMoneyService = async (
       },
     },
   ]);
+
   return result.length ? result[0].totalInvestmentOfTimeAndMoney : 0;
 };
 

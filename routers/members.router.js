@@ -84,26 +84,9 @@ membersRouter.delete(
 );
 /*
  === === === === === === === === === === === ===
-      === ==========finance=============== ===
+      === ==========finance route=============== ===
  === === === === === === === === === === === === 
  */
-/*
- *@api{get}/finance/balance/:id get a balance
- *@apiDescription get a specific balance by id
- *@apiPermission authorized admin to manager and member
- *@apiHeader authorization token for verification
- *@apiBody none
- *@apiParam none
- *@apiQuery none
- *@apiSuccess {Objects} balance.
- *@apiError 401 & 404
- */
-membersRouter.get(
-  "/finance/balance/:id",
-  verifyToken,
-  verifyAuthorization(roles.adminToManager),
-  memberController.getAccountBalanceOfAMemberController
-);
 
 /*
  *@api{get}/finance/deposit/:id get total deposit amount
@@ -174,5 +157,39 @@ membersRouter.get(
   verifyToken,
   verifyAuthorization(roles.adminToManagerAndGeneralMember),
   memberController.getAccountTotalExpenseOfAMemberController
+);
+/*
+ *@api{get}/finance/profit/:id get total profit amount
+ *@apiDescription get a member's specific profit by id
+ *@apiPermission authorized admin to manager and member
+ *@apiHeader authorization token for verification
+ *@apiBody none
+ *@apiParam member object id
+ *@apiQuery none
+ *@apiSuccess {Objects} profit.
+ *@apiError 401 & 404
+ */
+membersRouter.get(
+  "/finance/profit/:id",
+  verifyToken,
+  verifyAuthorization(roles.adminToManagerAndGeneralMember),
+  memberController.getAccountTotalProfitOfAMemberController
+);
+/*
+ *@api{get}/finance/balance/:id get a balance
+ *@apiDescription get a specific balance by id
+ *@apiPermission authorized admin to manager and member
+ *@apiHeader authorization token for verification
+ *@apiBody none
+ *@apiParam none
+ *@apiQuery none
+ *@apiSuccess {Objects} balance.
+ *@apiError 401 & 404
+ */
+membersRouter.get(
+  "/finance/balance/:id",
+  verifyToken,
+  verifyAuthorization(roles.adminToManager),
+  memberController.getAccountBalanceOfAMemberController
 );
 module.exports = membersRouter;

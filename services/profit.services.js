@@ -145,33 +145,57 @@ exports.getProfitCalculatedOfEachMember = (members, profitAmount) => {
 };
 // add profit calculation === === === === end === === === ===
 
+exports.getAllProfitService = async (query) => {
+  let { limit, sort, page, ...filters } = query;
+  filters = addSymbleToFiltersOperator(filters);
+
+  const result = await Profit.find(filters)
+    .skip(limit * page)
+    .limit(limit)
+    .sort(sort);
+  return result;
+};
+
 exports.getAProfitByIdService = async (id) => {
   const result = await Profit.findById(id);
   return result;
 };
 
-exports.approveAProfitRequestService = async (id, authorised) => {
-  const result = await Profit.updateOne(
-    { _id: id },
-    { $set: { status: "invested", authorised } },
-    { runValidators: true }
-  );
-  return result;
+exports.addNewProfitOnMemberModelService = async (profit) => {
+  const collectionDate = profit.collectionDate;
+  const profitId = profit._id;
+
+  for (const profitOnInvestment of profit.profitOnInvestment) {
+    for (const individualProfit of profitOnInvestment.individualProfit) {
+      await Member.updateOne(
+        { _id: individualProfit.moreAboutMember },
+        {
+          $push: {
+            profits: {
+              profitAmount: individualProfit.profitAmount,
+              collectionDate,
+              moreAboutProfit: profitId,
+            },
+          },
+        },
+        { runValidators: true }
+      );
+    }
+  }
 };
+exports.addNewProfitOnInvestmentModelService = async (profit) => {
+  const collectionDate = profit.collectionDate;
+  const profitId = profit._id;
 
-exports.addNewprofitOnMemberModelService = async (profit) => {
-  const individualprofits = profit.individualprofit;
-
-  for (const individualprofit of individualprofits) {
-    await Member.updateOne(
-      { _id: individualprofit.moreAboutMember },
+  for (const profitOnInvestment of profit.profitOnInvestment) {
+    await Investment.updateOne(
+      { _id: profitOnInvestment.moreAboutInvestment },
       {
         $push: {
           profits: {
-            profitPercentage: individualprofit.profitPercentage,
-            profitAmount: individualprofit.profitAmount,
-            profitDate: profit.profitDate,
-            moreAboutprofit: profit._id,
+            profitAmount: profitOnInvestment.profitAmount,
+            collectionDate,
+            moreAboutProfit: profitId,
           },
         },
       },
@@ -180,17 +204,30 @@ exports.addNewprofitOnMemberModelService = async (profit) => {
   }
 };
 
-exports.addNewprofitOnBusinessModelService = async (profit) => {
-  const { profitAmount, profitDate, _id } = profit;
-  const newprofit = {
+exports.addNewProfitOnBusinessModelService = async (profit) => {
+  const collectionDate = profit.collectionDate;
+  const profitId = profit._id;
+  const profitAmount = profit.profitAmount;
+
+  const newProfit = {
     profitAmount,
-    profitDate,
-    moreAboutprofit: _id,
+    collectionDate,
+    moreAboutProfit: profitId,
   };
+
   await Business.updateOne({
     _id: profit.business.moreAboutBusiness,
-    $push: { profits: newprofit },
+    $push: { profits: newProfit },
   });
+};
+
+exports.approveAProfitRequestService = async (id, authorised) => {
+  const result = await Profit.updateOne(
+    { _id: id },
+    { $set: { status: "approved", authorised } },
+    { runValidators: true }
+  );
+  return result;
 };
 
 exports.rejectAProfitRequestService = async (id) => {
@@ -202,37 +239,47 @@ exports.rejectAProfitRequestService = async (id) => {
   return result;
 };
 
-exports.getAllprofitService = async (query) => {
-  let { limit, sort, page, ...filters } = query;
-  filters = addSymbleToFiltersOperator(filters);
+exports.removeAProfitFromMemberModelService = async (profit) => {
+  const profitId = profit._id;
+  const investments = profit.profitOnInvestment;
 
-  const result = await Profit.find(filters)
-    .skip(limit * page)
-    .limit(limit)
-    .sort(sort);
-  return result;
+  for (const investment of investments) {
+    for (const individualProfit of investment.individualProfit) {
+      // remove from member model
+      await Member.updateOne(
+        { _id: individualProfit.moreAboutMember },
+        {
+          $pull: { profits: { moreAboutProfit: profitId } },
+        }
+      );
+    }
+  }
 };
 
-exports.removeAProfitFromMemberModelService = async (profit) => {
-  const individualprofits = profit.individualprofit;
-  for (const individualprofit of individualprofits) {
+exports.removeAProfitFromInvestmentModelService = async (profit) => {
+  const profitId = profit._id;
+  const investments = profit.profitOnInvestment;
+
+  for (const investment of investments) {
     // remove from member model
-    await Member.updateOne(
-      { _id: individualprofit.moreAboutMember },
+    await Investment.updateOne(
+      { _id: investment.moreAboutInvestment },
       {
-        $pull: { profits: { moreAboutprofit: profit._id } },
+        $pull: { profits: { moreAboutProfit: profitId } },
       }
     );
   }
 };
 
 exports.removeAProfitFromBusinessModelService = async (profit) => {
-  await Business.updateOne({
+  const result = await Business.updateOne({
     _id: profit.business.moreAboutBusiness,
     $pull: {
-      profits: { moreAboutprofit: profit._id },
+      // profits: { profitAmount: 1000 },
+      profits: { moreAboutProfit: profit._id },
     },
   });
+  return result;
 };
 
 exports.deleteAProfitService = async (id) => {
@@ -242,13 +289,13 @@ exports.deleteAProfitService = async (id) => {
 
 /*
  === === === === === === === === === === === ===
-      === ==========finance=============== ===
+      === ==========finance route=============== ===
  === === === === === === === === === === === === 
  */
-exports.getTotalprofitOfTheOrganisationService = async () => {
+exports.getTotalProfitOfTheOrganisationService = async () => {
   const result = await Profit.aggregate([
     {
-      $match: { status: "invested" },
+      $match: { status: "approved" },
     },
     {
       $project: {
@@ -269,24 +316,19 @@ exports.getTotalprofitOfTheOrganisationService = async () => {
   return result.length ? result[0].totalprofit : 0;
 };
 
-exports.getTotalprofitOfAMemberByIdService = async (id) => {
-  const result = await Profit.aggregate([
+exports.getTotalProfitOfAMemberByIdService = async (id) => {
+  const result = await Member.aggregate([
     {
       $match: {
-        status: "invested",
+        _id: new ObjectId(id),
       },
     },
-    { $unwind: "$individualprofit" },
+    { $unwind: "$profits" },
 
     {
-      $match: {
-        "individualprofit.moreAboutMember": new ObjectId(id),
-      },
-    },
-    {
       $group: {
-        _id: "$individualprofit.moreAboutMember",
-        totalprofit: { $sum: "$individualprofit.profitAmount" },
+        _id: "$_id",
+        totalprofit: { $sum: "$profits.profitAmount" },
       },
     },
   ]);

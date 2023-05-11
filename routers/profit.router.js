@@ -38,7 +38,7 @@ router.get(
   "/request",
   verifyToken,
   verifyAuthorization(roles.adminToManager),
-  profitController.getAllPendingprofitController
+  profitController.getAllPendingProfitController
 );
 
 /*
@@ -56,7 +56,7 @@ router.post(
   "/approve/:id",
   verifyToken,
   verifyAuthorization(roles.adminToManager),
-  profitController.approveAnprofitRequestController
+  profitController.approveAProfitRequestController
 );
 /*
  *@api{post}/finance/profit/reject/:id reject a profit
@@ -73,7 +73,7 @@ router.post(
   "/reject/:id",
   verifyToken,
   verifyAuthorization(roles.adminToManager),
-  profitController.rejectAnprofitRequestController
+  profitController.rejectAProfitRequestController
 );
 
 /*
@@ -91,7 +91,7 @@ router.get(
   "/all",
   verifyToken,
   verifyAuthorization(roles.adminToManager),
-  profitController.getlAllprofitController
+  profitController.getlAllProfitController
 );
 
 /*
@@ -109,7 +109,7 @@ router.get(
   "/:id",
   verifyToken,
   verifyAuthorization(roles.adminToManager),
-  profitController.getAnprofitController
+  profitController.getAProfitController
 );
 /*
  *@api{delete}/finance/profit/:id delete a profit
@@ -126,7 +126,7 @@ router.delete(
   "/:id",
   verifyToken,
   verifyAuthorization("admin"),
-  profitController.deleteAnprofitControllter
+  profitController.deleteAProfitControllter
 );
 
 module.exports = router;

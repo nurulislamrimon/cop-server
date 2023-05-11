@@ -106,7 +106,7 @@ exports.deleteAnInvestmentService = async (id) => {
 
 /*
  === === === === === === === === === === === ===
-      === ==========finance=============== ===
+      === ==========finance route=============== ===
  === === === === === === === === === === === === 
  */
 exports.getTotalInvestmentOfTheOrganisationService = async () => {
@@ -134,26 +134,21 @@ exports.getTotalInvestmentOfTheOrganisationService = async () => {
 };
 
 exports.getTotalInvestmentOfAMemberByIdService = async (id) => {
-  const result = await Investment.aggregate([
+  const result = await Member.aggregate([
     {
       $match: {
-        status: "invested",
+        _id: new ObjectId(id),
       },
     },
-    { $unwind: "$individualInvestment" },
+    { $unwind: "$investments" },
 
     {
-      $match: {
-        "individualInvestment.moreAboutMember": new ObjectId(id),
-      },
-    },
-    {
       $group: {
-        _id: "$individualInvestment.moreAboutMember",
-        totalinvestment: { $sum: "$individualInvestment.investmentAmount" },
+        _id: "$_id",
+        totalInvestment: { $sum: "$investments.investmentAmount" },
       },
     },
   ]);
 
-  return result.length ? result[0].totalinvestment : 0;
+  return result.length ? result[0].totalInvestment : 0;
 };

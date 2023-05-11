@@ -4,6 +4,7 @@ const expenseServices = require("../services/expense.services.js");
 const investmentServices = require("../services/investment.services");
 const memberServices = require("../services/members.services");
 const withdrawServices = require("../services/withdraw.services");
+const profitServices = require("../services/profit.services");
 
 exports.getAllMembersController = async (req, res, next) => {
   try {
@@ -97,7 +98,7 @@ exports.getInfoOfAMemberController = async (req, res, next) => {
 };
 /*
  === === === === === === === === === === === ===
-      === ==========finance=============== ===
+      === ==========finance route=============== ===
  === === === === === === === === === === === === 
  */
 exports.getAccountBalanceOfAMemberController = async (req, res, next) => {
@@ -149,6 +150,7 @@ exports.getAccountTotalDepositOfAMemberController = async (req, res, next) => {
     next(error);
   }
 };
+
 exports.getAccountTotalWithdrawOfAMemberController = async (req, res, next) => {
   try {
     const memberId = req.params.id;
@@ -175,6 +177,7 @@ exports.getAccountTotalWithdrawOfAMemberController = async (req, res, next) => {
     next(error);
   }
 };
+
 exports.getAccountTotalInvestmentOfAMemberController = async (
   req,
   res,
@@ -207,6 +210,7 @@ exports.getAccountTotalInvestmentOfAMemberController = async (
     next(error);
   }
 };
+
 exports.getAccountTotalExpenseOfAMemberController = async (req, res, next) => {
   try {
     const memberId = req.params.id;
@@ -222,6 +226,34 @@ exports.getAccountTotalExpenseOfAMemberController = async (req, res, next) => {
       throw unauthorised;
     } else {
       const result = await expenseServices.getTotalExpenseOfAMemberByIdService(
+        memberId
+      );
+      res.send({
+        status: "success",
+        data: result,
+      });
+      console.log(`Total balance is ${result} taka!`);
+    }
+  } catch (error) {
+    next(error);
+  }
+};
+
+exports.getAccountTotalProfitOfAMemberController = async (req, res, next) => {
+  try {
+    const memberId = req.params.id;
+    const member = await memberServices.getMemberByIdService(memberId);
+    if (!member) {
+      throw new Error("Member not found!");
+    } else if (
+      req.decoded.role === "general-member" &&
+      req.decoded.memberCopID !== memberId
+    ) {
+      const unauthorised = new Error("Unauthorised access!");
+      unauthorised.code = 404;
+      throw unauthorised;
+    } else {
+      const result = await profitServices.getTotalProfitOfAMemberByIdService(
         memberId
       );
       res.send({

@@ -75,22 +75,18 @@ exports.deleteAWithdrawService = async (id) => {
 };
 
 exports.getTotalWithdrawOfAMemberByIdService = async (id) => {
-  const result = await Withdraw.aggregate([
+  const result = await Member.aggregate([
     {
-      $match: { moreAboutMember: new ObjectId(id), status: "approved" },
-    },
-    {
-      $project: {
-        _id: 1,
-        moreAboutMember: 1,
-        name: 1,
-        withdrawAmount: 1,
+      $match: {
+        _id: new ObjectId(id),
       },
     },
+    { $unwind: "$withdraws" },
+
     {
       $group: {
-        _id: "$moreAboutMember",
-        totalWithdraw: { $sum: "$withdrawAmount" },
+        _id: "$_id",
+        totalWithdraw: { $sum: "$withdraws.withdrawAmount" },
       },
     },
   ]);

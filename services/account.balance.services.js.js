@@ -1,6 +1,8 @@
 const depositServices = require("./deposit.services");
 const investmentServices = require("./investment.services");
 const withdrawServices = require("./withdraw.services");
+const profitServices = require("./profit.services");
+const expenseServices = require("./expense.services");
 
 exports.getAccountBalanceOfAMemberService = async (id) => {
   const memberTotalDeposit =
@@ -9,15 +11,31 @@ exports.getAccountBalanceOfAMemberService = async (id) => {
     await withdrawServices.getTotalWithdrawOfAMemberByIdService(id);
   const memberTotalInvestment =
     await investmentServices.getTotalInvestmentOfAMemberByIdService(id);
-  return memberTotalDeposit - (memberTotalWithdraw + memberTotalInvestment);
+  const memberTotalProfit =
+    await profitServices.getTotalProfitOfAMemberByIdService(id);
+  const memberTotalExpense =
+    await expenseServices.getTotalExpenseOfAMemberByIdService(id);
+  const balance =
+    memberTotalDeposit +
+    memberTotalProfit -
+    (memberTotalWithdraw + memberTotalInvestment + memberTotalExpense);
+  return balance;
 };
 
 exports.getAccountBalanceOfTheOrganisationService = async () => {
-  const grandTotalDeposit =
+  const totalDeposit =
     await depositServices.getTotalDepositOfTheOrganisationService();
-  const grandTotalWithdraw =
+  const totalWithdraw =
     await withdrawServices.getTotalWithdrawOfTheOrganisationService();
-  const grandTotalInvestment =
+  const totalInvestment =
     await investmentServices.getTotalInvestmentOfTheOrganisationService();
-  return grandTotalDeposit - (grandTotalWithdraw + grandTotalInvestment);
+  const totalExpense =
+    await expenseServices.getTotalExpenseOfTheOrganisationService();
+  const totalProfit =
+    await profitServices.getTotalProfitOfTheOrganisationService();
+  const balance =
+    totalDeposit +
+    totalProfit -
+    (totalWithdraw + totalInvestment + totalExpense);
+  return balance;
 };

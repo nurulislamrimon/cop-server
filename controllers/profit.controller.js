@@ -57,10 +57,10 @@ exports.addNewProfitController = async (req, res, next) => {
   }
 };
 
-exports.getAllPendingprofitController = async (req, res, next) => {
+exports.getAllPendingProfitController = async (req, res, next) => {
   try {
     req.query.status = "pending";
-    const result = await profitServices.getAllprofitService(req.query);
+    const result = await profitServices.getAllProfitService(req.query);
     res.send({
       status: "success",
       data: result,
@@ -71,7 +71,7 @@ exports.getAllPendingprofitController = async (req, res, next) => {
   }
 };
 
-exports.approveAnprofitRequestController = async (req, res, next) => {
+exports.approveAProfitRequestController = async (req, res, next) => {
   try {
     const profitId = req.params.id;
     const authoriser = await memberServices.getMemberByCopIDService(
@@ -83,46 +83,44 @@ exports.approveAnprofitRequestController = async (req, res, next) => {
       authorisingTime: Date.now(),
       moreAboutAuthoriser: authoriser._id,
     };
-    const profit = await profitServices.getAnprofitByIdService(profitId);
+    const profit = await profitServices.getAProfitByIdService(profitId);
     if (!profit) {
       throw new Error("Please enter a valid profit Id!");
     } else if (profit.status !== "pending") {
       throw new Error("This profit is not in pending state!");
     } else {
-      // check is balance sufficiant
-      const balanceOfTheOrganisation =
-        await getAccountBalanceOfTheOrganisationService();
-      if (balanceOfTheOrganisation < profit.profitAmount) {
-        throw new Error("Insufficient balance!");
-      } else {
-        await profitServices.addNewprofitOnMemberModelService(profit);
-        await profitServices.addNewprofitOnBusinessModelService(profit);
-        const result = await profitServices.approveAnprofitRequestService(
-          profitId,
-          authorised
-        );
+      // add to business model
+      await profitServices.addNewProfitOnBusinessModelService(profit);
+      // add to investments
+      await profitServices.addNewProfitOnInvestmentModelService(profit);
+      // add to member model
+      await profitServices.addNewProfitOnMemberModelService(profit);
+      // change status
+      const result = await profitServices.approveAProfitRequestService(
+        profitId,
+        authorised
+      );
 
-        res.send({
-          status: "success",
-          data: result,
-        });
-        console.log(`profit approved!`);
-      }
+      res.send({
+        status: "success",
+        data: result,
+      });
+      console.log(`profit approved!`);
     }
   } catch (error) {
     next(error);
   }
 };
 
-exports.rejectAnprofitRequestController = async (req, res, next) => {
+exports.rejectAProfitRequestController = async (req, res, next) => {
   try {
-    const profit = await profitServices.getAnprofitByIdService(req.params.id);
+    const profit = await profitServices.getAProfitByIdService(req.params.id);
     if (!profit) {
       throw new Error("profit request not found!");
     } else if (profit.status !== "pending") {
       throw new Error("This profit request is not in pending state!");
     } else {
-      const result = await profitServices.rejectAnprofitRequestService(
+      const result = await profitServices.rejectAProfitRequestService(
         req.params.id
       );
       res.send({
@@ -136,11 +134,24 @@ exports.rejectAnprofitRequestController = async (req, res, next) => {
   }
 };
 
-exports.getAnprofitController = async (req, res, next) => {
+exports.getlAllProfitController = async (req, res, next) => {
+  try {
+    const result = await profitServices.getAllProfitService(req.query);
+    res.send({
+      status: "success",
+      data: result,
+    });
+    console.log(`${result.length} profits are responsed!`);
+  } catch (error) {
+    next(error);
+  }
+};
+
+exports.getAProfitController = async (req, res, next) => {
   try {
     const profitId = req.params.id;
 
-    const result = await profitServices.getAnprofitByIdService(profitId);
+    const result = await profitServices.getAProfitByIdService(profitId);
     if (!result) {
       throw new Error("profit not found!");
     } else {
@@ -155,34 +166,23 @@ exports.getAnprofitController = async (req, res, next) => {
   }
 };
 
-exports.getlAllprofitController = async (req, res, next) => {
-  try {
-    const result = await profitServices.getAllprofitService(req.query);
-    res.send({
-      status: "success",
-      data: result,
-    });
-    console.log(`${result.length} profits are responsed!`);
-  } catch (error) {
-    next(error);
-  }
-};
-
-exports.deleteAnprofitControllter = async (req, res, next) => {
+exports.deleteAProfitControllter = async (req, res, next) => {
   try {
     const profitId = req.params.id;
-    const profit = await profitServices.getAnprofitByIdService(profitId);
+    const profit = await profitServices.getAProfitByIdService(profitId);
     if (!profit) {
       throw new Error("profit is not found!");
-    } else if (profit.status !== "invested") {
+    } else if (profit.status !== "approved") {
       throw new Error("profit is not in approved state!");
     } else {
-      // remove the profit from member model
-      await profitServices.removeAnprofitFromMemberModelService(profit);
       // remove the profit from business model
-      await profitServices.removeAnprofitFromBusinessModelService(profit);
-      // delete the profit from profit model
-      const result = await profitServices.deleteAnprofitService(profitId);
+      await profitServices.removeAProfitFromBusinessModelService(profit);
+      // remove the profit from member model
+      await profitServices.removeAProfitFromMemberModelService(profit);
+      // remove the profit from Investment model
+      await profitServices.removeAProfitFromInvestmentModelService(profit);
+      // // delete the profit from profit model
+      const result = await profitServices.deleteAProfitService(profitId);
       res.send({
         status: "success",
         data: result,

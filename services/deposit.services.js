@@ -76,29 +76,22 @@ exports.deleteADepositService = async (id) => {
 
 /*
  === === === === === === === === === === === ===
-      === ==========finance=============== ===
+      === ==========finance route=============== ===
  === === === === === === === === === === === === 
  */
 exports.getTotalDepositOfAMemberByIdService = async (id) => {
-  const result = await Deposit.aggregate([
+  const result = await Member.aggregate([
     {
       $match: {
-        moreAboutMember: new ObjectId(id),
-        status: "approved",
+        _id: new ObjectId(id),
       },
     },
-    {
-      $project: {
-        _id: 1,
-        moreAboutMember: 1,
-        name: 1,
-        depositAmount: 1,
-      },
-    },
+    { $unwind: "$deposits" },
+
     {
       $group: {
-        _id: "$moreAboutMember",
-        totalDeposit: { $sum: "$depositAmount" },
+        _id: "$_id",
+        totalDeposit: { $sum: "$deposits.depositAmount" },
       },
     },
   ]);

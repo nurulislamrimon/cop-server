@@ -103,9 +103,8 @@ const profitSchema = mongoose.Schema(
       },
       authorisingTime: {
         type: Date,
-        default: Date.now(),
       },
-      moreAboutAuthorised: {
+      moreAboutAuthoriser: {
         type: ObjectId,
         ref: "Member",
       },

@@ -107,26 +107,21 @@ exports.getTotalExpenseOfTheOrganisationService = async () => {
 };
 
 exports.getTotalExpenseOfAMemberByIdService = async (id) => {
-  const result = await Expense.aggregate([
+  const result = await Member.aggregate([
     {
       $match: {
-        status: "approved",
+        _id: new ObjectId(id),
       },
     },
-    { $unwind: "$individualExpense" },
+    { $unwind: "$expenses" },
 
     {
-      $match: {
-        "individualExpense.moreAboutMember": new ObjectId(id),
-      },
-    },
-    {
       $group: {
-        _id: "$individualExpense.moreAboutMember",
-        totalexpense: { $sum: "$individualExpense.expenseAmount" },
+        _id: "$_id",
+        totalExpense: { $sum: "$expenses.expenseAmount" },
       },
     },
   ]);
 
-  return result.length ? result[0].totalexpense : 0;
+  return result.length ? result[0].totalExpense : 0;
 };

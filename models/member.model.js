@@ -141,9 +141,8 @@ const memberSchema = mongoose.Schema(
           type: Number,
           required: true,
         },
-        profitCollectionTime: {
+        collectionDate: {
           type: Date,
-          default: Date.now(),
           required: true,
         },
         moreAboutProfit: {

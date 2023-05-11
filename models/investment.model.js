@@ -114,14 +114,17 @@ const investmentSchema = mongoose.Schema(
         ref: "Member",
       },
     },
-    profits: {
-      amount: Number,
-      profitCollectionTime: Date,
-      moreAboutProfit: {
-        type: ObjectId,
-        ref: "Profit",
+    profits: [
+      {
+        profitAmount: { type: Number, required: true },
+        collectionDate: { type: Date, required: true },
+        moreAboutProfit: {
+          type: ObjectId,
+          required: true,
+          ref: "Profit",
+        },
       },
-    },
+    ],
     expenses: [
       {
         amount: Number,

@@ -93,5 +93,22 @@ router.get(
   verifyAuthorization(roles.adminToManager),
   accountBalanceController.getTotalExpenseOfTheOrganisationController
 );
+/*
+ *@api{get}/finance/profit/ get total profit amount of the organisation
+ *@apiDescription get total profit of the organisation
+ *@apiPermission authorized admin to manager and member
+ *@apiHeader authorization token for verification
+ *@apiBody none
+ *@apiParam member object id
+ *@apiQuery none
+ *@apiSuccess {Objects} profit.
+ *@apiError 401 & 404
+ */
+router.get(
+  "/profit",
+  verifyToken,
+  verifyAuthorization(roles.adminToManager),
+  accountBalanceController.getTotalProfitOfTheOrganisationController
+);
 
 module.exports = router;

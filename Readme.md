@@ -24,5 +24,5 @@ We have administration team to lead and manage the organization. Last year our r
 - Closing Business
 - Profits distributions
   `                                                       
-                                                     **Thanks**
-                                                  Nurul Islam Rimon`
+                                                  `#0969DA` **Thanks**
+                                                Nurul Islam Rimon`

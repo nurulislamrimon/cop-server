@@ -23,5 +23,6 @@ We have administration team to lead and manage the organization. Last year our r
 - Investments theory
 - Closing Business
 - Profits distributions
-  `                                                        **Thanks**
-                                                      Nurul Islam Rimon`
+  `                                                       
+                                                     **Thanks**
+                                                  Nurul Islam Rimon`

@@ -7,6 +7,7 @@ const expenseServices = require("./expense.services");
 exports.getAccountBalanceOfAMemberService = async (id) => {
   const memberTotalDeposit =
     await depositServices.getTotalDepositOfAMemberByIdService(id);
+
   const memberTotalWithdraw =
     await withdrawServices.getTotalWithdrawOfAMemberByIdService(id);
   const memberTotalInvestment =
@@ -16,9 +17,9 @@ exports.getAccountBalanceOfAMemberService = async (id) => {
   const memberTotalExpense =
     await expenseServices.getTotalExpenseOfAMemberByIdService(id);
   const balance =
-    memberTotalDeposit +
-    memberTotalProfit -
-    (memberTotalWithdraw + memberTotalInvestment + memberTotalExpense);
+    memberTotalDeposit -
+    (memberTotalWithdraw + memberTotalInvestment + memberTotalExpense) +
+    memberTotalProfit;
   return balance;
 };
 

@@ -1,7 +1,7 @@
 {
     "client": "Thunder Client",
     "collectionName": "CoP Server",
-    "dateExported": "2023-05-05T19:29:21.088Z",
+    "dateExported": "2023-05-13T06:39:02.614Z",
     "version": "1.1",
     "folders": [
         {
@@ -61,6 +61,20 @@
             "sortNum": 90000
         },
         {
+            "_id": "83504fb5-d7cc-4509-b06a-92c09f694284",
+            "name": "Expense",
+            "containerId": "",
+            "created": "2023-05-06T15:44:02.163Z",
+            "sortNum": 95000
+        },
+        {
+            "_id": "e7c6457e-41c2-4beb-a857-8074bb4617dc",
+            "name": "Profit",
+            "containerId": "",
+            "created": "2023-05-09T10:53:39.883Z",
+            "sortNum": 97500
+        },
+        {
             "_id": "cbaf57b3-7f34-4703-b5f2-2c5eb88e28ec",
             "name": "Account Balance",
             "containerId": "",
@@ -69,29 +83,6 @@
         }
     ],
     "requests": [
-        {
-            "_id": "44aed473-003a-4245-9a67-431ca00d9f21",
-            "colId": "d4cc0172-8a2c-40a7-842d-df27aaec6ee5",
-            "containerId": "a4fedde2-68a9-4bb7-bb8f-30b018aa56f4",
-            "name": "get all business- cop",
-            "url": "{{cop}}/api/v1/business?",
-            "method": "GET",
-            "sortNum": 5000,
-            "created": "2023-05-04T16:37:34.213Z",
-            "modified": "2023-05-04T17:27:25.142Z",
-            "headers": [],
-            "params": [],
-            "body": {
-                "type": "json",
-                "raw": "{ \n  \"name\":\"nurul islam rimon\",\n  \"fatherName\":\"Noor Nabi\"\n}",
-                "form": []
-            },
-            "auth": {
-                "type": "bearer",
-                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5pcmltb25AZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwibWVtYmVyQ29wSUQiOiJDT1AwMTJOSSIsInN0YXR1cyI6ImFjdGl2ZSIsImlhdCI6MTY4MjYxNDU4NywiZXhwIjoxNjgyNzAwOTg3fQ.47LM-QXVqSxosEOb8wa_b3SGu6iaRRIELBswsfzJXdk"
-            },
-            "tests": []
-        },
         {
             "_id": "615bb65b-da9b-45b6-89f9-64380b8e8231",
             "colId": "d4cc0172-8a2c-40a7-842d-df27aaec6ee5",
@@ -120,17 +111,17 @@
             "method": "POST",
             "sortNum": 10000,
             "created": "2023-05-01T12:15:35.656Z",
-            "modified": "2023-05-04T13:40:27.278Z",
+            "modified": "2023-05-13T05:35:23.633Z",
             "headers": [],
             "params": [],
             "body": {
                 "type": "json",
-                "raw": "{ \n  \"name\":\"Shaharat Hossain Nahid\"\n}",
+                "raw": "{ \n  \"name\":\"Mahbubur Rahman Shanto\"\n}",
                 "form": []
             },
             "auth": {
                 "type": "bearer",
-                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5pcmltb25AZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwibWVtYmVyQ29wSUQiOiJDT1AwMDFOSSIsInN0YXR1cyI6ImFjdGl2ZSIsImlhdCI6MTY4MzIwNzQwMCwiZXhwIjoxNjgzMjkzODAwfQ.WqD2nup2IFcIGHbiP3oH4VW4VBCDm-NBJ_Gr_RwlXxk"
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5pcmltb25AZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwibWVtYmVyQ29wSUQiOiJDT1AwMDFOSSIsInN0YXR1cyI6ImFjdGl2ZSIsImlhdCI6MTY4Mzk1NTMwMCwiZXhwIjoxNjg0MDQxNzAwfQ.fwugBU24UQle2LWCk2UmXPfJJ0hyLTEoLOi8yvBjq1U"
             },
             "tests": []
         },
@@ -189,17 +180,17 @@
             "method": "POST",
             "sortNum": 10000,
             "created": "2023-05-01T13:47:34.142Z",
-            "modified": "2023-05-05T19:07:22.691Z",
+            "modified": "2023-05-13T05:43:37.807Z",
             "headers": [],
             "params": [],
             "body": {
                 "type": "json",
-                "raw": "{\n  \"depositorId\":\"6453b5a28a5dba562bf827b7\",\n  \"depositAmount\":1500,\n  \"collectorId\":\"6453b5cb8a5dba562bf827c3\"\n}",
+                "raw": "{\n  \"depositorId\":\"645f21675fad08e0261280a9\",\n  \"depositAmount\":2500,\n  \"collectorId\":\"645f219b5fad08e0261280ad\"\n}",
                 "form": []
             },
             "auth": {
                 "type": "bearer",
-                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5pcmltb25AZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwibWVtYmVyQ29wSUQiOiJDT1AwMDFOSSIsInN0YXR1cyI6ImFjdGl2ZSIsImlhdCI6MTY4MzMxMzQ4OCwiZXhwIjoxNjgzMzk5ODg4fQ.0zW2ZUHSzbpJnJzBspgP2QSBG2-4ggGcAeLeASul_jc"
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5pcmltb25AZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwibWVtYmVyQ29wSUQiOiJDT1AwMDFOSSIsInN0YXR1cyI6ImFjdGl2ZSIsImlhdCI6MTY4Mzk1NTMwMCwiZXhwIjoxNjg0MDQxNzAwfQ.fwugBU24UQle2LWCk2UmXPfJJ0hyLTEoLOi8yvBjq1U"
             },
             "tests": []
         },
@@ -212,17 +203,17 @@
             "method": "POST",
             "sortNum": 10000,
             "created": "2023-05-02T11:28:50.269Z",
-            "modified": "2023-05-05T19:06:42.081Z",
+            "modified": "2023-05-13T06:14:02.854Z",
             "headers": [],
             "params": [],
             "body": {
                 "type": "json",
-                "raw": "{\n  \"withdrawerId\":\"6453b5a28a5dba562bf827b7\",\n  \"withdrawAmount\":1,\n  \"witnessId\":\"6453b5a28a5dba562bf827b7\",\n  \"withdrawDate\":\"2023-05-10\"\n}",
+                "raw": "{\n  \"withdrawerId\":\"645f1e235fad08e02612809e\",\n  \"withdrawAmount\":1,\n  \"witnessId\":\"645f219b5fad08e0261280ad\",\n  \"withdrawDate\":\"2023-05-10\"\n}",
                 "form": []
             },
             "auth": {
                 "type": "bearer",
-                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5pcmltb25AZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwibWVtYmVyQ29wSUQiOiJDT1AwMDFOSSIsInN0YXR1cyI6ImFjdGl2ZSIsImlhdCI6MTY4MzI5OTMyNSwiZXhwIjoxNjgzMzg1NzI1fQ.KejDvxq9YViFx_DZfpUDzGBp6E-T3ArUCj86_p3xWtA"
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5pcmltb25AZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwibWVtYmVyQ29wSUQiOiJDT1AwMDFOSSIsInN0YXR1cyI6ImFjdGl2ZSIsImlhdCI6MTY4Mzk1NTMwMCwiZXhwIjoxNjg0MDQxNzAwfQ.fwugBU24UQle2LWCk2UmXPfJJ0hyLTEoLOi8yvBjq1U"
             },
             "tests": []
         },
@@ -235,17 +226,17 @@
             "method": "POST",
             "sortNum": 10000,
             "created": "2023-05-03T16:02:17.865Z",
-            "modified": "2023-05-05T19:27:08.129Z",
+            "modified": "2023-05-13T06:29:20.831Z",
             "headers": [],
             "params": [],
             "body": {
                 "type": "json",
-                "raw": "{\n  \"businessId\":\"6453e9c1788a74a77840f0c2\",\n  \"investmentAmount\":1000\n}",
+                "raw": "{\n  \"businessId\":\"645f24c55fad08e02612813f\",\n  \"investmentAmount\":3000,\n  \"investmentDate\":\"2022-11-10\"\n}",
                 "form": []
             },
             "auth": {
                 "type": "bearer",
-                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5pcmltb25AZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwibWVtYmVyQ29wSUQiOiJDT1AwMDFOSSIsInN0YXR1cyI6ImFjdGl2ZSIsImlhdCI6MTY4MzI5OTMyNSwiZXhwIjoxNjgzMzg1NzI1fQ.KejDvxq9YViFx_DZfpUDzGBp6E-T3ArUCj86_p3xWtA"
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5pcmltb25AZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwibWVtYmVyQ29wSUQiOiJDT1AwMDFOSSIsInN0YXR1cyI6ImFjdGl2ZSIsImlhdCI6MTY4Mzk1NTMwMCwiZXhwIjoxNjg0MDQxNzAwfQ.fwugBU24UQle2LWCk2UmXPfJJ0hyLTEoLOi8yvBjq1U"
             },
             "tests": []
         },
@@ -258,17 +249,63 @@
             "method": "POST",
             "sortNum": 10000,
             "created": "2023-05-04T16:37:34.210Z",
-            "modified": "2023-05-04T17:19:58.681Z",
+            "modified": "2023-05-13T05:48:53.686Z",
             "headers": [],
             "params": [],
             "body": {
                 "type": "json",
-                "raw": "{ \n  \"businessName\":\"Domestic Cow\",\n  \"managerName\":\"Siraj Mia\",\n  \"contactNumber\":\"01715494846\"\n}",
+                "raw": "{ \n  \"businessName\":\"New Dealer\",\n  \"managerName\":\"Ridhoy\",\n  \"contactNumber\":\"01850711231\"\n}",
                 "form": []
             },
             "auth": {
                 "type": "bearer",
-                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5pcmltb25AZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwibWVtYmVyQ29wSUQiOiJDT1AwMDFOSSIsInN0YXR1cyI6ImFjdGl2ZSIsImlhdCI6MTY4MzIwNzQwMCwiZXhwIjoxNjgzMjkzODAwfQ.WqD2nup2IFcIGHbiP3oH4VW4VBCDm-NBJ_Gr_RwlXxk"
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5pcmltb25AZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwibWVtYmVyQ29wSUQiOiJDT1AwMDFOSSIsInN0YXR1cyI6ImFjdGl2ZSIsImlhdCI6MTY4Mzk1NTMwMCwiZXhwIjoxNjg0MDQxNzAwfQ.fwugBU24UQle2LWCk2UmXPfJJ0hyLTEoLOi8yvBjq1U"
+            },
+            "tests": []
+        },
+        {
+            "_id": "074f88dc-d4d3-49cb-bde8-a601e3dd8cf7",
+            "colId": "d4cc0172-8a2c-40a7-842d-df27aaec6ee5",
+            "containerId": "83504fb5-d7cc-4509-b06a-92c09f694284",
+            "name": "add new expense - cop",
+            "url": "{{cop}}/api/v1/finance/expense/add",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2023-05-06T15:44:02.163Z",
+            "modified": "2023-05-07T08:17:26.737Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"purposeOfExpense\":\"Form\",\n  \"expenseAmount\":200\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5pcmltb25AZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwibWVtYmVyQ29wSUQiOiJDT1AwMDFOSSIsInN0YXR1cyI6ImFjdGl2ZSIsImlhdCI6MTY4MzM4OTM3OCwiZXhwIjoxNjgzNDc1Nzc4fQ.YULYOJT8S9v0DXHe6qx0oYKqDryXttDDvIt3B5m2PQI"
+            },
+            "tests": []
+        },
+        {
+            "_id": "bb8e681e-adf1-48a6-9d49-d5ad27168c34",
+            "colId": "d4cc0172-8a2c-40a7-842d-df27aaec6ee5",
+            "containerId": "e7c6457e-41c2-4beb-a857-8074bb4617dc",
+            "name": "add new profit- cop",
+            "url": "{{cop}}/api/v1/finance/profit/add",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2023-05-09T10:53:39.883Z",
+            "modified": "2023-05-13T06:30:03.019Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"profitAmount\":300,\n  \"businessId\":\"645f24c55fad08e02612813f\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5pcmltb25AZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwibWVtYmVyQ29wSUQiOiJDT1AwMDFOSSIsInN0YXR1cyI6ImFjdGl2ZSIsImlhdCI6MTY4Mzk1NTMwMCwiZXhwIjoxNjg0MDQxNzAwfQ.fwugBU24UQle2LWCk2UmXPfJJ0hyLTEoLOi8yvBjq1U"
             },
             "tests": []
         },
@@ -304,7 +341,7 @@
             "method": "POST",
             "sortNum": 20000,
             "created": "2023-05-01T12:15:35.659Z",
-            "modified": "2023-05-04T13:35:49.741Z",
+            "modified": "2023-05-13T05:21:40.978Z",
             "headers": [],
             "params": [],
             "body": {
@@ -392,7 +429,7 @@
             "method": "GET",
             "sortNum": 20000,
             "created": "2023-05-01T15:43:48.516Z",
-            "modified": "2023-05-04T13:52:36.448Z",
+            "modified": "2023-05-13T05:37:09.007Z",
             "headers": [],
             "params": [],
             "body": {
@@ -402,7 +439,7 @@
             },
             "auth": {
                 "type": "bearer",
-                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5pcmltb25AZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwibWVtYmVyQ29wSUQiOiJDT1AwMDFOSSIsInN0YXR1cyI6ImFjdGl2ZSIsImlhdCI6MTY4MzIwNzgxNCwiZXhwIjoxNjgzMjk0MjE0fQ.LwS1-u7WLlZIHtPlr8nak41TqzcmLixl75R6PTOKKZA"
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5pcmltb25AZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwibWVtYmVyQ29wSUQiOiJDT1AwMDFOSSIsInN0YXR1cyI6ImFjdGl2ZSIsImlhdCI6MTY4Mzk1NTMwMCwiZXhwIjoxNjg0MDQxNzAwfQ.fwugBU24UQle2LWCk2UmXPfJJ0hyLTEoLOi8yvBjq1U"
             },
             "tests": []
         },
@@ -415,7 +452,7 @@
             "method": "GET",
             "sortNum": 20000,
             "created": "2023-05-02T11:28:50.270Z",
-            "modified": "2023-05-05T16:31:33.502Z",
+            "modified": "2023-05-13T05:46:12.844Z",
             "headers": [],
             "params": [],
             "body": {
@@ -425,7 +462,7 @@
             },
             "auth": {
                 "type": "bearer",
-                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5pcmltb25AZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwibWVtYmVyQ29wSUQiOiJDT1AwMDFOSSIsInN0YXR1cyI6ImFjdGl2ZSIsImlhdCI6MTY4MzI5OTMyNSwiZXhwIjoxNjgzMzg1NzI1fQ.KejDvxq9YViFx_DZfpUDzGBp6E-T3ArUCj86_p3xWtA"
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5pcmltb25AZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwibWVtYmVyQ29wSUQiOiJDT1AwMDFOSSIsInN0YXR1cyI6ImFjdGl2ZSIsImlhdCI6MTY4Mzk1NTMwMCwiZXhwIjoxNjg0MDQxNzAwfQ.fwugBU24UQle2LWCk2UmXPfJJ0hyLTEoLOi8yvBjq1U"
             },
             "tests": []
         },
@@ -438,7 +475,7 @@
             "method": "GET",
             "sortNum": 20000,
             "created": "2023-05-03T16:02:17.866Z",
-            "modified": "2023-05-05T15:09:00.879Z",
+            "modified": "2023-05-13T05:50:07.211Z",
             "headers": [],
             "params": [],
             "body": {
@@ -448,7 +485,7 @@
             },
             "auth": {
                 "type": "bearer",
-                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5pcmltb25AZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwibWVtYmVyQ29wSUQiOiJDT1AwMDFOSSIsInN0YXR1cyI6ImFjdGl2ZSIsImlhdCI6MTY4MzI5OTMyNSwiZXhwIjoxNjgzMzg1NzI1fQ.KejDvxq9YViFx_DZfpUDzGBp6E-T3ArUCj86_p3xWtA"
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5pcmltb25AZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwibWVtYmVyQ29wSUQiOiJDT1AwMDFOSSIsInN0YXR1cyI6ImFjdGl2ZSIsImlhdCI6MTY4Mzk1NTMwMCwiZXhwIjoxNjg0MDQxNzAwfQ.fwugBU24UQle2LWCk2UmXPfJJ0hyLTEoLOi8yvBjq1U"
             },
             "tests": []
         },
@@ -472,6 +509,121 @@
             "auth": {
                 "type": "bearer",
                 "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5pcmltb25AZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwibWVtYmVyQ29wSUQiOiJDT1AwMDFOSSIsInN0YXR1cyI6ImFjdGl2ZSIsImlhdCI6MTY4MzIwNzgxNCwiZXhwIjoxNjgzMjk0MjE0fQ.LwS1-u7WLlZIHtPlr8nak41TqzcmLixl75R6PTOKKZA"
+            },
+            "tests": []
+        },
+        {
+            "_id": "b7fd3e7e-0c44-4ee8-8cd2-05f601f32e80",
+            "colId": "d4cc0172-8a2c-40a7-842d-df27aaec6ee5",
+            "containerId": "83504fb5-d7cc-4509-b06a-92c09f694284",
+            "name": "get all pending expense - cop",
+            "url": "{{cop}}/api/v1/finance/expense/request",
+            "method": "GET",
+            "sortNum": 20000,
+            "created": "2023-05-06T15:44:02.164Z",
+            "modified": "2023-05-06T16:27:28.215Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"depositorId\":\"644d5e654dc8ba1fb0faaef8\",\n  \"depositAmount\":300,\n  \"collectorId\":\"644fcab1901e7680dad528da\",\n  \"collectionDate\":\"2023-05-10\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5pcmltb25AZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwibWVtYmVyQ29wSUQiOiJDT1AwMDFOSSIsInN0YXR1cyI6ImFjdGl2ZSIsImlhdCI6MTY4MzM4OTM3OCwiZXhwIjoxNjgzNDc1Nzc4fQ.YULYOJT8S9v0DXHe6qx0oYKqDryXttDDvIt3B5m2PQI"
+            },
+            "tests": []
+        },
+        {
+            "_id": "187a3cc2-5a16-4665-84d2-c2bd6d61c5b7",
+            "colId": "d4cc0172-8a2c-40a7-842d-df27aaec6ee5",
+            "containerId": "e7c6457e-41c2-4beb-a857-8074bb4617dc",
+            "name": "get all pending profit - cop",
+            "url": "{{cop}}/api/v1/finance/profit/request",
+            "method": "GET",
+            "sortNum": 20000,
+            "created": "2023-05-09T10:53:39.884Z",
+            "modified": "2023-05-10T17:18:42.502Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"depositorId\":\"644d5e654dc8ba1fb0faaef8\",\n  \"depositAmount\":300,\n  \"collectorId\":\"644fcab1901e7680dad528da\",\n  \"collectionDate\":\"2023-05-10\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5pcmltb25AZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwibWVtYmVyQ29wSUQiOiJDT1AwMDFOSSIsInN0YXR1cyI6ImFjdGl2ZSIsImlhdCI6MTY4MzczODEwMCwiZXhwIjoxNjgzODI0NTAwfQ.LwKIZYaUg9zDN9EpaG38AeKK-RzYwvVJGF0StYiMhPM"
+            },
+            "tests": []
+        },
+        {
+            "_id": "44aed473-003a-4245-9a67-431ca00d9f21",
+            "colId": "d4cc0172-8a2c-40a7-842d-df27aaec6ee5",
+            "containerId": "a4fedde2-68a9-4bb7-bb8f-30b018aa56f4",
+            "name": "get all business- cop",
+            "url": "{{cop}}/api/v1/business?",
+            "method": "GET",
+            "sortNum": 22500,
+            "created": "2023-05-04T16:37:34.213Z",
+            "modified": "2023-05-13T05:48:22.625Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{ \n  \"name\":\"nurul islam rimon\",\n  \"fatherName\":\"Noor Nabi\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5pcmltb25AZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwibWVtYmVyQ29wSUQiOiJDT1AwMTJOSSIsInN0YXR1cyI6ImFjdGl2ZSIsImlhdCI6MTY4MjYxNDU4NywiZXhwIjoxNjgyNzAwOTg3fQ.47LM-QXVqSxosEOb8wa_b3SGu6iaRRIELBswsfzJXdk"
+            },
+            "tests": []
+        },
+        {
+            "_id": "386cb3b6-fd39-40dd-9c3f-4bf3a80b9a97",
+            "colId": "d4cc0172-8a2c-40a7-842d-df27aaec6ee5",
+            "containerId": "a4fedde2-68a9-4bb7-bb8f-30b018aa56f4",
+            "name": "close a business- cop",
+            "url": "{{cop}}/api/v1/business/close/645f24c55fad08e02612813f",
+            "method": "POST",
+            "sortNum": 25000,
+            "created": "2023-05-11T12:32:53.094Z",
+            "modified": "2023-05-13T06:35:28.609Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{ \n  \"collectedAmount\":3600\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5pcmltb25AZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwibWVtYmVyQ29wSUQiOiJDT1AwMDFOSSIsInN0YXR1cyI6ImFjdGl2ZSIsImlhdCI6MTY4Mzk1NTMwMCwiZXhwIjoxNjg0MDQxNzAwfQ.fwugBU24UQle2LWCk2UmXPfJJ0hyLTEoLOi8yvBjq1U"
+            },
+            "tests": []
+        },
+        {
+            "_id": "a76b49b7-8480-44af-af31-7783c2d87916",
+            "colId": "d4cc0172-8a2c-40a7-842d-df27aaec6ee5",
+            "containerId": "a4fedde2-68a9-4bb7-bb8f-30b018aa56f4",
+            "name": "approve a business close - cop",
+            "url": "{{cop}}/api/v1/business/close/approve/645f2fb083ec668db0522abc",
+            "method": "POST",
+            "sortNum": 27500,
+            "created": "2023-05-11T16:49:38.265Z",
+            "modified": "2023-05-13T06:36:13.537Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{ \n  \"collectedAmount\":4500\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5pcmltb25AZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwibWVtYmVyQ29wSUQiOiJDT1AwMDFOSSIsInN0YXR1cyI6ImFjdGl2ZSIsImlhdCI6MTY4Mzk1NTMwMCwiZXhwIjoxNjg0MDQxNzAwfQ.fwugBU24UQle2LWCk2UmXPfJJ0hyLTEoLOi8yvBjq1U"
             },
             "tests": []
         },
@@ -572,11 +724,11 @@
             "colId": "d4cc0172-8a2c-40a7-842d-df27aaec6ee5",
             "containerId": "288fbc6b-e0dd-4195-840b-864677009a6e",
             "name": "approve a deposit - cop",
-            "url": "{{cop}}/api/v1/finance/deposit/approve/645553ea2ada07917963f01c",
+            "url": "{{cop}}/api/v1/finance/deposit/approve/645f23895fad08e0261280de",
             "method": "POST",
             "sortNum": 30000,
             "created": "2023-05-01T17:52:46.204Z",
-            "modified": "2023-05-05T19:07:50.053Z",
+            "modified": "2023-05-13T05:45:48.117Z",
             "headers": [],
             "params": [],
             "body": {
@@ -586,7 +738,7 @@
             },
             "auth": {
                 "type": "bearer",
-                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5pcmltb25AZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwibWVtYmVyQ29wSUQiOiJDT1AwMDFOSSIsInN0YXR1cyI6ImFjdGl2ZSIsImlhdCI6MTY4MzMxMzQ4OCwiZXhwIjoxNjgzMzk5ODg4fQ.0zW2ZUHSzbpJnJzBspgP2QSBG2-4ggGcAeLeASul_jc"
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5pcmltb25AZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwibWVtYmVyQ29wSUQiOiJDT1AwMDFOSSIsInN0YXR1cyI6ImFjdGl2ZSIsImlhdCI6MTY4Mzk1NTMwMCwiZXhwIjoxNjg0MDQxNzAwfQ.fwugBU24UQle2LWCk2UmXPfJJ0hyLTEoLOi8yvBjq1U"
             },
             "tests": []
         },
@@ -595,11 +747,11 @@
             "colId": "d4cc0172-8a2c-40a7-842d-df27aaec6ee5",
             "containerId": "28934564-ac97-40f8-9123-09d32841c32a",
             "name": "approve a withdraw request - cop",
-            "url": "{{cop}}/api/v1/finance/withdraw/approve/645543928dacb002d1ce78df",
+            "url": "{{cop}}/api/v1/finance/withdraw/approve/645f24115fad08e02612811a",
             "method": "POST",
             "sortNum": 30000,
             "created": "2023-05-02T11:28:50.271Z",
-            "modified": "2023-05-05T18:38:11.396Z",
+            "modified": "2023-05-13T05:46:43.116Z",
             "headers": [],
             "params": [],
             "body": {
@@ -609,7 +761,7 @@
             },
             "auth": {
                 "type": "bearer",
-                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5pcmltb25AZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwibWVtYmVyQ29wSUQiOiJDT1AwMDFOSSIsInN0YXR1cyI6ImFjdGl2ZSIsImlhdCI6MTY4MzI5OTMyNSwiZXhwIjoxNjgzMzg1NzI1fQ.KejDvxq9YViFx_DZfpUDzGBp6E-T3ArUCj86_p3xWtA"
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5pcmltb25AZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwibWVtYmVyQ29wSUQiOiJDT1AwMDFOSSIsInN0YXR1cyI6ImFjdGl2ZSIsImlhdCI6MTY4Mzk1NTMwMCwiZXhwIjoxNjg0MDQxNzAwfQ.fwugBU24UQle2LWCk2UmXPfJJ0hyLTEoLOi8yvBjq1U"
             },
             "tests": []
         },
@@ -618,11 +770,11 @@
             "colId": "d4cc0172-8a2c-40a7-842d-df27aaec6ee5",
             "containerId": "9186546e-8195-4262-b61d-d49146896ced",
             "name": "approve a investment request - cop",
-            "url": "{{cop}}/api/v1/finance/investment/approve/6455586281bb63b61b9e5913",
+            "url": "{{cop}}/api/v1/finance/investment/approve/645f2ea583ec668db0522a3c",
             "method": "POST",
             "sortNum": 30000,
             "created": "2023-05-03T16:02:17.867Z",
-            "modified": "2023-05-05T19:26:50.469Z",
+            "modified": "2023-05-13T06:31:19.165Z",
             "headers": [],
             "params": [],
             "body": {
@@ -632,7 +784,7 @@
             },
             "auth": {
                 "type": "bearer",
-                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5pcmltb25AZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwibWVtYmVyQ29wSUQiOiJDT1AwMDFOSSIsInN0YXR1cyI6ImFjdGl2ZSIsImlhdCI6MTY4MzI5OTMyNSwiZXhwIjoxNjgzMzg1NzI1fQ.KejDvxq9YViFx_DZfpUDzGBp6E-T3ArUCj86_p3xWtA"
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5pcmltb25AZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwibWVtYmVyQ29wSUQiOiJDT1AwMDFOSSIsInN0YXR1cyI6ImFjdGl2ZSIsImlhdCI6MTY4Mzk1NTMwMCwiZXhwIjoxNjg0MDQxNzAwfQ.fwugBU24UQle2LWCk2UmXPfJJ0hyLTEoLOi8yvBjq1U"
             },
             "tests": []
         },
@@ -656,6 +808,52 @@
             "auth": {
                 "type": "bearer",
                 "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5pcmltb25AZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwibWVtYmVyQ29wSUQiOiJDT1AwMDFOSSIsInN0YXR1cyI6ImFjdGl2ZSIsImlhdCI6MTY4MzIwNzQwMCwiZXhwIjoxNjgzMjkzODAwfQ.WqD2nup2IFcIGHbiP3oH4VW4VBCDm-NBJ_Gr_RwlXxk"
+            },
+            "tests": []
+        },
+        {
+            "_id": "8d3f7660-a597-4d16-b587-3ed93359415a",
+            "colId": "d4cc0172-8a2c-40a7-842d-df27aaec6ee5",
+            "containerId": "83504fb5-d7cc-4509-b06a-92c09f694284",
+            "name": "approve a expense request - cop",
+            "url": "{{cop}}/api/v1/finance/expense/approve/64575e969c2dec2d8262738f",
+            "method": "POST",
+            "sortNum": 30000,
+            "created": "2023-05-06T15:44:02.165Z",
+            "modified": "2023-05-07T10:41:10.468Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"depositorId\":\"644d5e654dc8ba1fb0faaef8\",\n  \"depositAmount\":300,\n  \"collectorId\":\"644fcab1901e7680dad528da\",\n  \"collectionDate\":\"2023-05-10\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5pcmltb25AZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwibWVtYmVyQ29wSUQiOiJDT1AwMDFOSSIsInN0YXR1cyI6ImFjdGl2ZSIsImlhdCI6MTY4MzQ1MzAzNCwiZXhwIjoxNjgzNTM5NDM0fQ.bBzP3Tp4WdRTqqLUdBm8-k1Q3a2hvWWJrFPceiP3ySo"
+            },
+            "tests": []
+        },
+        {
+            "_id": "d83726b7-35c2-4e24-9c0e-f0d6665d2d07",
+            "colId": "d4cc0172-8a2c-40a7-842d-df27aaec6ee5",
+            "containerId": "e7c6457e-41c2-4beb-a857-8074bb4617dc",
+            "name": "approve a profit request - cop",
+            "url": "{{cop}}/api/v1/finance/profit/approve/645f2ecc83ec668db0522a6f",
+            "method": "POST",
+            "sortNum": 30000,
+            "created": "2023-05-09T10:53:39.885Z",
+            "modified": "2023-05-13T06:32:18.358Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"depositorId\":\"644d5e654dc8ba1fb0faaef8\",\n  \"depositAmount\":300,\n  \"collectorId\":\"644fcab1901e7680dad528da\",\n  \"collectionDate\":\"2023-05-10\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5pcmltb25AZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwibWVtYmVyQ29wSUQiOiJDT1AwMDFOSSIsInN0YXR1cyI6ImFjdGl2ZSIsImlhdCI6MTY4Mzk1NTMwMCwiZXhwIjoxNjg0MDQxNzAwfQ.fwugBU24UQle2LWCk2UmXPfJJ0hyLTEoLOi8yvBjq1U"
             },
             "tests": []
         },
@@ -734,11 +932,11 @@
             "colId": "d4cc0172-8a2c-40a7-842d-df27aaec6ee5",
             "containerId": "288fbc6b-e0dd-4195-840b-864677009a6e",
             "name": "reject a deposit - cop",
-            "url": "{{cop}}/api/v1/finance/deposit/reject/64500cf3e6dac3bbc4a1ba46",
+            "url": "{{cop}}/api/v1/finance/deposit/reject/645f23605fad08e0261280d5",
             "method": "POST",
             "sortNum": 40000,
             "created": "2023-05-01T19:15:21.834Z",
-            "modified": "2023-05-01T19:17:14.843Z",
+            "modified": "2023-05-13T05:43:18.808Z",
             "headers": [],
             "params": [],
             "body": {
@@ -748,7 +946,7 @@
             },
             "auth": {
                 "type": "bearer",
-                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5pcmltb25AZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwibWVtYmVyQ29wSUQiOiJDT1AwMDFOSSIsInN0YXR1cyI6ImFjdGl2ZSIsImlhdCI6MTY4Mjk0OTMzNiwiZXhwIjoxNjgzMDM1NzM2fQ.prR3xMRtQSDB_fTdGnY5Jv-rME8sdeE2S6CnxvFq9l4"
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5pcmltb25AZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwibWVtYmVyQ29wSUQiOiJDT1AwMDFOSSIsInN0YXR1cyI6ImFjdGl2ZSIsImlhdCI6MTY4Mzk1NTMwMCwiZXhwIjoxNjg0MDQxNzAwfQ.fwugBU24UQle2LWCk2UmXPfJJ0hyLTEoLOi8yvBjq1U"
             },
             "tests": []
         },
@@ -795,6 +993,52 @@
             "auth": {
                 "type": "bearer",
                 "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5pcmltb25AZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwibWVtYmVyQ29wSUQiOiJDT1AwMDFOSSIsInN0YXR1cyI6ImFjdGl2ZSIsImlhdCI6MTY4MzI5OTMyNSwiZXhwIjoxNjgzMzg1NzI1fQ.KejDvxq9YViFx_DZfpUDzGBp6E-T3ArUCj86_p3xWtA"
+            },
+            "tests": []
+        },
+        {
+            "_id": "1a4f89f4-5626-4ca9-9a80-df16ed0fd361",
+            "colId": "d4cc0172-8a2c-40a7-842d-df27aaec6ee5",
+            "containerId": "83504fb5-d7cc-4509-b06a-92c09f694284",
+            "name": "reject a expense request - cop",
+            "url": "{{cop}}/api/v1/finance/expense/reject/64575a339c2dec2d826272d1",
+            "method": "POST",
+            "sortNum": 40000,
+            "created": "2023-05-06T15:44:02.166Z",
+            "modified": "2023-05-07T09:55:25.243Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"depositorId\":\"644d5e654dc8ba1fb0faaef8\",\n  \"depositAmount\":300,\n  \"collectorId\":\"644fcab1901e7680dad528da\",\n  \"collectionDate\":\"2023-05-10\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5pcmltb25AZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwibWVtYmVyQ29wSUQiOiJDT1AwMDFOSSIsInN0YXR1cyI6ImFjdGl2ZSIsImlhdCI6MTY4MzQ1MzAzNCwiZXhwIjoxNjgzNTM5NDM0fQ.bBzP3Tp4WdRTqqLUdBm8-k1Q3a2hvWWJrFPceiP3ySo"
+            },
+            "tests": []
+        },
+        {
+            "_id": "773be9b9-1611-432f-a690-0048d62b651d",
+            "colId": "d4cc0172-8a2c-40a7-842d-df27aaec6ee5",
+            "containerId": "e7c6457e-41c2-4beb-a857-8074bb4617dc",
+            "name": "reject a profit request - cop",
+            "url": "{{cop}}/api/v1/finance/profit/reject/645bd6418ebbf15a18943385",
+            "method": "POST",
+            "sortNum": 40000,
+            "created": "2023-05-09T10:53:39.886Z",
+            "modified": "2023-05-10T19:18:40.624Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"depositorId\":\"644d5e654dc8ba1fb0faaef8\",\n  \"depositAmount\":300,\n  \"collectorId\":\"644fcab1901e7680dad528da\",\n  \"collectionDate\":\"2023-05-10\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5pcmltb25AZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwibWVtYmVyQ29wSUQiOiJDT1AwMDFOSSIsInN0YXR1cyI6ImFjdGl2ZSIsImlhdCI6MTY4MzczODEwMCwiZXhwIjoxNjgzODI0NTAwfQ.LwKIZYaUg9zDN9EpaG38AeKK-RzYwvVJGF0StYiMhPM"
             },
             "tests": []
         },
@@ -929,11 +1173,11 @@
             "colId": "d4cc0172-8a2c-40a7-842d-df27aaec6ee5",
             "containerId": "9186546e-8195-4262-b61d-d49146896ced",
             "name": "get a investment - cop",
-            "url": "{{cop}}/api/v1/finance/investment/6455588c81bb63b61b9e594c",
+            "url": "{{cop}}/api/v1/finance/investment/64554e554c95c51c3e506513",
             "method": "GET",
             "sortNum": 50000,
             "created": "2023-05-03T16:02:17.870Z",
-            "modified": "2023-05-05T19:28:39.730Z",
+            "modified": "2023-05-06T14:04:46.050Z",
             "headers": [],
             "params": [],
             "body": {
@@ -944,6 +1188,52 @@
             "auth": {
                 "type": "bearer",
                 "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5pcmltb25AZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwibWVtYmVyQ29wSUQiOiJDT1AwMDFOSSIsInN0YXR1cyI6ImFjdGl2ZSIsImlhdCI6MTY4MzI5OTMyNSwiZXhwIjoxNjgzMzg1NzI1fQ.KejDvxq9YViFx_DZfpUDzGBp6E-T3ArUCj86_p3xWtA"
+            },
+            "tests": []
+        },
+        {
+            "_id": "3610ccf1-ef62-4b09-b0d5-fa3ddfcc2f17",
+            "colId": "d4cc0172-8a2c-40a7-842d-df27aaec6ee5",
+            "containerId": "83504fb5-d7cc-4509-b06a-92c09f694284",
+            "name": "get a expense - cop",
+            "url": "{{cop}}/api/v1/finance/expense/64575e969c2dec2d8262738f",
+            "method": "GET",
+            "sortNum": 50000,
+            "created": "2023-05-06T15:44:02.167Z",
+            "modified": "2023-05-07T09:58:42.341Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"depositorId\":\"644d5e654dc8ba1fb0faaef8\",\n  \"depositAmount\":300,\n  \"collectorId\":\"644fcab1901e7680dad528da\",\n  \"collectionDate\":\"2023-05-10\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5pcmltb25AZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwibWVtYmVyQ29wSUQiOiJDT1AwMDFOSSIsInN0YXR1cyI6ImFjdGl2ZSIsImlhdCI6MTY4MzQ1MzAzNCwiZXhwIjoxNjgzNTM5NDM0fQ.bBzP3Tp4WdRTqqLUdBm8-k1Q3a2hvWWJrFPceiP3ySo"
+            },
+            "tests": []
+        },
+        {
+            "_id": "e7219311-38ea-4fde-b45c-1a5ac4ef2330",
+            "colId": "d4cc0172-8a2c-40a7-842d-df27aaec6ee5",
+            "containerId": "e7c6457e-41c2-4beb-a857-8074bb4617dc",
+            "name": "get a profit - cop",
+            "url": "{{cop}}/api/v1/finance/profit/645bd6418ebbf15a18943385",
+            "method": "GET",
+            "sortNum": 50000,
+            "created": "2023-05-09T10:53:39.888Z",
+            "modified": "2023-05-10T19:22:25.919Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"depositorId\":\"644d5e654dc8ba1fb0faaef8\",\n  \"depositAmount\":300,\n  \"collectorId\":\"644fcab1901e7680dad528da\",\n  \"collectionDate\":\"2023-05-10\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5pcmltb25AZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwibWVtYmVyQ29wSUQiOiJDT1AwMDFOSSIsInN0YXR1cyI6ImFjdGl2ZSIsImlhdCI6MTY4MzczODEwMCwiZXhwIjoxNjgzODI0NTAwfQ.LwKIZYaUg9zDN9EpaG38AeKK-RzYwvVJGF0StYiMhPM"
             },
             "tests": []
         },
@@ -1022,40 +1312,11 @@
             "colId": "d4cc0172-8a2c-40a7-842d-df27aaec6ee5",
             "containerId": "9186546e-8195-4262-b61d-d49146896ced",
             "name": "get all investment - cop",
-            "url": "{{cop}}/api/v1/finance/investment/all?status=invested",
+            "url": "{{cop}}/api/v1/finance/investment/all?",
             "method": "GET",
             "sortNum": 60000,
             "created": "2023-05-03T16:02:17.871Z",
-            "modified": "2023-05-04T09:09:45.620Z",
-            "headers": [],
-            "params": [
-                {
-                    "name": "status",
-                    "value": "invested",
-                    "isPath": false
-                }
-            ],
-            "body": {
-                "type": "json",
-                "raw": "{\n  \"depositorId\":\"644d5e654dc8ba1fb0faaef8\",\n  \"depositAmount\":300,\n  \"collectorId\":\"644fcab1901e7680dad528da\",\n  \"collectionDate\":\"2023-05-10\"\n}",
-                "form": []
-            },
-            "auth": {
-                "type": "bearer",
-                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5pcmltb25AZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwibWVtYmVyQ29wSUQiOiJDT1AwMDFOSSIsInN0YXR1cyI6ImFjdGl2ZSIsImlhdCI6MTY4MzEyOTkyMCwiZXhwIjoxNjgzMjE2MzIwfQ.LZkl9-k7qL5r6957ELDPYFNgmYvWXsN2k8v0v3AQX-M"
-            },
-            "tests": []
-        },
-        {
-            "_id": "7a20e1d3-64fb-42b7-a01d-a0fc64205238",
-            "colId": "d4cc0172-8a2c-40a7-842d-df27aaec6ee5",
-            "containerId": "cbaf57b3-7f34-4703-b5f2-2c5eb88e28ec",
-            "name": "balance of organisation- cop",
-            "url": "{{cop}}/api/v1/finance/account/balance",
-            "method": "GET",
-            "sortNum": 60000,
-            "created": "2023-05-05T19:02:50.558Z",
-            "modified": "2023-05-05T19:04:59.752Z",
+            "modified": "2023-05-06T14:05:18.819Z",
             "headers": [],
             "params": [],
             "body": {
@@ -1065,7 +1326,122 @@
             },
             "auth": {
                 "type": "bearer",
-                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5pcmltb25AZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwibWVtYmVyQ29wSUQiOiJDT1AwMDFOSSIsInN0YXR1cyI6ImFjdGl2ZSIsImlhdCI6MTY4MzMxMzQ4OCwiZXhwIjoxNjgzMzk5ODg4fQ.0zW2ZUHSzbpJnJzBspgP2QSBG2-4ggGcAeLeASul_jc"
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5pcmltb25AZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwibWVtYmVyQ29wSUQiOiJDT1AwMDFOSSIsInN0YXR1cyI6ImFjdGl2ZSIsImlhdCI6MTY4MzI5OTMyNSwiZXhwIjoxNjgzMzg1NzI1fQ.KejDvxq9YViFx_DZfpUDzGBp6E-T3ArUCj86_p3xWtA"
+            },
+            "tests": []
+        },
+        {
+            "_id": "59aa167f-0054-473c-a355-efcf680fdf69",
+            "colId": "d4cc0172-8a2c-40a7-842d-df27aaec6ee5",
+            "containerId": "83504fb5-d7cc-4509-b06a-92c09f694284",
+            "name": "get all expense - cop",
+            "url": "{{cop}}/api/v1/finance/expense/all?",
+            "method": "GET",
+            "sortNum": 60000,
+            "created": "2023-05-06T15:44:02.168Z",
+            "modified": "2023-05-07T09:58:21.445Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"depositorId\":\"644d5e654dc8ba1fb0faaef8\",\n  \"depositAmount\":300,\n  \"collectorId\":\"644fcab1901e7680dad528da\",\n  \"collectionDate\":\"2023-05-10\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5pcmltb25AZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwibWVtYmVyQ29wSUQiOiJDT1AwMDFOSSIsInN0YXR1cyI6ImFjdGl2ZSIsImlhdCI6MTY4MzQ1MzAzNCwiZXhwIjoxNjgzNTM5NDM0fQ.bBzP3Tp4WdRTqqLUdBm8-k1Q3a2hvWWJrFPceiP3ySo"
+            },
+            "tests": []
+        },
+        {
+            "_id": "4e2bbfad-7214-496a-b504-4dc62162327e",
+            "colId": "d4cc0172-8a2c-40a7-842d-df27aaec6ee5",
+            "containerId": "e7c6457e-41c2-4beb-a857-8074bb4617dc",
+            "name": "get all profit - cop",
+            "url": "{{cop}}/api/v1/finance/profit/all?",
+            "method": "GET",
+            "sortNum": 60000,
+            "created": "2023-05-09T10:53:39.889Z",
+            "modified": "2023-05-10T19:20:49.607Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"depositorId\":\"644d5e654dc8ba1fb0faaef8\",\n  \"depositAmount\":300,\n  \"collectorId\":\"644fcab1901e7680dad528da\",\n  \"collectionDate\":\"2023-05-10\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5pcmltb25AZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwibWVtYmVyQ29wSUQiOiJDT1AwMDFOSSIsInN0YXR1cyI6ImFjdGl2ZSIsImlhdCI6MTY4MzczODEwMCwiZXhwIjoxNjgzODI0NTAwfQ.LwKIZYaUg9zDN9EpaG38AeKK-RzYwvVJGF0StYiMhPM"
+            },
+            "tests": []
+        },
+        {
+            "_id": "82532674-73be-4da2-b888-8727cb3a68f9",
+            "colId": "d4cc0172-8a2c-40a7-842d-df27aaec6ee5",
+            "containerId": "cbaf57b3-7f34-4703-b5f2-2c5eb88e28ec",
+            "name": "deposit of organisation- cop",
+            "url": "{{cop}}/api/v1/finance/account/deposit",
+            "method": "GET",
+            "sortNum": 65000,
+            "created": "2023-05-06T10:46:15.651Z",
+            "modified": "2023-05-11T10:13:11.431Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"depositorId\":\"644d5e654dc8ba1fb0faaef8\",\n  \"depositAmount\":300,\n  \"collectorId\":\"644fcab1901e7680dad528da\",\n  \"collectionDate\":\"2023-05-10\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5pcmltb25AZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwibWVtYmVyQ29wSUQiOiJDT1AwMDFOSSIsInN0YXR1cyI6ImFjdGl2ZSIsImlhdCI6MTY4MzczODEwMCwiZXhwIjoxNjgzODI0NTAwfQ.LwKIZYaUg9zDN9EpaG38AeKK-RzYwvVJGF0StYiMhPM"
+            },
+            "tests": []
+        },
+        {
+            "_id": "8cfaab02-c575-4fd6-a367-46ecd9b9ba06",
+            "colId": "d4cc0172-8a2c-40a7-842d-df27aaec6ee5",
+            "containerId": "cbaf57b3-7f34-4703-b5f2-2c5eb88e28ec",
+            "name": "withdraw of organisation- cop",
+            "url": "{{cop}}/api/v1/finance/account/withdraw",
+            "method": "GET",
+            "sortNum": 67500,
+            "created": "2023-05-06T10:57:22.523Z",
+            "modified": "2023-05-11T10:14:32.696Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"depositorId\":\"644d5e654dc8ba1fb0faaef8\",\n  \"depositAmount\":300,\n  \"collectorId\":\"644fcab1901e7680dad528da\",\n  \"collectionDate\":\"2023-05-10\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5pcmltb25AZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwibWVtYmVyQ29wSUQiOiJDT1AwMDFOSSIsInN0YXR1cyI6ImFjdGl2ZSIsImlhdCI6MTY4MzczODEwMCwiZXhwIjoxNjgzODI0NTAwfQ.LwKIZYaUg9zDN9EpaG38AeKK-RzYwvVJGF0StYiMhPM"
+            },
+            "tests": []
+        },
+        {
+            "_id": "e6626206-da8c-4353-97a1-e61106158298",
+            "colId": "d4cc0172-8a2c-40a7-842d-df27aaec6ee5",
+            "containerId": "cbaf57b3-7f34-4703-b5f2-2c5eb88e28ec",
+            "name": "investment of organisation- cop",
+            "url": "{{cop}}/api/v1/finance/account/investment",
+            "method": "GET",
+            "sortNum": 68750,
+            "created": "2023-05-06T11:21:59.322Z",
+            "modified": "2023-05-11T10:16:29.637Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"depositorId\":\"644d5e654dc8ba1fb0faaef8\",\n  \"depositAmount\":300,\n  \"collectorId\":\"644fcab1901e7680dad528da\",\n  \"collectionDate\":\"2023-05-10\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5pcmltb25AZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwibWVtYmVyQ29wSUQiOiJDT1AwMDFOSSIsInN0YXR1cyI6ImFjdGl2ZSIsImlhdCI6MTY4MzczODEwMCwiZXhwIjoxNjgzODI0NTAwfQ.LwKIZYaUg9zDN9EpaG38AeKK-RzYwvVJGF0StYiMhPM"
             },
             "tests": []
         },
@@ -1138,34 +1514,34 @@
             "colId": "d4cc0172-8a2c-40a7-842d-df27aaec6ee5",
             "containerId": "9186546e-8195-4262-b61d-d49146896ced",
             "name": "delete a investment - cop",
-            "url": "{{cop}}/api/v1/finance/investment/645543928dacb002d1ce78df",
+            "url": "{{cop}}/api/v1/finance/investment/645cde276a994acfbe57948b",
             "method": "DELETE",
             "sortNum": 70000,
             "created": "2023-05-03T16:02:17.872Z",
-            "modified": "2023-05-05T18:41:21.503Z",
+            "modified": "2023-05-11T14:41:42.750Z",
             "headers": [],
             "params": [],
             "body": {
                 "type": "json",
-                "raw": "{\n  \"depositorId\":\"644d5e654dc8ba1fb0faaef8\",\n  \"depositAmount\":300,\n  \"collectorId\":\"644fcab1901e7680dad528da\",\n  \"collectionDate\":\"2023-05-10\"\n}",
+                "raw": "{\n  \"depositorId\":\"644d5e654dc8ba1fb0faaef8\",\n  \"depositAmount\":300,\n  \"collectorId\":\"644fcab1901e7680dad528da\",\n  \"collectionDate\":\"2022-05-10\"\n}",
                 "form": []
             },
             "auth": {
                 "type": "bearer",
-                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5pcmltb25AZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwibWVtYmVyQ29wSUQiOiJDT1AwMDFOSSIsInN0YXR1cyI6ImFjdGl2ZSIsImlhdCI6MTY4MzMwNjM3MSwiZXhwIjoxNjgzMzkyNzcxfQ.6_ogZVbAG08MflWPIJvXPVGBTtKejoW_r2psieM2Iow"
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5pcmltb25AZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwibWVtYmVyQ29wSUQiOiJDT1AwMDFOSSIsInN0YXR1cyI6ImFjdGl2ZSIsImlhdCI6MTY4MzczODEwMCwiZXhwIjoxNjgzODI0NTAwfQ.LwKIZYaUg9zDN9EpaG38AeKK-RzYwvVJGF0StYiMhPM"
             },
             "tests": []
         },
         {
-            "_id": "1910afe1-e2f7-45eb-bd20-c16839dbad1b",
+            "_id": "c15f2361-0747-414c-b1ba-193295553392",
             "colId": "d4cc0172-8a2c-40a7-842d-df27aaec6ee5",
-            "containerId": "cbaf57b3-7f34-4703-b5f2-2c5eb88e28ec",
-            "name": "member's balance- cop",
-            "url": "{{cop}}/api/v1/finance/account/balance/6453b5a28a5dba562bf827b7",
+            "containerId": "de049c20-2118-44ee-982e-c73522466e17",
+            "name": "member's deposit- cop",
+            "url": "{{cop}}/api/v1/members/finance/deposit/645f1e235fad08e02612809e",
             "method": "GET",
             "sortNum": 70000,
-            "created": "2023-05-05T19:02:50.557Z",
-            "modified": "2023-05-05T19:14:55.556Z",
+            "created": "2023-05-06T10:19:34.418Z",
+            "modified": "2023-05-13T05:41:14.908Z",
             "headers": [],
             "params": [],
             "body": {
@@ -1175,7 +1551,145 @@
             },
             "auth": {
                 "type": "bearer",
-                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5pcmltb25AZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwibWVtYmVyQ29wSUQiOiJDT1AwMDFOSSIsInN0YXR1cyI6ImFjdGl2ZSIsImlhdCI6MTY4MzMxMzQ4OCwiZXhwIjoxNjgzMzk5ODg4fQ.0zW2ZUHSzbpJnJzBspgP2QSBG2-4ggGcAeLeASul_jc"
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5pcmltb25AZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwibWVtYmVyQ29wSUQiOiJDT1AwMDFOSSIsInN0YXR1cyI6ImFjdGl2ZSIsImlhdCI6MTY4Mzk1NTMwMCwiZXhwIjoxNjg0MDQxNzAwfQ.fwugBU24UQle2LWCk2UmXPfJJ0hyLTEoLOi8yvBjq1U"
+            },
+            "tests": []
+        },
+        {
+            "_id": "0de0c03d-54e2-4d91-9c1f-461733a85420",
+            "colId": "d4cc0172-8a2c-40a7-842d-df27aaec6ee5",
+            "containerId": "83504fb5-d7cc-4509-b06a-92c09f694284",
+            "name": "delete a expense - cop",
+            "url": "{{cop}}/api/v1/finance/expense/64575a339c2dec2d826272d1",
+            "method": "DELETE",
+            "sortNum": 70000,
+            "created": "2023-05-06T15:44:02.169Z",
+            "modified": "2023-05-07T09:55:56.619Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"depositorId\":\"644d5e654dc8ba1fb0faaef8\",\n  \"depositAmount\":300,\n  \"collectorId\":\"644fcab1901e7680dad528da\",\n  \"collectionDate\":\"2023-05-10\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5pcmltb25AZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwibWVtYmVyQ29wSUQiOiJDT1AwMDFOSSIsInN0YXR1cyI6ImFjdGl2ZSIsImlhdCI6MTY4MzQ1MzAzNCwiZXhwIjoxNjgzNTM5NDM0fQ.bBzP3Tp4WdRTqqLUdBm8-k1Q3a2hvWWJrFPceiP3ySo"
+            },
+            "tests": []
+        },
+        {
+            "_id": "672d0f29-3667-46d0-a5c6-01f72e74dfc7",
+            "colId": "d4cc0172-8a2c-40a7-842d-df27aaec6ee5",
+            "containerId": "e7c6457e-41c2-4beb-a857-8074bb4617dc",
+            "name": "delete a profit - cop",
+            "url": "{{cop}}/api/v1/finance/profit/645ca811a6a2f4dbfbc908e9",
+            "method": "DELETE",
+            "sortNum": 70000,
+            "created": "2023-05-09T10:53:39.890Z",
+            "modified": "2023-05-11T08:47:54.068Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"depositorId\":\"644d5e654dc8ba1fb0faaef8\",\n  \"depositAmount\":300,\n  \"collectorId\":\"644fcab1901e7680dad528da\",\n  \"collectionDate\":\"2023-05-10\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5pcmltb25AZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwibWVtYmVyQ29wSUQiOiJDT1AwMDFOSSIsInN0YXR1cyI6ImFjdGl2ZSIsImlhdCI6MTY4MzczODEwMCwiZXhwIjoxNjgzODI0NTAwfQ.LwKIZYaUg9zDN9EpaG38AeKK-RzYwvVJGF0StYiMhPM"
+            },
+            "tests": []
+        },
+        {
+            "_id": "6100e4aa-f1d7-4826-ae13-32f4bdc784c4",
+            "colId": "d4cc0172-8a2c-40a7-842d-df27aaec6ee5",
+            "containerId": "cbaf57b3-7f34-4703-b5f2-2c5eb88e28ec",
+            "name": "expense of organisation- cop",
+            "url": "{{cop}}/api/v1/finance/account/expense",
+            "method": "GET",
+            "sortNum": 73750,
+            "created": "2023-05-07T10:53:05.026Z",
+            "modified": "2023-05-11T10:17:03.894Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"depositorId\":\"644d5e654dc8ba1fb0faaef8\",\n  \"depositAmount\":300,\n  \"collectorId\":\"644fcab1901e7680dad528da\",\n  \"collectionDate\":\"2023-05-10\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5pcmltb25AZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwibWVtYmVyQ29wSUQiOiJDT1AwMDFOSSIsInN0YXR1cyI6ImFjdGl2ZSIsImlhdCI6MTY4MzczODEwMCwiZXhwIjoxNjgzODI0NTAwfQ.LwKIZYaUg9zDN9EpaG38AeKK-RzYwvVJGF0StYiMhPM"
+            },
+            "tests": []
+        },
+        {
+            "_id": "f656d984-cadf-482b-8c9f-3977bcb6b3fb",
+            "colId": "d4cc0172-8a2c-40a7-842d-df27aaec6ee5",
+            "containerId": "de049c20-2118-44ee-982e-c73522466e17",
+            "name": "member's withdraw- cop",
+            "url": "{{cop}}/api/v1/members/finance/withdraw/6453b5958a5dba562bf827b3",
+            "method": "GET",
+            "sortNum": 75000,
+            "created": "2023-05-06T10:22:51.402Z",
+            "modified": "2023-05-11T10:03:49.302Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"depositorId\":\"644d5e654dc8ba1fb0faaef8\",\n  \"depositAmount\":300,\n  \"collectorId\":\"644fcab1901e7680dad528da\",\n  \"collectionDate\":\"2023-05-10\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5pcmltb25AZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwibWVtYmVyQ29wSUQiOiJDT1AwMDFOSSIsInN0YXR1cyI6ImFjdGl2ZSIsImlhdCI6MTY4MzczODEwMCwiZXhwIjoxNjgzODI0NTAwfQ.LwKIZYaUg9zDN9EpaG38AeKK-RzYwvVJGF0StYiMhPM"
+            },
+            "tests": []
+        },
+        {
+            "_id": "eff1a3dc-82fd-4dfb-b1bb-48bf97c80b04",
+            "colId": "d4cc0172-8a2c-40a7-842d-df27aaec6ee5",
+            "containerId": "cbaf57b3-7f34-4703-b5f2-2c5eb88e28ec",
+            "name": "profit of organisation- cop",
+            "url": "{{cop}}/api/v1/finance/account/profit",
+            "method": "GET",
+            "sortNum": 76250,
+            "created": "2023-05-11T08:50:03.330Z",
+            "modified": "2023-05-11T08:54:55.853Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"depositorId\":\"644d5e654dc8ba1fb0faaef8\",\n  \"depositAmount\":300,\n  \"collectorId\":\"644fcab1901e7680dad528da\",\n  \"collectionDate\":\"2023-05-10\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5pcmltb25AZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwibWVtYmVyQ29wSUQiOiJDT1AwMDFOSSIsInN0YXR1cyI6ImFjdGl2ZSIsImlhdCI6MTY4MzczODEwMCwiZXhwIjoxNjgzODI0NTAwfQ.LwKIZYaUg9zDN9EpaG38AeKK-RzYwvVJGF0StYiMhPM"
+            },
+            "tests": []
+        },
+        {
+            "_id": "7a20e1d3-64fb-42b7-a01d-a0fc64205238",
+            "colId": "d4cc0172-8a2c-40a7-842d-df27aaec6ee5",
+            "containerId": "cbaf57b3-7f34-4703-b5f2-2c5eb88e28ec",
+            "name": "balance of organisation- cop",
+            "url": "{{cop}}/api/v1/finance/account/balance",
+            "method": "GET",
+            "sortNum": 78750,
+            "created": "2023-05-05T19:02:50.558Z",
+            "modified": "2023-05-13T06:24:05.637Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"depositorId\":\"644d5e654dc8ba1fb0faaef8\",\n  \"depositAmount\":300,\n  \"collectorId\":\"644fcab1901e7680dad528da\",\n  \"collectionDate\":\"2023-05-10\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5pcmltb25AZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwibWVtYmVyQ29wSUQiOiJDT1AwMDFOSSIsInN0YXR1cyI6ImFjdGl2ZSIsImlhdCI6MTY4Mzk1NTMwMCwiZXhwIjoxNjg0MDQxNzAwfQ.fwugBU24UQle2LWCk2UmXPfJJ0hyLTEoLOi8yvBjq1U"
             },
             "tests": []
         },
@@ -1194,6 +1708,98 @@
             "auth": {
                 "type": "bearer",
                 "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5pcmltb25AZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwibWVtYmVyQ29wSUQiOiJDT1AwMDFOSSIsInN0YXR1cyI6ImFjdGl2ZSIsImlhdCI6MTY4MzIwNzQwMCwiZXhwIjoxNjgzMjkzODAwfQ.WqD2nup2IFcIGHbiP3oH4VW4VBCDm-NBJ_Gr_RwlXxk"
+            },
+            "tests": []
+        },
+        {
+            "_id": "3c83a843-b83f-46f4-85c0-7697ef4fdd13",
+            "colId": "d4cc0172-8a2c-40a7-842d-df27aaec6ee5",
+            "containerId": "de049c20-2118-44ee-982e-c73522466e17",
+            "name": "member's investment- cop",
+            "url": "{{cop}}/api/v1/members/finance/investment/6453b5b28a5dba562bf827bb",
+            "method": "GET",
+            "sortNum": 80000,
+            "created": "2023-05-06T10:25:33.690Z",
+            "modified": "2023-05-11T11:42:40.732Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"depositorId\":\"644d5e654dc8ba1fb0faaef8\",\n  \"depositAmount\":300,\n  \"collectorId\":\"644fcab1901e7680dad528da\",\n  \"collectionDate\":\"2023-05-10\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5pcmltb25AZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwibWVtYmVyQ29wSUQiOiJDT1AwMDFOSSIsInN0YXR1cyI6ImFjdGl2ZSIsImlhdCI6MTY4MzczODEwMCwiZXhwIjoxNjgzODI0NTAwfQ.LwKIZYaUg9zDN9EpaG38AeKK-RzYwvVJGF0StYiMhPM"
+            },
+            "tests": []
+        },
+        {
+            "_id": "bf53164c-0b11-4bd6-8822-7fd22c5905b0",
+            "colId": "d4cc0172-8a2c-40a7-842d-df27aaec6ee5",
+            "containerId": "de049c20-2118-44ee-982e-c73522466e17",
+            "name": "member's expense- cop",
+            "url": "{{cop}}/api/v1/members/finance/expense/64575ba19c2dec2d826272e7",
+            "method": "GET",
+            "sortNum": 100000,
+            "created": "2023-05-07T10:23:38.209Z",
+            "modified": "2023-05-11T10:10:55.306Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"depositorId\":\"644d5e654dc8ba1fb0faaef8\",\n  \"depositAmount\":300,\n  \"collectorId\":\"644fcab1901e7680dad528da\",\n  \"collectionDate\":\"2023-05-10\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5pcmltb25AZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwibWVtYmVyQ29wSUQiOiJDT1AwMDFOSSIsInN0YXR1cyI6ImFjdGl2ZSIsImlhdCI6MTY4MzczODEwMCwiZXhwIjoxNjgzODI0NTAwfQ.LwKIZYaUg9zDN9EpaG38AeKK-RzYwvVJGF0StYiMhPM"
+            },
+            "tests": []
+        },
+        {
+            "_id": "01a40242-398b-4605-aca8-0329f38afb23",
+            "colId": "d4cc0172-8a2c-40a7-842d-df27aaec6ee5",
+            "containerId": "de049c20-2118-44ee-982e-c73522466e17",
+            "name": "member's profit- cop",
+            "url": "{{cop}}/api/v1/members/finance/profit/64575ba19c2dec2d826272e7",
+            "method": "GET",
+            "sortNum": 110000,
+            "created": "2023-05-11T08:49:19.388Z",
+            "modified": "2023-05-11T09:00:32.566Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"depositorId\":\"644d5e654dc8ba1fb0faaef8\",\n  \"depositAmount\":300,\n  \"collectorId\":\"644fcab1901e7680dad528da\",\n  \"collectionDate\":\"2023-05-10\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5pcmltb25AZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwibWVtYmVyQ29wSUQiOiJDT1AwMDFOSSIsInN0YXR1cyI6ImFjdGl2ZSIsImlhdCI6MTY4MzczODEwMCwiZXhwIjoxNjgzODI0NTAwfQ.LwKIZYaUg9zDN9EpaG38AeKK-RzYwvVJGF0StYiMhPM"
+            },
+            "tests": []
+        },
+        {
+            "_id": "1910afe1-e2f7-45eb-bd20-c16839dbad1b",
+            "colId": "d4cc0172-8a2c-40a7-842d-df27aaec6ee5",
+            "containerId": "de049c20-2118-44ee-982e-c73522466e17",
+            "name": "member's balance- cop",
+            "url": "{{cop}}/api/v1/members/finance/balance/645f1e235fad08e02612809e",
+            "method": "GET",
+            "sortNum": 120000,
+            "created": "2023-05-05T19:02:50.557Z",
+            "modified": "2023-05-13T06:23:37.180Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"depositorId\":\"644d5e654dc8ba1fb0faaef8\",\n  \"depositAmount\":300,\n  \"collectorId\":\"644fcab1901e7680dad528da\",\n  \"collectionDate\":\"2023-05-10\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5pcmltb25AZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwibWVtYmVyQ29wSUQiOiJDT1AwMDFOSSIsInN0YXR1cyI6ImFjdGl2ZSIsImlhdCI6MTY4Mzk1NTMwMCwiZXhwIjoxNjg0MDQxNzAwfQ.fwugBU24UQle2LWCk2UmXPfJJ0hyLTEoLOi8yvBjq1U"
             },
             "tests": []
         }

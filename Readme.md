@@ -6,7 +6,7 @@
 
 ### visit the [site](https://cop-server-nirimonpc-gmailcom.vercel.app/) to live preview.
 
-Hi there,
+`Hi there,`
 I am Nurul Islam Rimon. I am a MERN Stack Developer. I have an organization where we have **40+ members**.
 We have administration team to lead and manage the organization. Last year our revenue was 32%. It was very defficult to mantain the account. So, I have developed the Site for the organization. Now it makes our management so easy.
 
@@ -23,6 +23,3 @@ We have administration team to lead and manage the organization. Last year our r
 - Investments theory
 - Closing Business
 - Profits distributions
-  `                                                       
-                                                  `#0969DA` **Thanks**
-                                                Nurul Islam Rimon`

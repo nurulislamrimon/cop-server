@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 async function dbconnection() {
   try {
-    const db = await mongoose.connect(process.env.db_local);
+    const db = await mongoose.connect(process.env.db_remote);
     if (db) {
       console.log("Database connection successful!".yellow);
     }

@@ -4,7 +4,7 @@
 
 ### Read: [the doc](https://docs.google.com/document/d/1ys2TfHhnZZNF_n8kAk1zAmxzE5wUn3Iam4hgAH1RJjk/edit?usp=sharing) to know about this server.
 
-### visit the [site](https://cop-server-nirimonpc-gmailcom.vercel.app/) to live preview.
+### visit the [site](https://cop-server.vercel.app/) to live preview.
 
 `Hi there,`
 I am Nurul Islam Rimon. I am a MERN Stack Developer. I have an organization where we have **40+ members**.

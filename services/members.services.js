@@ -54,7 +54,7 @@ exports.addNewMemberService = async (member) => {
   }
   const isMemberExist = await this.getMemberByCopIDService(member.memberCopID);
   if (isMemberExist) {
-    throw new Error("Sorry, This member id already used!");
+    throw new Error("Sorry, This member id is already used!");
   }
   const result = await Member.create(member);
   return result;
